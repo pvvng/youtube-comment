@@ -11,7 +11,6 @@ interface PropsType {
 }
 
 export default function FeelGraphContainer({feelData} : PropsType){
-    console.log(feelData)
     let graphFeelData = [
         {name : 'positive', value : feelData.positive},
         {name : 'negative', value : feelData.negative},

@@ -7,13 +7,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import CommentContainer from "./CommentContainer";
+import { AxiosError } from "axios";
 
 export default function MainContainer(
     {videoId} : {videoId : string}
 ){
     const router = useRouter();
     // Video Data 불러오기
-    const { data, isLoading, isError } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey : ['videoData', videoId],
         queryFn : () => fetchVideoData(videoId),
         refetchOnWindowFocus : false,
@@ -25,19 +26,35 @@ export default function MainContainer(
     // 에러 발생시 뒤로가기
     useEffect(() => {
         if (isError) {
-            alert('잘못된 접근입니다.');
+            console.log(error)
+            let errorMessage = '';
+            // error가 AxiosError인지 확인
+            if (error instanceof AxiosError ) {
+                // AxiosError 타입에 따라 에러 처리
+                errorMessage = 
+                error.response?.data?.message || '서버에서 오류가 발생했습니다.';
+            } else if (error instanceof Error) {
+                // 다른 일반 에러 처리
+                errorMessage = error.message;
+            } else {
+                errorMessage = "알 수 없는 에러가 발생했습니다.";
+            }
+            alert(errorMessage);
             router.back();
         }
     }, [isError, router]);
 
-    if(!data || isLoading) return <h1>로딩중입니다.</h1>
+    if(isLoading) return <h1>로딩중입니다.</h1>
+    if(!data) return <h1>no Data</h1>
 
     const { youtuber, video } = data;
 
     return(
         <>
-            <YoutuberProfileContainer youtuber={youtuber} />
-            <VideoContainer video={video} videoId={videoId} />
+            <div id="video">
+                <YoutuberProfileContainer youtuber={youtuber} />
+                <VideoContainer video={video} videoId={videoId} />
+            </div>
             <CommentContainer videoId={videoId} />
         </>
     )

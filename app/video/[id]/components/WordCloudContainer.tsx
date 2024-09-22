@@ -27,7 +27,6 @@ export default function WordCloudContainer(
 
     // 배율을 선형적으로 조정할 수 있도록 배열의 길이에 따른 offset 설정
     const scaleFactor = calculateOffset(wordData.length);
-    console.log(wordData)
 
     if(wordData.length === 0) return <h3>데이터 없음</h3>
     return (
@@ -46,8 +45,8 @@ export default function WordCloudContainer(
                 font="Impact" 
                 fontWeight="bold"
                 spiral="rectangular"
-                // fontSize={(word) => Math.round((word.value/totalValue) * scaleFactor)}
-                fontSize={(word) => Math.log2(word.value) * 5}
+                fontSize={(word) => Math.round((word.value/totalValue) * scaleFactor)}
+                // fontSize={(word) => Math.log2(word.value) * 5}
                 // rotate={(word) => word.value % 360}
                 padding={2}
                 random={Math.random}

@@ -3,6 +3,8 @@
 import { fetchAnalyzedCommentData } from "@/@util/functions/fetch/fetchAnalyzedCommentData";
 import { FilteredCommentType } from "@/types/comment";
 import { useQuery } from "@tanstack/react-query";
+import WordCloudContainer from "./WordCloudContainer";
+import FeelGraphContainer from "./FeelGraphContainer";
 
 export default function WordHubContainer(
     {commentData} : {commentData : FilteredCommentType[]}
@@ -19,9 +21,17 @@ export default function WordHubContainer(
         staleTime : 3600000,
     });
 
-    console.log(data)
-    console.log(isLoading)
-    console.log(isError)
+    if(isLoading) return <h3>댓글 데이터 로딩 중임</h3>
+    if(!data) return <h3>no data</h3>
+    if(isError) return <h3>에러남;;</h3>
 
-    return 123;
+    const {morpData :keyWordData, feelData} = data;
+    return (
+        <>
+            <h3>댓글 감정 분석</h3>
+            <FeelGraphContainer feelData={feelData} />
+            <h3>댓글 키워드</h3>
+            <WordCloudContainer keyWordData={keyWordData} />
+        </>
+    )
 }

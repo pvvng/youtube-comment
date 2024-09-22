@@ -26,7 +26,7 @@ export default function CommentContainer({videoId} : {videoId : string}){
     console.log(commentData)
     return(
         <div className="w-100">
-            <h4>화제성</h4>
+            <h3>화제성 분석</h3>
             <DatechartContainer dateData={dateData} />
             <WordHubContainer commentData={commentData} />
         </div>

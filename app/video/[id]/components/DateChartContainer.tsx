@@ -15,7 +15,7 @@ export default function DatechartContainer(
             '%' : v.percent.toFixed(2), 
         }
     })
-
+    
     return (
         <div style={{height : '300px'}}>
             <ResponsiveContainer width="100%" height="100%">

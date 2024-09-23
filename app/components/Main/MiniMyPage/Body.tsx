@@ -1,16 +1,30 @@
-import CardContainer from "../CardContainer";
+import { Session } from "next-auth";
+import { SignInBtn } from "../../SignItems/SignBtn";
 
-export default function MiniMyPageBody(){
+export default function MiniMyPageBody(
+    {session} : {session : Session | null}
+){
     return(
-        <div className="w-100 bg-secondary p-2" style={{minHeight : '200px'}}>
-            <h4>찜한 동영상</h4>
-            <CardContainer n={3} />
-            <h4>찜한 유튜버</h4>
-            <CardContainer n={3} />
-            <h4>구독 목록</h4>
-            <CardContainer n={3} />
-            <button className="float-end">마이페이지</button>
-            <div style={{clear : 'both'}}></div>
+        <div className="w-100 p-2" style={{background  :'#eee'}}>
+            {
+                session ?
+                <>
+                    <p>찜한 동영상</p>
+                    <p>찜한 유튜버</p>
+                    <p>구독 목록</p>
+                    <button className="float-end">마이페이지</button>
+                    <div style={{clear : 'both'}}></div>   
+                </> : 
+                <div 
+                    className="row row-center w-100" 
+                    style={{minHeight : '200px', margin : 'auto'}}
+                >
+                    <div className="text-center">
+                        <p>로그인 후 이용 가능합니다.</p>
+                        <SignInBtn />
+                    </div>
+                </div>
+            }
         </div>
     )
 }

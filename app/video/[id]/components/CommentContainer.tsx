@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import DatechartContainer from "./DateChartContainer";
 import WordHubContainer from "./WordHubContainer";
 import { AxiosError } from "axios";
+import TopLikeContainer from "./TopLikeCountContainer";
 
 interface PropsType {
     videoId : string;
@@ -50,8 +51,13 @@ export default function CommentContainer(
     // 불러온 데이터가 빈 값일 때 (에러 발생시 혹은 댓글이 없는 영상일 때 방어)
     if(commentData.length === 0 && dateData.length === 0) return <p>댓글 데이터가 없습니다.</p>
 
+    // 좋아요 많은 10개 댓글 보내기
+    let sortedCommentData = commentData.sort((a,b) => b.likeCount - a.likeCount)
+    
     return(
         <div className="w-100" id="topicality">
+            <h3>영상과 관련된 댓글</h3>
+            <TopLikeContainer commentData={sortedCommentData} videoId={videoId} />
             <h3>화제성 분석</h3>
             <DatechartContainer dateData={dateData} />
             <WordHubContainer commentData={commentData} channelId={channelId} />

@@ -5,14 +5,15 @@ import MiniMyPageBody from "./Body";
 export default async function MiniMyPageContainer(){
     const session = await getServerSession();
     return(
-        <div className="w-100">
-            {
-                session ?
-                <div className="border">
-                    <MiniMyPageHeader session={session} />
-                    <MiniMyPageBody />
-                </div> : <p>로그인 후 이용 가능함</p>
-            }
+        <div 
+            className="w-100 border" 
+            style={{
+                borderRadius : '10px'
+            }}
+        >
+            <MiniMyPageHeader session={session} />
+            <hr className="m-0"/>
+            <MiniMyPageBody session={session} />
         </div>
     )
 }

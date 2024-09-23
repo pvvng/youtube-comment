@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import CommentContainer from "./CommentContainer";
 import { AxiosError } from "axios";
+import { useUpdateRecentVideoLocalStorage } from "@/@util/hooks/useUpdateRecentVideoLocalStorage";
 
 export default function MainContainer(
     {videoId} : {videoId : string}
@@ -43,6 +44,13 @@ export default function MainContainer(
             router.back();
         }
     }, [isError, router]);
+
+    useUpdateRecentVideoLocalStorage(
+        videoId,
+        data?.video.title,
+        data?.video.channelTitle,
+        data?.video.thumbnails.url
+    );
 
     if(isLoading) return <h1>로딩중입니다.</h1>
     if(!data) return <h1>no Data</h1>

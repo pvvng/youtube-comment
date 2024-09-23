@@ -91,7 +91,7 @@ export default async function handler(
             publishedAt : new Date(snippet.publishedAt),
         }
         filteredAllCommentData.push(pushItem);
-    })
+    });
 
     // date Map 배열로 형식 변경 및 날짜 순으로 정렬, 퍼센티지 필드 추가
     const totalCommentLength = filteredAllCommentData.length;

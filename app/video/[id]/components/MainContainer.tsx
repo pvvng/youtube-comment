@@ -55,7 +55,7 @@ export default function MainContainer(
                 <YoutuberProfileContainer youtuber={youtuber} />
                 <VideoContainer video={video} videoId={videoId} />
             </div>
-            <CommentContainer videoId={videoId} />
+            <CommentContainer videoId={videoId} channelId={youtuber.channelId} />
         </>
     )
 }

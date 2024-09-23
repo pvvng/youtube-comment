@@ -6,7 +6,14 @@ import DatechartContainer from "./DateChartContainer";
 import WordHubContainer from "./WordHubContainer";
 import { AxiosError } from "axios";
 
-export default function CommentContainer({videoId} : {videoId : string}){
+interface PropsType {
+    videoId : string;
+    channelId : string;
+}
+
+export default function CommentContainer(
+    {videoId, channelId} : PropsType
+){
     
     const {data, isLoading, isError, error} = useQuery({
         queryKey : ['commentData', videoId],
@@ -35,16 +42,19 @@ export default function CommentContainer({videoId} : {videoId : string}){
         return <p>{errorMessage}</p>;
     }
 
-    if(data === undefined) return <p>노 데이터</p>;
+    if(data === undefined) return null;
 
     // 각각 댓글 데이터, 날짜 데이터
     const {commentData, dateData} = data;
+
+    // 불러온 데이터가 빈 값일 때 (에러 발생시 혹은 댓글이 없는 영상일 때 방어)
+    if(commentData.length === 0 && dateData.length === 0) return <p>댓글 데이터가 없습니다.</p>
 
     return(
         <div className="w-100" id="topicality">
             <h3>화제성 분석</h3>
             <DatechartContainer dateData={dateData} />
-            <WordHubContainer commentData={commentData} />
+            <WordHubContainer commentData={commentData} channelId={channelId} />
         </div>
     )
 }

@@ -78,7 +78,7 @@ export default async function handler(
                     ),
                     publishedAt: videoSnippet.publishedAt,
                 };
-        
+                
                 // 영상 통계 정보 추출
                 const videoStatistics: VideoStatisticsType = videoResponse.data.items[0].statistics;
                 // 성공적으로 필터링된 영상 정보와 통계 정보를 응답

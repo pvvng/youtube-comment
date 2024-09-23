@@ -53,7 +53,10 @@ export interface OrganizedFeelType {
 }
   
 export interface AnalyzedCommentData {
-    morpData : string[];
+    morpData : {
+        text: string;
+        value: number;
+    }[];
     feelData : {
         positive : number;
         negative : number;

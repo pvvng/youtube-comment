@@ -6,7 +6,9 @@ import axios, { AxiosResponse } from "axios";
  * 
  * **댓글 데이터 배열 인자로 필요**
 */
-export async function fetchAnalyzedCommentData(commentData : FilteredCommentType[]){
+export async function fetchAnalyzedCommentData(
+    commentData : FilteredCommentType[], channelId :string
+){
     let sumString = '';
 
     commentData.forEach(cd => sumString += (cd.text + '/'));
@@ -15,8 +17,12 @@ export async function fetchAnalyzedCommentData(commentData : FilteredCommentType
     const formData = new FormData();
     formData.append('file', blob, 'textdata.txt');
 
+    // videoId를 FormData에 추가
+    formData.append('channelId', channelId);
+
     try{
-        const res : AxiosResponse<AnalyzedCommentData> = await axios.post('/api/post/word', formData, {
+        const res : AxiosResponse<AnalyzedCommentData> = 
+        await axios.post('/api/post/word', formData, {
             headers : {
                 'Content-Type' : 'multipart/form-data'
             },

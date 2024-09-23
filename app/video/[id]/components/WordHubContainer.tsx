@@ -6,16 +6,22 @@ import { useQuery } from "@tanstack/react-query";
 import WordCloudContainer from "./WordCloudContainer";
 import FeelGraphContainer from "./FeelGraphContainer";
 import { AxiosError } from "axios";
+import { useParams } from "next/navigation";
+
+interface PropsType {
+    commentData : FilteredCommentType[]
+    channelId : string;
+};
 
 export default function WordHubContainer(
-    {commentData} : {commentData : FilteredCommentType[]}
+    {commentData, channelId} : PropsType
 ){
     // 영상이 바뀌지 않는 한 첫번째 댓글 내용이 변하지 않음
     // 쿼리 키로 사용
     const queryKey = commentData[0];
     const {data, isLoading, isError, error} = useQuery({
         queryKey : ['analyzedComment', queryKey],
-        queryFn : () => fetchAnalyzedCommentData(commentData),
+        queryFn : () => fetchAnalyzedCommentData(commentData, channelId),
         refetchOnWindowFocus : false,
         // 캐시타임 1시간(3600000ms)
         gcTime : 3600000,

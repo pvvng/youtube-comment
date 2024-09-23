@@ -3,32 +3,30 @@
 import WordCloud from "react-d3-cloud";
 
 export default function WordCloudContainer(
-    {keyWordData} : {keyWordData : string[]}
+    {keyWordData} : {keyWordData : {
+        text: string;
+        value: number;
+    }[]}
 ){
-    // 키워드 카운트 맵
-    const keyWordMap = new Map();
-    for(let i = 0; i < keyWordData.length; i++){
-        let getter = keyWordMap.get(keyWordData[i]) || 0;
-        keyWordMap.set(keyWordData[i], getter + 1);
-    }
-    // 키워드 맵 배열로 변환 후 sort
-    let wordData = Array.from(keyWordMap)
-    .sort((a, b) => b[1] - a[1])
-    .map(v => {return { text : v[0], value : v[1]} });
+    // // 키워드 카운트 맵
+    // const keyWordMap = new Map();
+    // for(let i = 0; i < keyWordData.length; i++){
+    //     let getter = keyWordMap.get(keyWordData[i]) || 0;
+    //     keyWordMap.set(keyWordData[i], getter + 1);
+    // }
+    // // 키워드 맵 배열로 변환 후 sort
+    // let wordData = Array.from(keyWordMap)
+    // .sort((a, b) => b[1] - a[1])
+    // .map(v => {return { text : v[0], value : v[1]} });
 
-    const totalValue = wordData.reduce((acc, cul) => {
+    const totalValue = keyWordData.reduce((acc, cul) => {
         return acc + cul.value;
     },0);
 
-    // 길이가 100 이상이면 자르기
-    if(wordData.length > 100){
-        wordData = wordData.slice(0,100);
-    }
-
     // 배율을 선형적으로 조정할 수 있도록 배열의 길이에 따른 offset 설정
-    const scaleFactor = calculateOffset(wordData.length);
+    const scaleFactor = calculateOffset(keyWordData.length);
 
-    if(wordData.length === 0) return <h3>데이터 없음</h3>
+    if(keyWordData.length === 0) return <h3>데이터 없음</h3>
     return (
         <div 
             className="mt-4 mb-2" 
@@ -39,7 +37,7 @@ export default function WordCloudContainer(
             }}
         >
             <WordCloud
-                data={wordData}
+                data={keyWordData}
                 width={100}
                 height={100}
                 font="Impact" 

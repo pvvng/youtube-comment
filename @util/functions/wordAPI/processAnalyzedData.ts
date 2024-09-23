@@ -41,5 +41,19 @@ export default function processAnalyzedData(
         }
     });
 
-    return { organizedMorpArr, feelCounterObj };
+    const keyWordMap = new Map();
+    for(let i = 0; i < organizedMorpArr.length; i++){
+        let getter = keyWordMap.get(organizedMorpArr[i]) || 0;
+        keyWordMap.set(organizedMorpArr[i], getter + 1);
+    }
+    let keyWordData = Array.from(keyWordMap)
+    .sort((a, b) => b[1] - a[1])
+    .map((v : [string, number]) => {return { text : v[0], value : v[1]} });
+
+    // 길이가 100 이상이면 자르기
+    if(keyWordData.length > 100){
+        keyWordData = keyWordData.slice(0,100);
+    }
+
+    return { keyWordData, feelCounterObj };
 }

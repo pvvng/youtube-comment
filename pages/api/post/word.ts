@@ -55,30 +55,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         // 2. 파일의 내용을 비동기적으로 읽음 (fs.promises.readFile 사용)
         const data = await fs.readFile(file.filepath, 'utf8');
+        console.log(data)
+        // // 3. 파일의 내용을 클린업하여 반환 및 '/' 단위로 split
+        // const organizedtextArr = cleanUpText(data).split('/');
 
-        // 3. 파일의 내용을 클린업하여 반환 및 '/' 단위로 split
-        const organizedtextArr = cleanUpText(data).split('/');
+        // // 4. 댓글 분석 함수 호출
+        // const { morpResult, feelResult } = await getAnalyzedWordData(organizedtextArr);
 
-        // 4. 댓글 분석 함수 호출
-        const { morpResult, feelResult } = await getAnalyzedWordData(organizedtextArr);
+        // // 5. 데이터 가공 함수 호출
+        // let { keyWordData, feelCounterObj } = processAnalyzedData(morpResult, feelResult);
 
-        // 5. 데이터 가공 함수 호출
-        let { keyWordData, feelCounterObj } = processAnalyzedData(morpResult, feelResult);
+        // // db 연결
+        // const db = (await connectDB).db('youtube');
 
-        // db 연결
-        const db = (await connectDB).db('youtube');
+        // // 채널 아이디를 콜렉션 필드의 _id로 지정하여 검색
+        // let videoCollectionResult = await db.collection<YoutuberDocument>('youtuber')
+        // .find({ _id : channelId }).toArray();
 
-        // 채널 아이디를 콜렉션 필드의 _id로 지정하여 검색
-        let videoCollectionResult = await db.collection<YoutuberDocument>('youtuber')
-        .find({ _id : channelId }).toArray();
-
-        updateDBCollectionYoutuber(
-            db, channelId, keyWordData, 
-            feelCounterObj, videoCollectionResult
-        );
+        // updateDBCollectionYoutuber(
+        //     db, channelId, keyWordData, 
+        //     feelCounterObj, videoCollectionResult
+        // );
 
         // 6. 응답 반환
-        return res.status(200).json({ morpData: keyWordData, feelData: feelCounterObj });
+        return res.status(200).json("안뇽");
     } catch (error) {
         console.error(error);
         return res.status(500).json({ error: 'Internal server error' });

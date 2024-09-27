@@ -1,6 +1,9 @@
 import { FilteredCommentType } from "@/types/comment";
 import { AnalyzedCommentData } from "@/types/word";
 import axios, { AxiosResponse } from "axios";
+import { cleanUpText } from "../wordAPI/cleanUpText";
+
+const flask_url = process.env.NEXT_PUBLIC_FLASK_URL
 
 /** 댓글 데이터 합본 파일로 만들어 API에 보내는(POST) 함수 
  * 
@@ -9,11 +12,21 @@ import axios, { AxiosResponse } from "axios";
 export async function fetchAnalyzedCommentData(
     commentData : FilteredCommentType[], channelId :string
 ){
-    let sumString = '';
+    if(!flask_url) return null;
 
-    commentData.forEach(cd => sumString += (cd.text + '/'));
+    // flask 서버에 보낼 수 있는 데이터로 수정
+    let flaskArr : {text :string, like : number}[] = [];
+    commentData.forEach(cd => {
+        let cleandComment = cleanUpText(cd.text);
+        flaskArr.push({
+            text : cleandComment,
+            like : cd.likeCount
+        })
+    })
+    // 수정한 데이터 stringify
+    let stringifyData = JSON.stringify(flaskArr);
 
-    const blob = new Blob([sumString], {type : 'text/plain'});
+    const blob = new Blob([stringifyData], {type : 'text/plain'});
     const formData = new FormData();
     formData.append('file', blob, 'textdata.txt');
 
@@ -22,7 +35,7 @@ export async function fetchAnalyzedCommentData(
 
     try{
         const res : AxiosResponse<AnalyzedCommentData> = 
-        await axios.post('/api/post/word', formData, {
+        await axios.post(flask_url, formData, {
             headers : {
                 'Content-Type' : 'multipart/form-data'
             },

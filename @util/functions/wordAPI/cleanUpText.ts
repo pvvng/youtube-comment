@@ -13,11 +13,13 @@ export function cleanUpText(text :string) {
     text = text.replace(/\s+/g, ' '); // 여러 개의 공백 -> 한 개의 공백
     
     // 4. 특수문자와 이모지 제거 (알파벳, 숫자, 한글, 공백만 남김, '/'은 제외)
-    text = text.replace(/[^\w\sㄱ-ㅎㅏ-ㅣ가-힣/]+/g, ''); // 특수문자 및 이모지 제거, '/' 제외
+    text = text.replace(/[^\w\sㄱ-ㅎㅏ-ㅣ가-힣]+/g, ''); // '/'도 특수문자처럼 제거
 
     // 5. 한글 자음(ㄱ-ㅎ), 모음(ㅏ-ㅣ)이 2개 이상 연속되면 2개만 남기기
     text = text.replace(/([ㄱ-ㅎㅏ-ㅣ])\1{2,}/g, '$1$1'); // 'ㄱㄱ', 'ㅏㅏ'와 같은 패턴만 남김
 
+    // 6. 줄바꿈 문자 (\n) 삭제
+    text = text.replace(/\n/g, ''); // 줄바꿈 문자를 완전히 제거
     // 앞뒤 공백 제거
     return text.trim();
 }

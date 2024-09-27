@@ -8,22 +8,13 @@ import axios from "axios";
 export interface VideoCardType extends RecentVideoType{};
 
 export default function CardListContainer(){
-    const data = "사랑해 자기야"
+    const data = "채팅 개너무하네 풍신님이랑 이미 큐 돌리고 있는데 히키킹보고싶당 ㅇㅈㄹ ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
 
     return(
         <div 
             className="p-2 border" 
             style={{borderRadius : '10px', background : '#eee'}}
         >
-            <button onClick={async () => {
-                let res = await axios.post(
-                    'http://127.0.0.1:5000/receive_data', data, {
-                    headers: {
-                        'Content-Type': 'application/json'  // JSON 형식으로 헤더 지정
-                    }
-                })
-                console.log(res.data)
-            }}>테스트</button>
             <h5 className="fw-bold m-0">인기 유튜버</h5>
              <hr />
             <h5 className="fw-bold m-0">인기 영상</h5>

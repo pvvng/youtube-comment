@@ -1,7 +1,10 @@
 'use client'
 
+import '@/app/css/video.css';
 import { FilteredCommentType } from "@/types/comment";
 import { useEffect, useRef, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 export default function TopLikeContainer(
     {commentData, videoId} : {commentData : FilteredCommentType[], videoId : string}
@@ -44,14 +47,7 @@ export default function TopLikeContainer(
     }, []);
 
     return (
-        <div 
-            className="p-2 border rounded-2" 
-            style={{
-                background :'#eee', 
-                height : '300px', 
-                overflowY : 'scroll'
-            }}
-        >
+        <div className="p-2 custom-scrollbar card-container">
             {visibleData.map((cd, i) => (
                 <div key={cd.publishedAt.toString() + i}>
                     <CommentCardContainer cd={cd} videoId={videoId} />
@@ -91,7 +87,7 @@ export function CommentCardContainer(
                         href={videoUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        style={{ color: 'blue', textDecoration: 'underline' }}
+                        style={{textDecoration: 'none' }}
                     >
                         {match[0]}
                     </a>
@@ -104,7 +100,7 @@ export function CommentCardContainer(
     };
 
     return (
-        <div className="card p-2 mb-2">
+        <div className="card-container p-2 mb-2">
             <div className="row row-center w-100" style={{ margin: 'auto' }}>
                 <div className="col-2 col-lg-1">
                     <img
@@ -127,7 +123,10 @@ export function CommentCardContainer(
                             }
                         </div>
                         <div className="col-12 col-lg-4">
-                            <p className="m-0">❤️{cd.likeCount}</p>
+                            <p className="m-0">
+                                <FontAwesomeIcon icon={faHeart} />
+                                {' '}{cd.likeCount.toLocaleString()}
+                            </p>
                             <p className="m-0">{cd.publishedAt.toString()}</p>
                         </div>
                     </div>

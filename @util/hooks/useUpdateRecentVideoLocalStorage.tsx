@@ -6,7 +6,6 @@ export interface RecentVideoType {
     videoTitle: string;
     channelTitle: string;
     thumbnailUrl : string;
-    date : string;
 }
 
 /** localstorage에 최근 본 6개 영상 저장하는 커스텀 훅 */
@@ -16,7 +15,6 @@ export function useUpdateRecentVideoLocalStorage(
     channelTitle : string | undefined,
     thumbnailUrl : string | undefined,
 ) {
-    const nowDate = moment().format('YYYYMMDD');
     // localStorage에 최근 본 영상 6개까지 저장하기
     useEffect(() => {
         // 조건이 맞지 않으면 훅 실행하지 않음
@@ -28,7 +26,6 @@ export function useUpdateRecentVideoLocalStorage(
             videoTitle: videoTitle,
             channelTitle: channelTitle,
             thumbnailUrl : thumbnailUrl,
-            date : nowDate
         };
 
         let getRecent = localStorage.getItem('recent');
@@ -56,5 +53,5 @@ export function useUpdateRecentVideoLocalStorage(
         // localStorage에 다시 저장
         localStorage.setItem('recent', JSON.stringify(parsedRecent));
 
-    }, [videoId, videoTitle, thumbnailUrl, channelTitle, nowDate]);
+    }, [videoId, videoTitle, thumbnailUrl, channelTitle]);
 }

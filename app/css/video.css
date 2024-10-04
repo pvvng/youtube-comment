@@ -1,0 +1,57 @@
+.video-icon-container {
+    transition: all 0.5s;
+}
+
+.video-icon {
+    font-size: 1.8rem;
+    transition: all 0.5s;
+}
+
+.video-tag {
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.video-icon-container:hover > .video-tag {
+    opacity: 1;
+}
+
+.video-icon-container:hover > .video-icon {
+    font-size: 1rem;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.custom-scrollbar {
+    width: 100%;
+    background : white;
+    height: 400px;
+    overflow-y: scroll;
+}
+
+@media (max-width: 720px) {
+    .custom-scrollbar {
+        height: 300px; /* 720px 이하일 때 height */
+    }
+}
+.custom-scrollbar::-webkit-scrollbar {
+    width: 20px;
+    /* height: 20px; */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: url('/comment-white.png') no-repeat center center;
+    background-size: contain; /* 이미지가 핸들 크기에 맞춰서 조정됨 */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: black; /* 트랙의 배경색 */
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+/* 
+.custom-scrollbar {
+    scrollbar-width: thin; 
+    scrollbar-color: #888 #f1f1f1; 
+} */

@@ -57,7 +57,6 @@ export default function CommentContainer(
     
     return(
         <div className="w-100" id="topicality">
-            <h3>영상과 관련된 댓글</h3>
             <TopLikeContainer commentData={sortedCommentData} videoId={videoId} />
             <h3>화제성 분석</h3>
             <DatechartContainer dateData={dateData} />

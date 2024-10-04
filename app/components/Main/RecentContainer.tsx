@@ -8,20 +8,14 @@ import { useEffect, useState } from "react";
 export default function RecentContainer(){
 
     const [recentArr, setRecentArr] = useState<VideoCardType[]>([]);
-    
-    const nowDate = moment().format('YYYYMMDD')
-    // localstorage에 저장된 최근 확인한 비디오 불러오기
+
     useEffect(() => {
-        let recent = localStorage.getItem('recent');
-        if(recent) {
-            let parsed :VideoCardType[] = JSON.parse(recent);
-            // 3일 이전 데이터는 삭제
-            let filteredParsed = parsed.filter(e => parseInt(e.date) < parseInt(nowDate) - 3)
-            localStorage.setItem('recent', JSON.stringify(filteredParsed));
-            // 뒤집어서 상태로 변경
-            setRecentArr([...filteredParsed].reverse());
+        let getRecent = localStorage.getItem('recent')
+        if(getRecent){
+            let parsed = JSON.parse(getRecent);
+            setRecentArr(parsed);
         }
-    },[]);
+    },[])
 
     return(
         <div className="border" style={{background : '#eee', borderRadius : '10px'}}>

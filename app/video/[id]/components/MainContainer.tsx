@@ -58,12 +58,11 @@ export default function MainContainer(
     const { youtuber, video } = data;
 
     return(
-        <>
-            <div id="video">
-                <YoutuberProfileContainer youtuber={youtuber} />
-                <VideoContainer video={video} videoId={videoId} />
-            </div>
+        <div id="video">
+            <YoutuberProfileContainer youtuber={youtuber} />
+            <hr/>
+            <VideoContainer video={video} videoId={videoId} />
             <CommentContainer videoId={videoId} channelId={youtuber.channelId} />
-        </>
+        </div>
     )
 }

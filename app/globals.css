@@ -3,7 +3,37 @@ body {
     box-sizing: border-box;
 }
 
+.c-main {
+    color : #ff0000;
+}
+
+.bg-main{
+    background-color: #ff0000;
+}
+
+.a-tag {
+    text-decoration: none;
+    color: black;
+    transition: all 0.5s;
+}
+
+.a-tag:hover {
+    color : #ff0000;
+}
+
 .row-center{
     justify-content: center;
     align-items: center;
+}
+
+.text-hide {
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;  
+}
+
+.card-container{
+    border: 1px solid #999999;
+    padding : 20px;
+    border-radius: 10px;
 }

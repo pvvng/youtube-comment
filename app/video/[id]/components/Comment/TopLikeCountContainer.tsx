@@ -55,7 +55,7 @@ export default function TopLikeContainer(
             ))}
             {
                 visibleData.length === commentData.length &&
-                <p>이게 마지막 댓글이었음</p>
+                <p className='m-0 text-center'>마지막 댓글입니다.</p>
             }
             {/* 이 div가 스크롤 끝에 도달할 때마다 observer가 동작 */}
             <div ref={observerRef} style={{ height: "1px" }}></div>

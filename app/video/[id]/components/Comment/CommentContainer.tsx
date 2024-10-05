@@ -2,8 +2,8 @@
 
 import { fetchCommentData } from "@/@util/functions/fetch/fetchCommentData";
 import { useQuery } from "@tanstack/react-query";
-import DatechartContainer from "./DateChartContainer";
-import WordHubContainer from "./WordHubContainer";
+import DatechartContainer from "../Analyzed/DateChartContainer";
+import WordHubContainer from "../Analyzed/WordHubContainer";
 import { AxiosError } from "axios";
 import TopLikeContainer from "./TopLikeCountContainer";
 import { fetchAnalyzedCommentData } from "@/@util/functions/fetch/fetchAnalyzedCommentData";
@@ -60,11 +60,7 @@ export default function CommentContainer(
             <TopLikeContainer commentData={sortedCommentData} videoId={videoId} />
             <h3>화제성 분석</h3>
             <DatechartContainer dateData={dateData} />
-            <button onClick={async () => {
-                let data = await fetchAnalyzedCommentData(commentData, videoId)
-                if(data) console.log(data)
-            }}>버튼</button>
-            {/* <WordHubContainer commentData={commentData} channelId={channelId} /> */}
+            <WordHubContainer commentData={commentData} channelId={channelId} />
         </div>
     )
 }

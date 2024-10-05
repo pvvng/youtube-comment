@@ -7,6 +7,7 @@ import WordCloudContainer from "./WordCloudContainer";
 import FeelGraphContainer from "./FeelGraphContainer";
 import { AxiosError } from "axios";
 import { useParams } from "next/navigation";
+import useProcessError from "@/@util/hooks/useprocessError";
 
 interface PropsType {
     commentData : FilteredCommentType[]
@@ -28,31 +29,16 @@ export default function WordHubContainer(
         staleTime : 3600000,
     });
 
+    useProcessError(isError, error, 'null');
     if(isLoading) return <h3>댓글 데이터 로딩 중임</h3>
-    if (isError) {
-        let errorMessage = '';
-        // error가 AxiosError인지 확인
-        if (error instanceof AxiosError ) {
-            // AxiosError 타입에 따라 에러 처리
-            errorMessage = 
-            error.response?.data?.message || '서버에서 오류가 발생했습니다.';
-        } else if (error instanceof Error) {
-            // 다른 일반 에러 처리
-            errorMessage = error.message;
-        } else {
-            errorMessage = "알 수 없는 에러가 발생했습니다.";
-        }
-        // 에러 객체에서 메시지 추출
-        return <p>{errorMessage}</p>;
-    }
     if(!data) return <h3>no data</h3>
 
-    const {morpData :keyWordData, feelData} = data;
-    
+    const {pos :keyWordData, sentiment} = data;
+
     return (
         <>
             <h3 id="feeling">댓글 감정 분석</h3>
-            <FeelGraphContainer feelData={feelData} />
+            <FeelGraphContainer feelData={sentiment} />
             <h3 id="keyword">댓글 키워드</h3>
             <WordCloudContainer keyWordData={keyWordData} />
         </>

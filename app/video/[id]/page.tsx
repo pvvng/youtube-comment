@@ -1,5 +1,5 @@
-import MainContainer from "./components/MainContainer";
-import SideBarContainer from "./components/SideBarContainer";
+import MainContainer from "./components/Main/MainContainer";
+import SideBarContainer from "./components/Main/SideBarContainer";
 
 interface PropsType {
     params : {id : string};

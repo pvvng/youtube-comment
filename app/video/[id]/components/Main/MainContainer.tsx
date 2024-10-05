@@ -6,9 +6,10 @@ import YoutuberProfileContainer from "@/app/components/YoutuberProfileContainer"
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import CommentContainer from "./CommentContainer";
+import CommentContainer from "../Comment/CommentContainer";
 import { AxiosError } from "axios";
 import { useUpdateRecentVideoLocalStorage } from "@/@util/hooks/useUpdateRecentVideoLocalStorage";
+import useProcessError from "@/@util/hooks/useprocessError";
 
 export default function MainContainer(
     {videoId} : {videoId : string}
@@ -25,25 +26,7 @@ export default function MainContainer(
     });
 
     // 에러 발생시 뒤로가기
-    useEffect(() => {
-        if (isError) {
-            console.log(error)
-            let errorMessage = '';
-            // error가 AxiosError인지 확인
-            if (error instanceof AxiosError ) {
-                // AxiosError 타입에 따라 에러 처리
-                errorMessage = 
-                error.response?.data?.message || '서버에서 오류가 발생했습니다.';
-            } else if (error instanceof Error) {
-                // 다른 일반 에러 처리
-                errorMessage = error.message;
-            } else {
-                errorMessage = "알 수 없는 에러가 발생했습니다.";
-            }
-            alert(errorMessage);
-            router.back();
-        }
-    }, [isError, router]);
+    useProcessError(isError, error, 'mc');
 
     useUpdateRecentVideoLocalStorage(
         videoId,

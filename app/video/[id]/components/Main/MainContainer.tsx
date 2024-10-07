@@ -6,14 +6,17 @@ import YoutuberProfileContainer from "@/app/components/YoutuberProfileContainer"
 import { useQuery } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import CommentContainer from "./CommentContainer";
+import CommentContainer from "../Comment/CommentContainer";
+import { AxiosError } from "axios";
+import { useUpdateRecentVideoLocalStorage } from "@/@util/hooks/useUpdateRecentVideoLocalStorage";
+import useProcessError from "@/@util/hooks/useprocessError";
 
 export default function MainContainer(
     {videoId} : {videoId : string}
 ){
     const router = useRouter();
     // Video Data 불러오기
-    const { data, isLoading, isError } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey : ['videoData', videoId],
         queryFn : () => fetchVideoData(videoId),
         refetchOnWindowFocus : false,
@@ -23,22 +26,26 @@ export default function MainContainer(
     });
 
     // 에러 발생시 뒤로가기
-    useEffect(() => {
-        if (isError) {
-            alert('잘못된 접근입니다.');
-            router.back();
-        }
-    }, [isError, router]);
+    useProcessError(isError, error, 'mc');
 
-    if(!data || isLoading) return <h1>로딩중입니다.</h1>
+    useUpdateRecentVideoLocalStorage(
+        videoId,
+        data?.video.title,
+        data?.video.channelTitle,
+        data?.video.thumbnails.url
+    );
+
+    if(isLoading) return <h1>로딩중입니다.</h1>
+    if(!data) return <h1>no Data</h1>
 
     const { youtuber, video } = data;
 
     return(
-        <>
+        <div id="video">
             <YoutuberProfileContainer youtuber={youtuber} />
+            <hr/>
             <VideoContainer video={video} videoId={videoId} />
-            <CommentContainer videoId={videoId} />
-        </>
+            <CommentContainer videoId={videoId} channelId={youtuber.channelId} />
+        </div>
     )
 }

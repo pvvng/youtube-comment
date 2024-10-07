@@ -53,10 +53,17 @@ export interface OrganizedFeelType {
 }
   
 export interface AnalyzedCommentData {
-    morpData : string[];
-    feelData : {
-        positive : number;
-        negative : number;
-        neutral : number;
-    };
+    pos: PosType[];
+    sentiment: SentimentType;
+}
+
+export interface PosType {
+    text : string;
+    value : number;
+}
+
+export interface SentimentType {
+    negative: number;
+    neutral: number;
+    positive: number;
 }

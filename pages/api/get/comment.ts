@@ -20,7 +20,6 @@ export default async function handler(
 
     let allCommentsData :RawCommentData[] = [];
     let nextPageToken = null;
-
     while (true) {
         try {
             const response : AxiosResponse<CommentThread> = await axios.get(BASE_URL, {
@@ -45,9 +44,31 @@ export default async function handler(
                 break;
             }
         } catch (error) {
-            console.error('Error fetching comments:', error);
-            // 에러 발생 시 루프 중단
-            break; 
+            if (axios.isAxiosError(error)) {
+                // AxiosError의 상태 코드 확인
+                const statusCode = error.response?.status;
+    
+                if (statusCode === 403) {
+                    // 403 Forbidden - 댓글이 차단된 경우
+                    const errorMessage = '댓글 수집이 허용되지 않은 영상입니다.';
+                    console.error('403 Forbidden:', errorMessage);
+                    return res.status(403).json({ message: errorMessage });
+                } else if (statusCode === 404) {
+                    // 404 Not Found - 잘못된 videoId 또는 비공개 영상인 경우
+                    const errorMessage = '해당 영상이 존재하지 않거나 비공개 상태입니다.';
+                    console.error('404 Not Found:', errorMessage);
+                    return res.status(404).json({ message: errorMessage });
+                } else {
+                    // 다른 일반적인 에러 처리
+                    const errorMessage = error.response?.data?.error?.message || '알 수 없는 에러가 발생했습니다.';
+                    console.error('기타 에러 발생:', errorMessage);
+                    return res.status(statusCode || 500).json({ message: errorMessage });
+                }
+            } else {
+                // AxiosError가 아닌 다른 에러 처리
+                console.error('알 수 없는 에러 발생:', error);
+                return res.status(500).json({ message: '서버에서 알 수 없는 에러가 발생했습니다.' });
+            }
         }
     }
 
@@ -70,7 +91,7 @@ export default async function handler(
             publishedAt : new Date(snippet.publishedAt),
         }
         filteredAllCommentData.push(pushItem);
-    })
+    });
 
     // date Map 배열로 형식 변경 및 날짜 순으로 정렬, 퍼센티지 필드 추가
     const totalCommentLength = filteredAllCommentData.length;

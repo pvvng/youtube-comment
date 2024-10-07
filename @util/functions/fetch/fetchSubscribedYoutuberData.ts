@@ -1,21 +1,16 @@
-import { VideoDataType } from "@/types/video";
+import { SubScibedYoutuberType } from "@/types/youtuber";
 import axios from "axios";
 
-/** 비디오 데이터 패칭 함수 */
-export async function fetchVideoData(videoId: string): Promise<VideoDataType | undefined> {
-    
-    try {
-        const resultGetVideo = await axios.get('/api/get/video', {
-            params: {
-                videoId: videoId,
-            }
-        });
-        
-        const videoData: VideoDataType = resultGetVideo.data; 
-        // 비디오 데이터 저장
-        return videoData;
-
-    } catch (error) {
+/** #### 사용자가 로그인 한 경우에 구독한 유튜버 목록 불러오는 함수 (클라이언트 컴포넌트 전용)
+ * 
+ * **React-Query에서 사용 권장**
+ */
+export default async function fetchSubscribedYoutuberData(){
+    try{
+        let resultGetSubscription = await axios.get('/api/get/subscribe');
+        const subscription : SubScibedYoutuberType[] = resultGetSubscription.data 
+        return subscription;
+    }catch(error){
         // error가 AxiosError인지 확인
         if (axios.isAxiosError(error)) {
             // AxiosError 타입에 따라 에러 처리

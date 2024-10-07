@@ -1,9 +1,11 @@
-import { getServerSession } from "next-auth"
+import { getServerSession, Session } from "next-auth"
 import MiniMyPageHeader from "./Header";
 import MiniMyPageBody from "./Body";
 
 export default async function MiniMyPageContainer(){
-    const session = await getServerSession();
+
+    const session : Session|null = await getServerSession();
+    
     return(
         <div 
             className="w-100 border" 

@@ -2,9 +2,12 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 /** 
- * 에러시 예외 처리하는 커스텀 훅 
+ * #### 에러시 예외 처리하는 커스텀 훅 
+ * 
  * isError : React-Query isError 값
+ * 
  * error : React-Query error 값
+ * 
  * type : str 타입의 "mc"일 경우 alert 박스 띄우고 뒤로가기
  * */
 export default function useProcessError(

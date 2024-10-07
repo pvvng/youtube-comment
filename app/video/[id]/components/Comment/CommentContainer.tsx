@@ -4,9 +4,8 @@ import { fetchCommentData } from "@/@util/functions/fetch/fetchCommentData";
 import { useQuery } from "@tanstack/react-query";
 import DatechartContainer from "../Analyzed/DateChartContainer";
 import WordHubContainer from "../Analyzed/WordHubContainer";
-import { AxiosError } from "axios";
 import TopLikeContainer from "./TopLikeCountContainer";
-import { fetchAnalyzedCommentData } from "@/@util/functions/fetch/fetchAnalyzedCommentData";
+import useProcessError from "@/@util/hooks/useprocessError";
 
 interface PropsType {
     videoId : string;
@@ -26,24 +25,8 @@ export default function CommentContainer(
         staleTime : 3600000,
     })
 
+    useProcessError(isError, error, '');
     if(isLoading) return <h2>로딩중임</h2>;
-    if (isError) {
-        let errorMessage = '';
-        // error가 AxiosError인지 확인
-        if (error instanceof AxiosError ) {
-            // AxiosError 타입에 따라 에러 처리
-            errorMessage = 
-            error.response?.data?.message || '서버에서 오류가 발생했습니다.';
-        } else if (error instanceof Error) {
-            // 다른 일반 에러 처리
-            errorMessage = error.message;
-        } else {
-            errorMessage = "알 수 없는 에러가 발생했습니다.";
-        }
-        // 에러 객체에서 메시지 추출
-        return <p>{errorMessage}</p>;
-    }
-
     if(data === undefined) return null;
 
     // 각각 댓글 데이터, 날짜 데이터

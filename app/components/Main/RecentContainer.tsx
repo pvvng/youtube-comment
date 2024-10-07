@@ -1,6 +1,5 @@
 'use client';
 
-import moment from "moment-timezone";
 import { VideoCardType } from "./PopularList/CardListContainer";
 import VideoCardContainer from "./VideoCardContainer";
 import { useEffect, useState } from "react";

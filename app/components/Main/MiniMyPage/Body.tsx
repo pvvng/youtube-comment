@@ -1,9 +1,14 @@
+'use client';
+
 import { Session } from "next-auth";
 import { SignInBtn } from "../../SignItems/SignBtn";
+import { useRouter } from "next/navigation";
 
 export default function MiniMyPageBody(
     {session} : {session : Session | null}
 ){
+
+    const router = useRouter();
     return(
         <div className="w-100 p-2" style={{background  :'#eee'}}>
             {
@@ -12,7 +17,9 @@ export default function MiniMyPageBody(
                     <p>찜한 동영상</p>
                     <p>찜한 유튜버</p>
                     <p>구독 목록</p>
-                    <button className="float-end">마이페이지</button>
+                    <button className="float-end" onClick={() => {
+                        router.push('/my-page');
+                    }}>마이페이지</button>
                     <div style={{clear : 'both'}}></div>   
                 </> : 
                 <div 

@@ -9,7 +9,7 @@ export default function  MiniMyPageHeader(
                 {
                     session ?
                     <img 
-                        src={session?.user?.image || ''} 
+                        src={session.user?.image || "/temp-user.png"} 
                         width="100%" 
                         alt="user-profile" 
                         style={{borderTopLeftRadius : '10px'}}

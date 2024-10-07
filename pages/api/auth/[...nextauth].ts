@@ -20,9 +20,9 @@ export const authOptions = {
     },
     secret : process.env.NEXTAUTH_SECRET,
     callbacks: {
-        async redirect({ url, baseUrl } : { url :string, baseUrl:string}) {
-        // 외부 URL 리디렉션을 허용하지 않으려면 이 콜백을 사용자 정의합니다.
-        return url.startsWith(baseUrl) ? url : baseUrl
+            async redirect({ url, baseUrl } : { url :string, baseUrl:string}) {
+            // 외부 URL 리디렉션을 허용하지 않으려면 이 콜백을 사용자 정의합니다.
+            return url.startsWith(baseUrl) ? url : baseUrl
         }
     },
 };

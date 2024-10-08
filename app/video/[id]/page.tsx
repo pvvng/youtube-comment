@@ -15,7 +15,6 @@ export default function VideoDetail(props :PropsType){
             <div className="col-md-3 col-lg-2 p-0 d-none d-md-block">
                 <SideBarContainer />
             </div>
-            ㅎㅎ
             <div className="col-md-9 col-lg-10 col-12">
                 <MainContainer videoId={videoId} />
             </div>

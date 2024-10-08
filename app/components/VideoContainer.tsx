@@ -5,6 +5,7 @@ import { FilteredVideoSnippet, VideoStatisticsType } from "@/types/video";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faEye, faCommentDots } from '@fortawesome/free-solid-svg-icons'
 import toLocaleString from '@/@util/functions/toLocaleString';
+import dateToString from '@/@util/functions/dateToString';
 
 interface PropsType {
     video : FilteredVideoSnippet & VideoStatisticsType; 
@@ -37,7 +38,7 @@ export default function VideoContainer({video, videoId} : PropsType){
                         className="a-tag"
                     >{video.title}</a>
                 </h5>
-                <p>{video.publishedAt}</p>
+                <p>{dateToString(video.publishedAt)}</p>
                 <div className="row row-center" style={{margin : 'auto'}}>
                     {ICON_ARR.map((ica, i) => 
                         <div key={ica.type + i} className="col-4 video-icon-container" style={{cursor : 'pointer'}}>

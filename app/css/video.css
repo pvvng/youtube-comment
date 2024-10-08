@@ -55,3 +55,14 @@
     scrollbar-width: thin; 
     scrollbar-color: #888 #f1f1f1; 
 } */
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.tooltip-container {
+    color: black;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}

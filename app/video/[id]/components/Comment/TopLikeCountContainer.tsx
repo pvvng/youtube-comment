@@ -47,7 +47,7 @@ export default function TopLikeContainer(
     }, []);
 
     return (
-        <div className="p-2 custom-scrollbar card-container">
+        <div className="p-2 custom-scrollbar card-container mt-2">
             {visibleData.map((cd, i) => (
                 <div key={cd.publishedAt.toString() + i}>
                     <CommentCardContainer cd={cd} videoId={videoId} />

@@ -1,11 +1,17 @@
 'use client';
 
 import { PosType } from "@/types/word";
+import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/navigation";
 import WordCloud from "react-d3-cloud";
 
 export default function WordCloudContainer(
     {keyWordData} : {keyWordData : PosType[]}
 ){
+    const router = useRouter();
+
+    // value 순으로 정렬
     keyWordData = keyWordData.sort((a, b) => b.value - a.value);
     let highValue = keyWordData[0].value;
 
@@ -23,36 +29,56 @@ export default function WordCloudContainer(
     }
 
     if(keyWordData.length === 0) return <h3>데이터 없음</h3>
+
     return (
-        <div 
-            className="mt-4 mb-2" 
-            style={{
-                maxWidth : '400px', 
-                margin : 'auto', 
-                cursor : 'pointer'
-            }}
-        >
-            <WordCloud
-                data={keyWordData}
-                width={100}
-                height={100}
-                font="Impact" 
-                fontWeight="bold"
-                spiral="rectangular"
-                fontSize={valueCount(highValue)}
-                padding={2}
-                random={Math.random}
-                fill='black' // 각 단어에 색상 적용
-                // onWordClick={(event, d) => {
-                //     console.log(`onWordClick: ${d.text} / ${d.value}`);
-                // }}
-                // onWordMouseOver={(event, d) => {
-                //     console.log(`onWordMouseOver: ${d.text} / ${d.value}`);
-                // }}
-                // onWordMouseOut={(event, d) => {
-                //     console.log(`onWordMouseOut: ${d.text} / ${d.value}`);
-                // }}
-            />
+        <div className='card-container mt-3 mb-3'>
+            <button 
+                className="float-end refresh-btn" 
+                onClick={() => {router.refresh()}}
+            >
+                <FontAwesomeIcon icon={faArrowsRotate} />
+            </button>
+            <p className='fw-bold'>키워드 분석</p>
+            <div style={{clear : 'both'}}/>
+            <div 
+                className="mt-4 mb-2" 
+                style={{
+                    maxWidth : '400px', 
+                    margin : 'auto', 
+                    cursor : 'pointer',
+                    position : 'relative'
+                }}
+            >
+                <WordCloud
+                    data={keyWordData}
+                    width={200}
+                    height={200}
+                    font="Impact" 
+                    fontWeight="bold"
+                    spiral="rectangular"
+                    fontSize={valueCount(highValue)}
+                    padding={2}
+                    random={Math.random}
+                    fill='black' // 각 단어에 색상 적용
+                    // onWordClick={(event, d) => {
+                    //     console.log(`onWordClick: ${d.text} / ${d.value}`);
+                    // }}
+                    onWordMouseOver={(event, d) => {
+                        console.log(`onWordMouseOver: ${d.text} / ${d.value}`);
+                    }}
+                    onWordMouseOut={(event, d) => {
+                        console.log(`onWordMouseOut: ${d.text} / ${d.value}`);
+                    }}
+                />
+                <div 
+                    className="tooltip" 
+                    style={{width : '125%', maxWidth : 180, zIndex : 100}}
+                >
+                    <p className='m-0 text-center'>
+                        123123
+                    </p> 
+                </div>
+            </div>
         </div>
     )
 }

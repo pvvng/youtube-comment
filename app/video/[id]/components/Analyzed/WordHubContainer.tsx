@@ -37,9 +37,7 @@ export default function WordHubContainer(
 
     return (
         <>
-            <h3 id="feeling">댓글 감정 분석</h3>
             <FeelGraphContainer feelData={sentiment} />
-            <h3 id="keyword">댓글 키워드</h3>
             <WordCloudContainer keyWordData={keyWordData} />
         </>
     )

@@ -12,7 +12,7 @@ export function CommentCardContainer(
 
     // jsx 반환 함수
     /** 타임 스탬프를 a태그로 변경하여 jsx로 반환하는 함수 */
-    const convertTextWithTimestamps = (text: string) => {
+    function convertTextWithTimestamps (text: string) {
         return text.split(' ').map((word, i) => {
             const match = word.match(timestampRegex);
             if (match) {
@@ -35,7 +35,7 @@ export function CommentCardContainer(
             }
 
             // 일반 텍스트는 span으로 렌더링
-            return <span key={i}> {word} </span>;
+            return <span key={i} style={{ overflowWrap: 'break-word' }}> {word} </span>;
         });
     };
 

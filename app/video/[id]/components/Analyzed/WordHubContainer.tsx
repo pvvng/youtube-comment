@@ -33,8 +33,8 @@ export default function WordHubContainer(
     if(isLoading) return <h3>댓글 데이터 로딩 중임</h3>
     if(!data) return <h3>no data</h3>
 
-    const {pos :keyWordData, sentiment} = data;
-
+    let {pos :keyWordData, sentiment} = data;
+    
     return (
         <>
             <FeelGraphContainer feelData={sentiment} />

@@ -38,7 +38,7 @@ export default function DateChartCustomTooltip(
                 {
                     max === percent? 
                     <p className='m-0' style={{color : '#FF3333'}}>
-                        <FontAwesomeIcon icon={faHeart} /> 영상 리즈시절
+                        <FontAwesomeIcon icon={faHeart} /> 영상의 리즈시절
                     </p>:
                     index > 0 && percent - dateData[index - 1].percent > avg? 
                     <p className='m-0' style={{color : '#FF9900'}}>
@@ -47,7 +47,7 @@ export default function DateChartCustomTooltip(
                     </p>:
                     min === percent ? 
                     <p className='m-0' style={{color : '#0066FF'}}>
-                        <FontAwesomeIcon icon={faSnowflake} /> 인기 동결
+                        <FontAwesomeIcon icon={faSnowflake} /> 화제성 동결
                     </p>:
                     null
                 } 

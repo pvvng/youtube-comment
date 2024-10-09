@@ -33,8 +33,8 @@ export default function DatechartContainer(
                         data={organizedDateData}
                         margin={{
                             top: 0,
-                            right: 0,
-                            left: 0,
+                            right: 10,
+                            left: -20,
                             bottom: 0,
                         }}
                     >

@@ -4,34 +4,61 @@ import { PosType } from "@/types/word";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import WordCloud from "react-d3-cloud";
+
+interface WordType {
+    x : number;
+    y : number;
+}
 
 export default function WordCloudContainer(
     {keyWordData} : {keyWordData : PosType[]}
 ){
+    // 라우터
     const router = useRouter();
+    
+    const tooltipRef = useRef<HTMLDivElement | null>(null);
 
     // value 순으로 정렬
     keyWordData = keyWordData.sort((a, b) => b.value - a.value);
+
+    // 가장 큰 값 저장
     let highValue = keyWordData[0].value;
 
     function valueCount(highValue: number) {
-        // 최대 좋아요가 100개 이하인 댓글 처리
-        if (highValue <= 80) {
-            return (word: { value: number }) => {
-                const totalValue = keyWordData.reduce((acc, cur) => acc + cur.value, 0);
-                const scaleFactor = calculateOffset(keyWordData.length);
-                return Math.round((word.value / totalValue) * scaleFactor);
-            };
-        } else {
-            return (word: { value: number }) => Math.log2(word.value) * 1.5;
-        }
+        return (word: { value: number }) => word.value * (50 / highValue);
     }
+
+    function handleMouseOver (event: any, d: {text :string, value : number}){
+        if (tooltipRef.current) {
+            const pTag = tooltipRef.current.querySelector('p');
+
+            tooltipRef.current.style.left = `${(event.offsetX)}px`;
+            tooltipRef.current.style.top = `${(event.offsetY - 30)}px`;
+
+            tooltipRef.current.style.opacity = "1";
+            tooltipRef.current.style.visibility = "visible";
+
+            if(pTag) {
+                pTag.textContent = `${d.text} : ${d.value}`;
+            }
+        }
+    };
+
+    function handleMouseOut(){
+        if (tooltipRef.current) {
+            tooltipRef.current.style.opacity = "0";
+            tooltipRef.current.style.visibility = "hidden";
+        }
+    };
 
     if(keyWordData.length === 0) return <h3>데이터 없음</h3>
 
     return (
-        <div className='card-container mt-3 mb-3'>
+        <div 
+            className='card-container mt-3 mb-3' 
+        >
             <button 
                 className="float-end refresh-btn" 
                 onClick={() => {router.refresh()}}
@@ -48,6 +75,7 @@ export default function WordCloudContainer(
                     cursor : 'pointer',
                     position : 'relative'
                 }}
+                onMouseLeave={handleMouseOut}
             >
                 <WordCloud
                     data={keyWordData}
@@ -60,43 +88,19 @@ export default function WordCloudContainer(
                     padding={2}
                     random={Math.random}
                     fill='black' // 각 단어에 색상 적용
-                    // onWordClick={(event, d) => {
-                    //     console.log(`onWordClick: ${d.text} / ${d.value}`);
-                    // }}
-                    onWordMouseOver={(event, d) => {
-                        console.log(`onWordMouseOver: ${d.text} / ${d.value}`);
-                    }}
-                    onWordMouseOut={(event, d) => {
-                        console.log(`onWordMouseOut: ${d.text} / ${d.value}`);
-                    }}
+                    onWordMouseOver={handleMouseOver}
                 />
                 <div 
+                    ref={tooltipRef}
                     className="tooltip" 
-                    style={{width : '125%', maxWidth : 180, zIndex : 100}}
+                    style={{
+                        width : 100, 
+                        zIndex : 100, 
+                    }}
                 >
-                    <p className='m-0 text-center'>
-                        123123
-                    </p> 
+                    <p className='m-0 text-center'></p> 
                 </div>
             </div>
         </div>
     )
-}
-
-/** 배열 길이에 따라 offset 부여하는 함수 */
-function calculateOffset(arrayLength: number): number {
-    const minLength = 0;
-    const maxLength = 100;
-    const minOffset = 50;
-    const maxOffset = 800;
-
-    // 배열의 길이가 minLength 이상, maxLength 이하일 때만 선형적으로 계산
-    if (arrayLength <= minLength) {
-        return minOffset; // 배열 길이가 0일 때 50
-    } else if (arrayLength >= maxLength) {
-        return maxOffset; // 배열 길이가 100일 때 500
-    } else {
-        // 배열 길이에 따라 선형적으로 계산
-        return minOffset + ((arrayLength - minLength) / (maxLength - minLength)) * (maxOffset - minOffset);
-    }
 }

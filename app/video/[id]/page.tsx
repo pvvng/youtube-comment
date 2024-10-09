@@ -15,7 +15,7 @@ export default function VideoDetail(props :PropsType){
             <div className="col-md-3 col-lg-2 p-0 d-none d-md-block">
                 <SideBarContainer />
             </div>
-            <div className="col-md-9 col-lg-10 col-12">
+            <div className="col-md-9 col-lg-10 col-12" style={{overflow : 'hidden'}}>
                 <MainContainer videoId={videoId} />
             </div>
         </div>

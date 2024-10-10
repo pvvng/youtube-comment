@@ -43,7 +43,7 @@ export default function VideoContainer({video, videoId} : PropsType){
                 </h5>
                 <p>{dateToString(video.publishedAt)}</p>
                 <div 
-                    className="row row-center w-100 text-center" 
+                    className="row row-center w-100 text-center mt-3 mb-3" 
                     style={{margin : 'auto', position : 'relative'}}
                 >
                     {

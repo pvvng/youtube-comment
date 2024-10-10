@@ -56,16 +56,13 @@ export default function WordCloudContainer(
     if(keyWordData.length === 0) return <h3>데이터 없음</h3>
 
     return (
-        <div 
-            className='card-container mt-3 mb-3' 
-        >
+        <>
             <button 
-                className="float-end refresh-btn" 
+                className="float-start refresh-btn" 
                 onClick={() => {router.refresh()}}
             >
                 <FontAwesomeIcon icon={faArrowsRotate} />
             </button>
-            <p className='fw-bold'>키워드 분석</p>
             <div style={{clear : 'both'}}/>
             <div 
                 className="mt-4 mb-2" 
@@ -94,13 +91,16 @@ export default function WordCloudContainer(
                     ref={tooltipRef}
                     className="tooltip" 
                     style={{
-                        width : 100, 
+                        width : 120, 
                         zIndex : 100, 
                     }}
                 >
-                    <p className='m-0 text-center'></p> 
+                    <p className='m-0 text-center'>
+                        {/* keywword label text */}
+                        text : value
+                    </p> 
                 </div>
             </div>
-        </div>
+        </>
     )
 }

@@ -10,8 +10,7 @@ export default function TopLikeContainer(
     {commentData, videoId} : {commentData : FilteredCommentType[], videoId : string}
 ){
 
-    const [visibleData, setVisibleData] = 
-    useState<FilteredCommentType[]>([]);
+    const [visibleData, setVisibleData] = useState<FilteredCommentType[]>([]);
     const [loadMore, setLoadMore] = useState(false);
     const observerRef = useRef<HTMLDivElement | null>(null);
 

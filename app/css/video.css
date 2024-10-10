@@ -50,6 +50,24 @@
     border-bottom-right-radius: 10px;
 }
 
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+.custom-scrollbar2::-webkit-scrollbar {
+    width: 20px;
+    /* height: 20px; */
+}
+
+.custom-scrollbar2::-webkit-scrollbar-thumb {
+    background: url('/keyword-white.png') no-repeat center center;
+    background-size: contain; /* 이미지가 핸들 크기에 맞춰서 조정됨 */
+}
+
+.custom-scrollbar2::-webkit-scrollbar-track {
+    background: black; /* 트랙의 배경색 */
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
 /* 
 .custom-scrollbar {
     scrollbar-width: thin; 
@@ -58,6 +76,7 @@
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
+/* 그래프 툴팁 */
 .tooltip-container {
     color: black;
     background-color: #fff;

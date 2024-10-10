@@ -3,11 +3,9 @@
 import { fetchAnalyzedCommentData } from "@/@util/functions/fetch/fetchAnalyzedCommentData";
 import { FilteredCommentType } from "@/types/comment";
 import { useQuery } from "@tanstack/react-query";
-import WordCloudContainer from "./WordCloudContainer";
 import FeelGraphContainer from "./FeelGraphContainer";
-import { AxiosError } from "axios";
-import { useParams } from "next/navigation";
 import useProcessError from "@/@util/hooks/useprocessError";
+import KeywordHubContainer from "./Word/KeywordHubContainer";
 
 interface PropsType {
     commentData : FilteredCommentType[]
@@ -38,7 +36,7 @@ export default function WordHubContainer(
     return (
         <>
             <FeelGraphContainer feelData={sentiment} />
-            <WordCloudContainer keyWordData={keyWordData} />
+            <KeywordHubContainer keyWordData={keyWordData} />
         </>
     )
 }

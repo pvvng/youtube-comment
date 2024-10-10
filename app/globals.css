@@ -82,3 +82,18 @@ body {
     opacity: 1; /* hover 시 툴팁 표시 */
     visibility: visible; /* hover 시 툴팁 표시 */
 }
+
+/* 알림창 백그라운드 */
+.alert-overlay {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top : 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

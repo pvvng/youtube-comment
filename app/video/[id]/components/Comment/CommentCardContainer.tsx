@@ -68,7 +68,9 @@ export function CommentCardContainer(
                         <div className="col-12 col-lg-4 px-sm-2 px-0 text-sm-start text-end">
                             <p className="m-0">{dateToString(cd.publishedAt)}</p>
                             <p className="m-0">
-                                <FontAwesomeIcon icon={faHeart} />
+                                <span style={{color : '#ff0000'}}>
+                                    <FontAwesomeIcon icon={faHeart} />
+                                </span>
                                 {' '}{cd.likeCount.toLocaleString()}
                             </p>
                         </div>

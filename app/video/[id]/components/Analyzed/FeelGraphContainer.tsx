@@ -2,6 +2,8 @@
 
 import { BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis, Bar, Cell, Rectangle } from "recharts";
 import FeelGrapthCustomTooltip from "../CustomToolTip/FeelGrapthCustomTooltip";
+import { useEffect, useRef } from "react";
+import { useScrollStore } from "@/app/store";
 
 const BAR_COLORS = {
     positive: '#6699FF',
@@ -10,6 +12,14 @@ const BAR_COLORS = {
 };
 
 export default function FeelGraphContainer({ feelData }: PropsType) {
+
+    // 사이드바 스크롤을 위한 설정
+    const sentimentContainerRef = useRef(null);
+    const setSectionRef = useScrollStore((state) => state.setSectionRef);
+    
+    useEffect(() => {
+        setSectionRef('sentiment', sentimentContainerRef);
+    }, [setSectionRef]);
 
     // 평균 낼 전체값 구하기
     let total = feelData.positive + feelData.negative + feelData.neutral;
@@ -21,7 +31,7 @@ export default function FeelGraphContainer({ feelData }: PropsType) {
     ];
 
     return (
-        <div className='card-container mt-3'>
+        <div ref={sentimentContainerRef} id="sentiment" className='card-container mt-3'>
             <p className='fw-bold'>댓글 감정 분석</p>
             <div style={{ height: '300px' }}>
                 <ResponsiveContainer width="100%" height="100%">

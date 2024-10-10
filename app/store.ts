@@ -1,19 +1,28 @@
-import { VideoDataType } from "@/types/video";
+import { RefObject } from "react";
 import { create } from "zustand"
 
-/** video data store type */
-interface VideoDataStoreType {
-    videoData: VideoDataType | undefined; // 비디오 데이터가 없을 때는 null
+export type SectionRefs = {
+    [key: string]: RefObject<HTMLElement> | null;
+};
+  
+interface ScrollStore {
+    sectionRefs: SectionRefs;
+    setSectionRef: (section: string, ref: RefObject<HTMLElement>) => void;
+  }
+  
+export const useScrollStore = create<ScrollStore>((set) => ({
+    sectionRefs: {},
+    setSectionRef: (section, ref) => set((state) => ({
+        sectionRefs: { ...state.sectionRefs, [section]: ref }
+    })),
+}));
 
-    // 상태 업데이트 함수들
-    setVideoData: (data: VideoDataType | undefined) => void;
+interface VideoSideBarType {
+    sideBarState : boolean;
+    setSideBarState : (isOpen : boolean) => void
 }
 
-/** 비디오 데이터 store */
-export const useVideoDataStore = create<VideoDataStoreType>((set) => ({
-    // 데이터
-    videoData : undefined,
-
-    // 상태 업데이트 함수
-    setVideoData: (data) => set({ videoData: data }),
+export const useVideoSideBarStore = create<VideoSideBarType>((set) => ({
+    sideBarState : false,
+    setSideBarState : (isOpen) => set((state) => ({ sideBarState : isOpen }))
 }))

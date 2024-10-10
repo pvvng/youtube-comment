@@ -1,10 +1,21 @@
+'use client';
+
 import { DateDataType } from '@/types/comment';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import DateChartCustomTooltip from '../CustomToolTip/DateChartCustomTooltip';
+import { useEffect, useRef } from 'react';
+import { useScrollStore } from '@/app/store';
 
 export default function DatechartContainer(
     {dateData} : {dateData : DateDataType[]}
 ){
+    // 사이드바 스크롤을 위한 설정
+    const topicalityContainerRef = useRef(null);
+    const setSectionRef = useScrollStore((state) => state.setSectionRef);
+    
+    useEffect(() => {
+        setSectionRef('topicality', topicalityContainerRef);
+    }, [setSectionRef]);
 
     // 데이터 그래프에 맞게 정돈
     let organizedDateData = dateData.map((v, index) => {
@@ -23,7 +34,7 @@ export default function DatechartContainer(
     const avgPercent = (maxPercent + minPercent) / 4;
 
     return (
-        <div className='card-container mt-3'>
+        <div className='card-container mt-3' id='topicality' ref={topicalityContainerRef}>
             <p className='fw-bold'>화제성 분석</p>
             <div style={{width : '100%', height : '250px'}}>
                 <ResponsiveContainer width="100%" height="100%">

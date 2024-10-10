@@ -61,10 +61,9 @@ export default function YoutuberProfileContainer(
                         <span className="fw-bold">영상수</span> 
                         {' '}{toLocaleString(youtuber.videoCount)} 개
                     </p>
-                    <button className="btn btn-dark float-end" onClick={() => {
+                    <button className="btn btn-dark mt-2 mb-3" onClick={() => {
                         setInfoClicker([10000, 1, 'visible']);
                     }}>정보</button>
-                    <div style={{clear : 'both'}}></div>
                 </div>
             </div>
         </div>

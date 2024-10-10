@@ -11,13 +11,9 @@ export default function VideoDetail(props :PropsType){
     const videoId = props.params.id;
 
     return (
-        <div className="row w-100" style={{margin :'auto'}}>
-            <div className="col-md-3 col-lg-2 p-0 d-none d-md-block">
-                <SideBarContainer />
-            </div>
-            <div className="col-md-9 col-lg-10 col-12" style={{overflow : 'hidden'}}>
-                <MainContainer videoId={videoId} />
-            </div>
+        <div style={{position : 'relative'}}>
+            <SideBarContainer />
+            <MainContainer videoId={videoId} />
         </div>
     )
 }

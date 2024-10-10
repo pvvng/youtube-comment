@@ -4,6 +4,7 @@ import '@/app/css/video.css';
 import { FilteredCommentType } from "@/types/comment";
 import { useEffect, useRef, useState } from "react";
 import { CommentCardContainer } from './CommentCardContainer';
+import { useScrollStore } from '@/app/store';
 
 
 export default function TopLikeContainer(
@@ -14,10 +15,18 @@ export default function TopLikeContainer(
     const [loadMore, setLoadMore] = useState(false);
     const observerRef = useRef<HTMLDivElement | null>(null);
 
+    // 사이드바 스크롤을 위한 설정
+    const commentContainerRef = useRef(null);
+    const { setSectionRef } = useScrollStore();
+    
+    useEffect(() => {
+        setSectionRef('comment', commentContainerRef);
+    }, [setSectionRef]);
+
     // 처음에 10개의 데이터를 로드
     useEffect(() => {
         setVisibleData(commentData.slice(0, 10));
-    }, []);
+    }, [setSectionRef]);
 
     useEffect(() => {
         if (loadMore && visibleData.length < commentData.length) {
@@ -46,7 +55,7 @@ export default function TopLikeContainer(
     }, []);
 
     return (
-        <div className="p-2 custom-scrollbar card-container mt-2">
+        <div ref={commentContainerRef} id='comment' className="p-2 custom-scrollbar card-container mt-2">
             {visibleData.map((cd, i) => (
                 <div key={cd.publishedAt.toString() + i}>
                     <CommentCardContainer cd={cd} videoId={videoId} />

@@ -4,7 +4,7 @@ import '@/app/css/video.css';
 import { FilteredCommentType } from "@/types/comment";
 import { useEffect, useRef, useState } from "react";
 import { CommentCardContainer } from './CommentCardContainer';
-import { useScrollStore } from '@/app/store';
+import { useScrollStore, useVideoRenderStateStore } from '@/app/store';
 
 
 export default function TopLikeContainer(
@@ -19,25 +19,13 @@ export default function TopLikeContainer(
     const commentContainerRef = useRef(null);
     const { setSectionRef } = useScrollStore();
     
-    useEffect(() => {
-        setSectionRef('comment', commentContainerRef);
-    }, [setSectionRef]);
-
-    // 처음에 10개의 데이터를 로드
-    useEffect(() => {
-        setVisibleData(commentData.slice(0, 10));
-    }, [setSectionRef]);
-
-    useEffect(() => {
-        if (loadMore && visibleData.length < commentData.length) {
-            const nextData = commentData.slice(visibleData.length, visibleData.length + 10);
-            setVisibleData(prev => [...prev, ...nextData]);
-            setLoadMore(false); // 데이터를 불러온 후 다시 loadMore 상태를 false로 설정
-        }
-    },[loadMore])
+    // video detail page render state
+    const { setVideoComponentState } = useVideoRenderStateStore();
 
     // Intersection Observer (한무 스크롤) 설정
     useEffect(() => {
+        setVideoComponentState(['comment', true]);
+
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
                 setLoadMore(true); // 끝에 도달하면 추가 데이터를 불러오기 위해 상태 업데이트
@@ -53,6 +41,23 @@ export default function TopLikeContainer(
             }
         };
     }, []);
+    
+    useEffect(() => {
+        if (loadMore && visibleData.length < commentData.length) {
+            const nextData = commentData.slice(visibleData.length, visibleData.length + 10);
+            setVisibleData(prev => [...prev, ...nextData]);
+            setLoadMore(false); // 데이터를 불러온 후 다시 loadMore 상태를 false로 설정
+        }
+    },[loadMore])
+
+    useEffect(() => {
+        setSectionRef('comment', commentContainerRef);
+    }, [setSectionRef]);
+
+    // 처음에 10개의 데이터를 로드
+    useEffect(() => {
+        setVisibleData(commentData.slice(0, 10));
+    }, [setSectionRef]);
 
     return (
         <div ref={commentContainerRef} id='comment' className="p-2 custom-scrollbar card-container mt-2">

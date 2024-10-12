@@ -9,6 +9,8 @@ import { useUpdateRecentVideoLocalStorage } from "@/@util/hooks/useUpdateRecentV
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 import { useScrollStore } from "@/app/store";
+import useCheckCachedData from "@/@util/hooks/useCheckCachedData";
+
 
 export default function MainContainer(
     {videoId} : {videoId : string}
@@ -17,6 +19,9 @@ export default function MainContainer(
     const videoContainerRef = useRef(null);
     const { setSectionRef } = useScrollStore();
 
+    useCheckCachedData(videoId);
+
+    // 사이드바 설정 위한 설정
     useEffect(() => {
         setSectionRef('video', videoContainerRef);
     }, [setSectionRef]);

@@ -2,7 +2,7 @@ import { PosType } from "@/types/word";
 import WordCloudContainer from "./WordCloudContainer";
 import KeywordListContainer from "./KeywordListContainer";
 import { useEffect, useRef } from "react";
-import { useScrollStore } from "@/app/store";
+import { useScrollStore, useVideoRenderStateStore } from "@/app/store";
 
 export default function KeywordHubContainer(
     {keyWordData} : {keyWordData : PosType[]}
@@ -10,7 +10,15 @@ export default function KeywordHubContainer(
     // 사이드바 스크롤을 위한 설정
     const keywordContainerRef = useRef(null);
     const setSectionRef = useScrollStore((state) => state.setSectionRef);
-    
+
+    // video detail page render state
+    const { setVideoComponentState } = useVideoRenderStateStore();
+
+    useEffect(() => {
+        setVideoComponentState(['keyword', true]);
+    },[]);
+
+    // 사이드바 설정 위한 설정
     useEffect(() => {
         setSectionRef('keyword', keywordContainerRef);
     }, [setSectionRef]);

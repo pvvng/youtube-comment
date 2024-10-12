@@ -3,7 +3,7 @@
 import { BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis, Bar, Cell, Rectangle } from "recharts";
 import FeelGrapthCustomTooltip from "../CustomToolTip/FeelGrapthCustomTooltip";
 import { useEffect, useRef } from "react";
-import { useScrollStore } from "@/app/store";
+import { useScrollStore, useVideoRenderStateStore } from "@/app/store";
 
 const BAR_COLORS = {
     positive: '#6699FF',
@@ -16,7 +16,15 @@ export default function FeelGraphContainer({ feelData }: PropsType) {
     // 사이드바 스크롤을 위한 설정
     const sentimentContainerRef = useRef(null);
     const setSectionRef = useScrollStore((state) => state.setSectionRef);
-    
+
+    // video detail page render state
+    const { setVideoComponentState } = useVideoRenderStateStore();
+
+    useEffect(() => {
+        setVideoComponentState(['sentiment', true]);
+    },[])
+
+    // 사이드바 설정 위한 설정
     useEffect(() => {
         setSectionRef('sentiment', sentimentContainerRef);
     }, [setSectionRef]);

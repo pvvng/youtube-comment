@@ -1,7 +1,7 @@
 'use client';
 
 import '@/app/css/video.css';
-import { useScrollStore, useVideoSideBarStore } from '@/app/store';
+import { useScrollStore, useVideoRenderStateStore, useVideoSideBarStore } from '@/app/store';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -16,9 +16,9 @@ const BTN_INFO = [
 export default function SideBarContainer(){
 
     const { sideBarState, setSideBarState } = useVideoSideBarStore();
-
     const { sectionRefs } = useScrollStore();
-
+    const { videoComponentState } = useVideoRenderStateStore();
+    
     const handleScroll = (section : string) => {
         const sectionRef = sectionRefs[section];
         if (sectionRef && sectionRef.current) {
@@ -33,12 +33,32 @@ export default function SideBarContainer(){
             onDoubleClick={() => {setSideBarState(false)}}
         >
             <div>
-                {BTN_INFO.map((bi) => 
+                {BTN_INFO.map((bi) =>  
                     <button 
                         key={bi.name + bi.koname}
-                        className="w-100 sidebar-btn"
+                        className={
+                            videoComponentState[bi.name]? 
+                            "w-100 sidebar-btn":
+                            "w-100 sidebar-loading-btn"
+                        }
                         onClick={() => {handleScroll(bi.name)}}
-                    >{bi.koname}</button>
+                    >
+                        {
+                            // 컴포넌트가 렌더링되면 글자 렌더. 
+                            // 이외에는 로딩 스피너 렌더
+                            videoComponentState[bi.name]?
+                            bi.koname:
+                            <div 
+                                key={bi.name + bi.koname} 
+                                className="spinner-border" 
+                                role="status"
+                            >
+                                <span className="visually-hidden">
+                                    Loading...
+                                </span>
+                            </div>
+                        }
+                    </button>
                 )}
             </div>
             <div 

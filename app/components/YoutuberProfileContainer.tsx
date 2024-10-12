@@ -3,14 +3,20 @@
 import toLocaleString from "@/@util/functions/toLocaleString";
 import { YoutuberDataType } from "@/types/youtuber";
 import YoutuberInfoContainer from "./YoutuberInfoContainer";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useVideoRenderStateStore } from "../store";
 
 export default function YoutuberProfileContainer(
     {youtuber} : {youtuber : YoutuberDataType}
 ){ 
-
     // 정보 알림창 띄우거나 죽이는 state
     const [infoClicker, setInfoClicker] = useState<[number, number, 'visible' | 'hidden']>([0, -10000, 'hidden']);
+    // video detail page render state
+    const { setVideoComponentState } = useVideoRenderStateStore();
+
+    useEffect(() => {
+        setVideoComponentState(['youtuber', true]);
+    },[]);
 
     return (
         <div style={{position : 'relative'}}>

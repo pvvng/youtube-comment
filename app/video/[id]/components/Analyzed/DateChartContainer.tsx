@@ -4,7 +4,7 @@ import { DateDataType } from '@/types/comment';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import DateChartCustomTooltip from '../CustomToolTip/DateChartCustomTooltip';
 import { useEffect, useRef } from 'react';
-import { useScrollStore } from '@/app/store';
+import { useScrollStore, useVideoRenderStateStore } from '@/app/store';
 
 export default function DatechartContainer(
     {dateData} : {dateData : DateDataType[]}
@@ -12,7 +12,15 @@ export default function DatechartContainer(
     // 사이드바 스크롤을 위한 설정
     const topicalityContainerRef = useRef(null);
     const setSectionRef = useScrollStore((state) => state.setSectionRef);
-    
+
+    // video detail page render state
+    const { setVideoComponentState } = useVideoRenderStateStore();
+
+    useEffect(() => {
+        setVideoComponentState(['topicality', true]);
+    },[]);
+
+    // 사이드바 설정 위한 설정
     useEffect(() => {
         setSectionRef('topicality', topicalityContainerRef);
     }, [setSectionRef]);

@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faCommentDots, faSeedling } from '@fortawesome/free-solid-svg-icons'
 import toLocaleString from '@/@util/functions/toLocaleString';
 import dateToString from '@/@util/functions/dateToString';
-import { useState } from 'react';
+import { useVideoRenderStateStore } from '../store';
+import { useEffect } from 'react';
 
 interface PropsType {
     video : FilteredVideoSnippet & VideoStatisticsType; 
@@ -15,8 +16,14 @@ interface PropsType {
 
 export default function VideoContainer({video, videoId} : PropsType){
 
-    // 아이콘 hover 상태 관리
+    // video detail page render state
+    const { setVideoComponentState } = useVideoRenderStateStore();
 
+    useEffect(() => {
+        setVideoComponentState(['video', true]);
+    },[]);
+
+    // 아이콘 hover 상태 관리
     const ICON_ARR = [
         {icon : faThumbsUp, name : '좋아요', type : video.likeCount, offset : '개'},
         {icon : faSeedling, name : '조회수', type : video.viewCount, offset : '회'},

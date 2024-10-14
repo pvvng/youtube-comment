@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import { handleFocus } from "@/@util/functions/input/handleFocus";
 import { useRouter } from "next/navigation";
-import { checkVideoId } from "@/@util/functions/input/checkVideoId";
+import { checkVideoId } from "@/@util/hooks/checkVideoId";
 
 /** video 검색 input component */
 export default function InputContainer(){

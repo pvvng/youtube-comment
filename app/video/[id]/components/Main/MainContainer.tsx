@@ -1,20 +1,31 @@
 'use client';
 
-import { fetchVideoData } from "@/@util/functions/fetch/fetchVideoData";
 import VideoContainer from "@/app/components/VideoContainer";
 import YoutuberProfileContainer from "@/app/components/YoutuberProfileContainer";
-import { useQuery } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import CommentContainer from "../Comment/CommentContainer";
-import { AxiosError } from "axios";
-import { useUpdateRecentVideoLocalStorage } from "@/@util/hooks/useUpdateRecentVideoLocalStorage";
 import useProcessError from "@/@util/hooks/useprocessError";
+import { fetchVideoData } from "@/@util/functions/fetch/fetchVideoData";
+import { useUpdateRecentVideoLocalStorage } from "@/@util/hooks/useUpdateRecentVideoLocalStorage";
+import { useQuery } from "@tanstack/react-query";
+import { useEffect, useRef } from "react";
+import { useScrollStore } from "@/app/store";
+import useCheckCachedData from "@/@util/hooks/useCheckCachedData";
+
 
 export default function MainContainer(
     {videoId} : {videoId : string}
 ){
-    const router = useRouter();
+    // 사이드바 스크롤을 위한 설정
+    const videoContainerRef = useRef(null);
+    const { setSectionRef } = useScrollStore();
+
+    useCheckCachedData(videoId);
+
+    // 사이드바 설정 위한 설정
+    useEffect(() => {
+        setSectionRef('video', videoContainerRef);
+    }, [setSectionRef]);
+
     // Video Data 불러오기
     const { data, isLoading, isError, error } = useQuery({
         queryKey : ['videoData', videoId],
@@ -41,9 +52,9 @@ export default function MainContainer(
     const { youtuber, video } = data;
 
     return(
-        <div id="video">
+        <div ref={videoContainerRef} id="video" className="container-md">
             <YoutuberProfileContainer youtuber={youtuber} />
-            <hr/>
+            <hr />
             <VideoContainer video={video} videoId={videoId} />
             <CommentContainer videoId={videoId} channelId={youtuber.channelId} />
         </div>

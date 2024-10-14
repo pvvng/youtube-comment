@@ -6,6 +6,8 @@ import DatechartContainer from "../Analyzed/DateChartContainer";
 import WordHubContainer from "../Analyzed/WordHubContainer";
 import TopLikeContainer from "./TopLikeCountContainer";
 import useProcessError from "@/@util/hooks/useprocessError";
+import { useEffect } from "react";
+import { useVideoRenderStateStore } from "@/app/store";
 
 interface PropsType {
     videoId : string;
@@ -15,8 +17,7 @@ interface PropsType {
 export default function CommentContainer(
     {videoId, channelId} : PropsType
 ){
-    
-    const {data, isLoading, isError, error} = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey : ['commentData', videoId],
         queryFn : () => fetchCommentData(videoId),
         refetchOnWindowFocus : false,
@@ -41,9 +42,8 @@ export default function CommentContainer(
     return(
         <div className="w-100" id="topicality">
             <TopLikeContainer commentData={sortedCommentData} videoId={videoId} />
-            <h3>화제성 분석</h3>
             <DatechartContainer dateData={dateData} />
-            <WordHubContainer commentData={commentData} channelId={channelId} />
+            <WordHubContainer commentData={commentData} channelId={channelId} videoId={videoId} />
         </div>
     )
 }

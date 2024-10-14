@@ -47,7 +47,7 @@ export default function KeywordListContainer(
     return (
         <div 
             className="card-container custom-scrollbar2 mt-sm-0 mt-4" 
-            style={{height : ' 350px', overflowY : 'scroll'}}
+            style={{ height : '250px', overflowY : 'scroll'}}
         >
             <p className="m-0 fw-bold">키워드 순위</p>
             {visibleData.map((kd, i) => 

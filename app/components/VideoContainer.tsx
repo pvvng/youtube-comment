@@ -39,6 +39,15 @@ export default function VideoContainer({video, videoId} : PropsType){
                     alt="thumbnail" 
                     style={{borderRadius : '20px'}}
                 />
+                {/* 비디오 로드 */}
+                {/* <iframe width="100%" height="auto" 
+                    src={`https://www.youtube.com/embed/${videoId}`} 
+                    title="YouTube video player" 
+                    frameBorder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowFullScreen
+                    style={{borderRadius : 20}}
+                ></iframe> */}
             </div>
             <div className="text-center p-3">
                 <h5 className="fw-bold m-0 mt-3 mb-3">

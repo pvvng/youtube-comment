@@ -1,34 +1,18 @@
-'use client'
+import React,{ReactNode} from "react";
 
-import { signIn, signOut } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
-import '@/app/css/item.css/loginButton.css';
+import styled from '@emotion/styled';
 
-
-// 카카오 로그인 버튼
-export function GoogleSignInBtn (){
-    // 메인 페이지로 리다이렉트
-    const searchParams = useSearchParams();
-    if(searchParams){
-        const callbackUrl = searchParams.get('callbackUrl') || '';
-        return (
-            <button 
-                onClick={() => signIn('google', { callbackUrl })} 
-            >
-                구글 로그인 버튼
-            </button>
-        )
-    }
+interface ValueProviderProps {
+    children: ReactNode; // children의 타입을 ReactNode로 정의
 }
-// 로그인 페이지로 이동하는 버튼
-export function SignInBtn (){
-    return <button 
-    className="loginButton text-end"
-  
-    onClick={() => {
-        signIn();
-    }}>
-      <svg
+
+
+
+const Button: React.FC<ValueProviderProps> = ({children}) => {
+  return (
+    <StyledWrapper>
+      <button className="button">
+        <svg
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="xMidYMid"
           viewBox="0 0 256 262"
@@ -50,18 +34,42 @@ export function SignInBtn (){
             d="M130.55 50.479c24.514 0 41.05 10.589 50.479 19.438l36.844-35.974C195.245 12.91 165.798 0 130.55 0 79.49 0 35.393 29.301 13.925 71.947l42.211 32.783c10.59-31.477 39.891-54.251 74.414-54.251"
           />
         </svg>
-      
-    </button>
+        {children}
+      </button>
+    </StyledWrapper>
+  );
+};
+
+const StyledWrapper = styled.div`
+  button {
+  max-width: 320px;
+  display: flex;
+  padding: 0.5rem 1.4rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  vertical-align: middle;
+  align-items: center;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  gap: 0.75rem;
+  color: rgb(65, 63, 63);
+  background-color: #fff;
+  cursor: pointer;
+  transition: all .6s ease;
 }
 
-// 로그 아웃 버튼
-export function SignOutBtn (){
-    return <button 
-    
-    onClick={() => {
-        signOut();
-    }}>로그아웃</button>
-
-  
+.button svg {
+  height: 24px;
 }
+
+button:hover {
+  transform: scale(1.02);
+}
+`;
+
+export default Button;
+
 

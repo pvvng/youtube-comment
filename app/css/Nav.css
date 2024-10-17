@@ -1,0 +1,19 @@
+@media (max-width: 600px) {
+    .hidden {
+        /* display: none !important;  */
+        visibility: hidden;
+    }
+
+    .hidden .keep-visible {
+        /* display: block !important; 또는 display: block; */
+        visibility: visible !important;
+    }
+}
+.checkk{
+    transition: width 0.3s ease; /* 너비 변화에 대한 전환 효과 */
+    width: calc(70% - 15px);
+}
+
+#aaa{
+    text-align: right
+}

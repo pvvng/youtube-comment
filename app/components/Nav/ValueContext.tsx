@@ -2,10 +2,8 @@
 import React, { createContext, useContext, useState, ReactNode, useRef } from 'react';
 
 interface ValueContextType {
-    value: boolean;
-    changeValue: (newValue: boolean) => void;
-    search: boolean;
-    changeSearch: (newValue: boolean) => void;
+    state: boolean[];
+    onResize: (nextValue: boolean, num: number) => void;
     inputRef: React.RefObject<HTMLInputElement>; // inputRef 추가
 }
 
@@ -16,17 +14,19 @@ interface ValueProviderProps {
 }
 
 export const ValueProvider: React.FC<ValueProviderProps> = ({ children }) => {
-    const [value, setValue] = useState(false);
-    const [search, setserch] = useState(true);
+    const [state, setState] = useState([false, true]);
     const inputRef = useRef<HTMLInputElement | null>(null); // inputRef 생성
-    const changeValue = (newValue: boolean) => {
-        setValue(newValue);
-    };
-    const changeSearch = (newValue: boolean) => {
-        setserch(newValue);
-    };
+
+    const onResize = (nextValue: boolean, num: number) => {
+        setState(prevState => {
+            const newState = [...prevState]; // 이전 상태를 복사
+            newState[num] = nextValue; // num 인덱스의 값을 업데이트
+            return newState; // 새로운 상태 반환
+        });
+    }
+
     return (
-        <ValueContext.Provider value={{ value, changeValue, search, changeSearch, inputRef }}>
+        <ValueContext.Provider value={{ inputRef, state, onResize }}>
             {children}
         </ValueContext.Provider>
     );

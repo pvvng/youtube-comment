@@ -1,14 +1,15 @@
 "use client";
 
 import { Session } from "next-auth";
-import InputContainer from "../InputContainer";
-import NavLogoContainer from "./NavItems";
 import { SignInBtn, SignOutBtn } from "../SignItems/SignBtn";
 import { useValue } from "./ValueContext";
+import InputContainer from "../InputContainer";
+import NavLogoContainer from "./NavItems";
 
+/**context를 사용하기 위한 허브 */
 const InnerNavbar: React.FC<{ session: Session | null }> = ({ session }) => {
-    const { value } = useValue(); // 이제 ValueProvider 내에서 사용되므로 오류가 발생하지 않음
-
+    const { state, onResize } = useValue(); 
+    
     return (
         <div
         className="row row-center w-100 p-3 bg-whiter"
@@ -17,12 +18,12 @@ const InnerNavbar: React.FC<{ session: Session | null }> = ({ session }) => {
             <div className="col-2 text-start">
                 <NavLogoContainer />
             </div>
-            <div className={value ? "col-10 text-center" : "col-8 text-center"}>
+            <div className={state[0] ? "col-10 text-center" : "col-8 text-center"}>
                 <InputContainer />
             </div>
             <div
-                className={value ? "" : "col-2 text-end pe-0"}
-                style={value ? { display: "none" } : undefined}
+                className={state[0] ? "" : "col-2 text-end pe-0"}
+                style={state[0] ? { display: "none" } : undefined}
             >
                 {session ? <SignOutBtn /> : <SignInBtn />}
             </div>

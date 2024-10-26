@@ -1,48 +1,46 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { handleFocus } from "@/@util/functions/input/handleFocus";
 import { useRouter } from "next/navigation";
 import { checkVideoId } from "@/@util/hooks/checkVideoId";
 import { useValue } from "./Nav/ValueContext";
 import "@/app/css/Nav.css";
 import "@/app/css/item.css/navInput.css";
-/** video 검색 input component */
 
+/** video 검색 input component */
 export default function InputContainer() {
   const router = useRouter();
-  const { value, changeValue, inputRef } = useValue(); //기본 false값 600px이상일 때는 false 600이하일때 버튼을 누르면 true(뒤로가기 누르면 다시 false)
-  const { search, changeSearch } = useValue();
-
   const originInputRef = useRef<HTMLInputElement|null>(null);
-
-  //화면이 줄어들고 처름 버튼을 눌렀을 때 생기는 반응
+  const {state,onResize, inputRef} = useValue(); 
+ 
+/**화면이 600px 이하일 때 검색창을 다시 활성화 해주는 버튼  */
   const replayButton = () => {
-    //뒤로 가기 버튼을 통해서 들어왔을 때는 이미 hidden class가 지워져 있는 상태이다. 음 생각해보니 뒤로가기 버튼을 통해 여기는 들어올
-    //수 없다.
+   
     if (inputRef.current) {
-      inputRef.current.classList.remove("hidden"); //hidden을 지워주며 input창 재등장
-      changeSearch(true);
-      changeValue(true); //화면이 줄어들고 처음 클릭되면 true로
+      inputRef.current.classList.remove("hidden"); 
+      onResize(true,1);
+      onResize(true,0);
     }
   };
   
+  /**화면 크기에 따라 반응하는 기능 구현 */
   useEffect(() => {
     const handleResize = () => {
-     
+    
+      //600px 넘어가면 다시 hidden을 넣어주며 초기 상태 유지
       if(window.innerWidth > 600){
-        //600px 넘어가면 다시 hidden을 넣어주며 초기 상태 유지
+        
         if (inputRef.current) {
           inputRef.current.classList.add("hidden"); 
         }
-        changeSearch(true);
-        changeValue(false); //화면이 다시 늘어나면 false로 복귀
-      }else{
-        changeSearch(false);
-        changeValue(false); //화면이 다시 늘어나면 false로 복귀
+        onResize(true,1);
+        onResize(false,0);
+      } 
+      else{
+        onResize(false, 1);
       }
-      //useState를 설정해주며 버튼의 역할 결정
-      //굳이 필요한 가 싶지만 프로그램이 원함
+      
     };
 
     window.addEventListener("resize", handleResize); //윈도우 화면 변화시 시작하게 설정
@@ -53,10 +51,6 @@ export default function InputContainer() {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(inputRef.current);
-  }, [inputRef])
- 
   return (
     <div ref={inputRef} className="input-wrapper">
       <input
@@ -75,8 +69,8 @@ export default function InputContainer() {
       />
       <button
         className="Subscribe-btn keep-visible"
-        onClick={() =>
-          search ? checkVideoId(originInputRef, router) : replayButton()
+        onClick={() => 
+          state[1] ? checkVideoId(originInputRef, router) : replayButton()
         }
       >
         <svg
@@ -93,23 +87,3 @@ export default function InputContainer() {
     </div>
   );
 }
-
-// <div >
-// <input
-//     className="checkk hidden"
-//     ref={inputRef}
-//     onKeyDown={(e) => {
-//         if (e.key === 'Enter') checkVideoId(inputRef, router);
-//     }}
-//     // input 클릭 시 전체 선택
-//     onFocus={() => handleFocus(inputRef)}
-// />
-// {/* <button onClick= { () => checkVideoId(inputRef, router) } >
-//     검색
-// </button> */}
-// {/* 윈도우 화면 크기에 따라 버튼의 역활을 달리해줌  */}
-// <button onClick= { ()=>search ? checkVideoId(inputRef, router) :replayButton() } >
-
-//     검색
-// </button>
-// </div>

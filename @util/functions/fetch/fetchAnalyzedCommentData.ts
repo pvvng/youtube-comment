@@ -3,7 +3,7 @@ import { AnalyzedCommentData } from "@/types/word";
 import axios, { AxiosResponse } from "axios";
 import { cleanUpText } from "../wordAPI/cleanUpText";
 
-const flask_url = process.env.NEXT_PUBLIC_FLASK_URL
+// const flask_url = process.env.NEXT_PUBLIC_FLASK_URL || process.env.FLASK_URL
 
 /** 댓글 데이터 합본 파일로 만들어 API에 보내는(POST) 함수 
  * 
@@ -12,35 +12,40 @@ const flask_url = process.env.NEXT_PUBLIC_FLASK_URL
 export async function fetchAnalyzedCommentData(
     commentData : FilteredCommentType[], channelId :string
 ){
-    if(!flask_url) return null;
+    // if(!flask_url) return null;
 
-    // flask 서버에 보낼 수 있는 데이터로 수정
-    let flaskArr : {text :string, like : number}[] = [];
-    commentData.forEach(cd => {
-        let cleandComment = cleanUpText(cd.text);
-        flaskArr.push({
-            text : cleandComment,
-            like : cd.likeCount
-        })
-    })
-    // 수정한 데이터 stringify
-    let stringifyData = JSON.stringify(flaskArr);
+    // // flask 서버에 보낼 수 있는 데이터로 수정
+    // let flaskArr : {text :string, like : number}[] = [];
+    // commentData.forEach(cd => {
+    //     let cleandComment = cleanUpText(cd.text);
+    //     flaskArr.push({
+    //         text : cleandComment,
+    //         like : cd.likeCount
+    //     })
+    // })
+    // // 수정한 데이터 stringify
+    // let stringifyData = JSON.stringify(flaskArr);
 
-    const blob = new Blob([stringifyData], {type : 'text/plain'});
-    const formData = new FormData();
-    formData.append('file', blob, 'textdata.txt');
+    // const blob = new Blob([stringifyData], {type : 'text/plain'});
+    // const formData = new FormData();
+    // formData.append('file', blob, 'textdata.txt');
 
-    // videoId를 FormData에 추가
-    formData.append('channelId', channelId);
+    // // videoId를 FormData에 추가
+    // formData.append('channelId', channelId);
 
     try{
-        const res : AxiosResponse<AnalyzedCommentData> = 
-        await axios.post(flask_url, formData, {
-            headers : {
-                'Content-Type' : 'multipart/form-data'
-            },
+        // const res : AxiosResponse<AnalyzedCommentData> = 
+        // await axios.post(flask_url, formData, {
+        //     headers : {
+        //         'Content-Type' : 'multipart/form-data'
+        //     },
+        // });
+        // return res.data;
+        const response = await axios.post('/api/post/analyze', {
+            commentData: commentData,
+            channelId: channelId
         });
-        return res.data;
+        return response.data.analyzedCommentData;
     }catch(error){
         // error가 AxiosError인지 확인
         if (axios.isAxiosError(error)) {

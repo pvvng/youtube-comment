@@ -1,4 +1,5 @@
 import { FilteredCommentType } from "@/types/comment";
+import { AnalyzedCommentData } from "@/types/word";
 import axios from "axios";
 
 /** 댓글 데이터 합본 파일로 만들어 API에 보내는(POST) 함수 
@@ -14,7 +15,8 @@ export async function fetchAnalyzedCommentData(
             channelId: channelId,
             videoId : videoId
         });
-        return response.data;
+        let result : AnalyzedCommentData = response.data 
+        return result;
     }catch(error){
         // error가 AxiosError인지 확인
         if (axios.isAxiosError(error)) {

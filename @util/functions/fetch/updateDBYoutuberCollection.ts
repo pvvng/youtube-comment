@@ -3,13 +3,16 @@ import { AnalyzedCommentData, PosType, SentimentType } from "@/types/word";
 import moment from "moment-timezone";
 import { Db, ObjectId } from "mongodb";
 
-interface videoCollectionType {
-    _id : ObjectId;
+export interface videoCollectionType {
     videoId : string;
     channelId : string;
     sentiment : SentimentType;
     keyword : PosType[];
     lastUpdate : string;
+}
+
+export interface videoCollectionTypeWithId extends videoCollectionType {
+    _id : ObjectId;
 }
 
 /**
@@ -50,7 +53,7 @@ export default async function updateDBYoutuberCollection(
     };
 
     const videoCollectionResult = 
-    await db.collection<videoCollectionType>('video')
+    await db.collection<videoCollectionTypeWithId>('video')
     .findOne({videoId});
 
     if(!videoCollectionResult){

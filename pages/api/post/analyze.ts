@@ -33,6 +33,16 @@ export default async function handler(
     let stringifyData = JSON.stringify(flaskArr);
 
     const blob = new Blob([stringifyData], {type : 'text/plain'});
+
+    // 파일 크기 출력
+    // const sizeInBytes = blob.size;
+    // const sizeInKB = (sizeInBytes / 1024).toFixed(2);
+    // const sizeInMB = (sizeInBytes / (1024 * 1024)).toFixed(2);
+    
+    // console.log("Blob size (bytes):", sizeInBytes);
+    // console.log("Blob size (KB):", sizeInKB);
+    // console.log("Blob size (MB):", sizeInMB);
+
     const formData = new FormData();
     formData.append('file', blob, 'textdata.txt');
 

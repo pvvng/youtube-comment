@@ -2,12 +2,10 @@
 
 import { fetchAnalyzedCommentData } from "@/@util/functions/fetch/fetchAnalyzedCommentData";
 import { FilteredCommentType } from "@/types/comment";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import FeelGraphContainer from "./FeelGraphContainer";
 import useProcessError from "@/@util/hooks/useprocessError";
 import KeywordHubContainer from "./Word/KeywordHubContainer";
-import { clearVideoComponentState, useVideoRenderStateStore } from "@/app/store";
-import { useEffect } from "react";
 
 interface PropsType {
     commentData : FilteredCommentType[]

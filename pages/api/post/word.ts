@@ -66,7 +66,7 @@
 //         // let { keyWordData, feelCounterObj } = processAnalyzedData(morpResult, feelResult);
 
 //         // // db 연결
-//         // const db = (await connectDB).db('youtube');
+        // const db = (await connectDB).db('youtube');
 
 //         // // 채널 아이디를 콜렉션 필드의 _id로 지정하여 검색
 //         // let videoCollectionResult = await db.collection<YoutuberDocument>('youtuber')

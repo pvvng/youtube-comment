@@ -22,7 +22,7 @@ export default function WordHubContainer(
     const queryKey = commentData[0];
     const { data, isLoading, isError, error } = useQuery({
         queryKey : ['analyzedComment', queryKey],
-        queryFn : () => fetchAnalyzedCommentData(commentData, channelId),
+        queryFn : () => fetchAnalyzedCommentData(commentData, videoId, channelId),
         refetchOnWindowFocus : false,
         // 캐시타임 1시간(3600000ms)
         gcTime : 3600000,

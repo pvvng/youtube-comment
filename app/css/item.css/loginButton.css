@@ -1,0 +1,42 @@
+.loginButton {
+    max-width: 320px;
+    display: flex;
+    padding: 0.5rem 1.4rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    gap: 0.75rem;
+    color: rgb(65, 63, 63);
+    background-color: #fff;
+    cursor: pointer;
+    transition: all .6s ease;
+  }
+  
+  .loginButton svg {
+    height: 24px;
+  }
+  
+  .loginButton:hover {
+    transform: scale(1.02);
+  }
+
+  .sidebar-overlay {
+    position: absolute; /* 버튼 아래에 위치하도록 설정 */
+    top: 100%; /* 버튼의 아래쪽에 위치 */
+    left: 0; /* 왼쪽 정렬 */
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* 다른 요소 위에 표시 */
+}
+
+.sidebar-content {
+    padding: 20px;
+    width: 200px; /* 사이드바의 너비 */
+}

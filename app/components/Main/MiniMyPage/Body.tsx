@@ -10,7 +10,7 @@ export default function MiniMyPageBody(
 
     const router = useRouter();
     return(
-        <div className="w-100 p-2" style={{background  :'#eee'}}>
+        <div className="w-100 p-2" style={{background  :'red'}}>
             {
                 session ?
                 <>

@@ -12,7 +12,6 @@ export async function checkVideoId(
 ){
     // url 검증
     let inputValue :string = inputRef.current?.value || '';
-
     // URL에서 비디오 ID를 추출하는 정규 표현식
     const match = inputValue.match(/v=([^&]+)/);
     const videoId = match ? match[1] : null;

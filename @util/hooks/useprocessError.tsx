@@ -33,7 +33,7 @@ export default function useProcessError(
             alert(errorMessage);
             router.back();
         }else{
-            return <p>{errorMessage}</p>;
+            return <p className="text-center">{errorMessage}</p>;
         }
     }
 }

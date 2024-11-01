@@ -48,7 +48,7 @@ export default function FeelGraphContainer({ feelData }: PropsType) {
                         height={300}
                         data={graphFeelData}
                         margin={{
-                            top: 0,
+                            top: 7,
                             right: 10,
                             left: -20,
                             bottom: 0,

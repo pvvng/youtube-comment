@@ -22,7 +22,7 @@ export default async function handler(
     req : NextApiRequest, res : NextApiResponse
 ){
     // 메소드 검증
-    if(req.method !== "GET") return res.status(500).json({message : "Not Allowed Method"})
+    if(req.method !== "GET") return res.status(405).json({message : "Not Allowed Method"})
 
     const session = await getServerSession(req, res, authOptions);
 

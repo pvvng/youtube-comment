@@ -25,7 +25,7 @@ const InnerNavbar: React.FC<{ session: Session | null }> = ({ session }) => {
                 className={state[0] ? "" : "col-2 text-end pe-0"}
                 style={state[0] ? { display: "none" } : undefined}
             >
-                {session ? <SignOutBtn /> : <SignInBtn />}
+                {session ? <SignOutBtn session={session}/> : <SignInBtn />}
             </div>
         </div>
     );

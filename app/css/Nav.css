@@ -1,13 +1,15 @@
 @media (max-width: 600px) {
     .hidden {
-        /* display: none !important;  */
         visibility: hidden;
     }
 
     .hidden .keep-visible {
-        /* display: block !important; 또는 display: block; */
         visibility: visible !important;
-    }
+        border-radius: 9999px !important;
+        width: 50px !important; 
+        height: 50px !important; 
+      
+        }
 }
 .checkk{
     transition: width 0.3s ease; /* 너비 변화에 대한 전환 효과 */
@@ -15,5 +17,13 @@
 }
 
 #aaa{
-    text-align: right
+    text-align: right;
+}
+
+.unicode-icon {
+    font-size: 40px; /* 원하는 크기로 조정 */
+    display: flex; /* flex로 설정하여 중앙 정렬 */
+    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: center; /* 수평 중앙 정렬 */
+    margin-top: -5px;
 }

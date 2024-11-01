@@ -2,6 +2,9 @@
 
 import { signIn, signOut } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import { Session } from "next-auth";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import '@/app/css/item.css/loginButton.css';
 
 
@@ -53,15 +56,52 @@ export function SignInBtn (){
       
     </button>
 }
+interface SidebarOverlayProps {
+  isOpenModel: boolean; // isOpenMode의 타입을 boolean으로 정의
+}
+
+export function SidebarOverlay({ isOpenModel }: SidebarOverlayProps) {
+  // if (!isOpenModel) return null;
+
+  return (
+      <div className="sidebar-overlay">
+          <div className="sidebar-content">
+              <h2>Sidebar Title</h2>
+              <p>Some content here...</p>
+             
+          </div>
+      </div>
+  );
+}
 
 // 로그 아웃 버튼
-export function SignOutBtn (){
-    return <button 
-    
-    onClick={() => {
-        signOut();
-    }}>로그아웃</button>
-
-  
+export function SignOutBtn (
+  {session} : {session : Session | null}
+){
+    const [isOpenModel, setisOpenModel] = useState(false);
+    const router = useRouter();
+     return <><div  onClick={() => {
+        // router.push('/my-page');
+        setisOpenModel(!isOpenModel);
+       }}
+        >
+       {
+                    session ?
+                    <img 
+                        src={session.user?.image || "/temp-user.png"} 
+                        width="50px" 
+                        alt="user-profile" 
+                        style={{ borderRadius: '50%' }}
+                    /> :
+                    <img 
+                        src="/temp-user.png"
+                        width="50px" 
+                        alt="user-temp-profile" 
+                        style={{ borderRadius: '50%' }}
+                    />
+                }
+       </div>
+       <SidebarOverlay isOpenModel={isOpenModel}  />
+       </>
 }
 

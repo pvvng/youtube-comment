@@ -33,13 +33,15 @@ export default function WordHubContainer(
 
     if(isLoading || isFetching || data === undefined){
         return <h3>댓글 데이터 로딩 중임</h3>
-    }else if(data === null) return (
-        <FetchFreshCommentContainer 
-            commentData = {commentData} 
-            videoId = {videoId} 
-            channelId = {channelId} 
-        />
-    );
+    }else if(data === null) {
+        return (
+            <FetchFreshCommentContainer 
+                commentData = {commentData} 
+                videoId = {videoId} 
+                channelId = {channelId} 
+            />
+        )
+    };
 
     let { keyword :keyWordData, sentiment, lastUpdate } = data;
     

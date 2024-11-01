@@ -6,8 +6,6 @@ import DatechartContainer from "../Analyzed/DateChartContainer";
 import WordHubContainer from "../Analyzed/WordHubContainer";
 import TopLikeContainer from "./TopLikeCountContainer";
 import useProcessError from "@/@util/hooks/useprocessError";
-import { useEffect } from "react";
-import { useVideoRenderStateStore } from "@/app/store";
 
 interface PropsType {
     videoId : string;

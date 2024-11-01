@@ -8,12 +8,12 @@ import NavLogoContainer from "./NavItems";
 
 /**context를 사용하기 위한 허브 */
 const InnerNavbar: React.FC<{ session: Session | null }> = ({ session }) => {
-    const { state, onResize } = useValue(); 
+    const { state } = useValue(); 
     
     return (
         <div
-        className="row row-center w-100 p-3 bg-whiter"
-        style={{ margin: "auto" }}
+            className="row row-center w-100 p-3 bg-whiter"
+            style={{ margin: "auto" }}
         >
             <div className="col-2 text-start">
                 <NavLogoContainer />

@@ -42,7 +42,7 @@ export default function NavBarHubContainer(
             className='p-3 row-center' 
             style={{minHeight : 100, display : 'flex'}}
         >
-            <div className="row row-center w-100 container" style={{margin : 'auto'}}>
+            <div className="row row-center w-100" style={{margin : 'auto'}}>
                 <div className="col-3 col-md-2 text-center">
                     {
                         isMobileBtnClick ?

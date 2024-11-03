@@ -10,14 +10,14 @@ export default function MiniMyPageBody(
 
     const router = useRouter();
     return(
-        <div className="w-100 p-2" style={{background  :'red'}}>
+        <div className="w-100 p-2">
             {
                 session ?
                 <>
                     <p>찜한 동영상</p>
                     <p>찜한 유튜버</p>
                     <p>구독 목록</p>
-                    <button className="float-end" onClick={() => {
+                    <button className="btn btn-dark float-end" onClick={() => {
                         router.push('/my-page');
                     }}>마이페이지</button>
                     <div style={{clear : 'both'}}></div>   

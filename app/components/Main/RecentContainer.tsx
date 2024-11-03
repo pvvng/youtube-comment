@@ -17,18 +17,23 @@ export default function RecentContainer(){
     },[])
 
     return(
-        <div className="border" style={{background : '#eee', borderRadius : '10px'}}>
+        <div className="border mt-3" style={{background : '#eee', borderRadius : '10px'}}>
             <div 
                 className="bg-white pt-2 pb-2" 
                 style={{borderTopLeftRadius : '10px', borderTopRightRadius : '10px'}}
             >
-                <h6 className="fw-bold m-0 text-center">최근에 확인한 영상</h6>
+                <h6 className="fw-bold m-0 text-center">감상한 동영상</h6>
             </div>
-            <div className="row row-center w-100" style={{margin : 'auto'}}>
+            <div className="row w-100" style={{margin : 'auto'}}>
                 {
                     recentArr.length > 0 ?
                     <VideoCardContainer cardData={recentArr} /> :
-                    <p>최근 확인한 영상이 없습니다.</p>
+                    <div 
+                        className="row-center" 
+                        style={{display : 'flex', minHeight : 350}}
+                    >
+                        <p className="text-center m-0">감상한 영상이 없습니다.</p>
+                    </div>
                 }
             </div>
         </div>

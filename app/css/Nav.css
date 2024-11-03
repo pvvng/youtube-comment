@@ -1,29 +1,41 @@
-@media (max-width: 600px) {
-    .hidden {
-        visibility: hidden;
-    }
-
-    .hidden .keep-visible {
-        visibility: visible !important;
-        border-radius: 9999px !important;
-        width: 50px !important; 
-        height: 50px !important; 
-      
-        }
-}
-.checkk{
-    transition: width 0.3s ease; /* 너비 변화에 대한 전환 효과 */
-    width: calc(70% - 15px);
+.input-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
-#aaa{
-    text-align: right;
+.input {
+    width: 80%;
+    padding: 10px;
+    padding-bottom: 10px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border: 1px solid grey;
 }
 
-.unicode-icon {
-    font-size: 40px; /* 원하는 크기로 조정 */
-    display: flex; /* flex로 설정하여 중앙 정렬 */
-    align-items: center; /* 수직 중앙 정렬 */
-    justify-content: center; /* 수평 중앙 정렬 */
-    margin-top: -5px;
+.search-button{
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border: 1px solid grey;
+    border-left: none;
+}
+
+.hidden-button{
+    float: inline-end;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 15px;
+    background: transparent;
+    border: none;
+}
+
+.back-button{
+    background-color: transparent;
+    border: none;
 }

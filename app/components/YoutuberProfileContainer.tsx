@@ -1,8 +1,8 @@
 'use client';
 
 import toLocaleString from "@/@util/functions/toLocaleString";
-import { YoutuberDataType } from "@/types/youtuber";
 import YoutuberInfoContainer from "./YoutuberInfoContainer";
+import { YoutuberDataType } from "@/types/youtuber";
 import { useEffect, useState } from "react";
 import { useVideoRenderStateStore } from "../store";
 

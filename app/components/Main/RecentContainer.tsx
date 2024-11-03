@@ -30,7 +30,7 @@ export default function RecentContainer(){
                     <VideoCardContainer cardData={recentArr} /> :
                     <div 
                         className="row-center" 
-                        style={{display : 'flex', minHeight : 350}}
+                        style={{display : 'flex', minHeight : 200}}
                     >
                         <p className="text-center m-0">감상한 영상이 없습니다.</p>
                     </div>

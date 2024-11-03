@@ -6,7 +6,6 @@ export default function Home() {
     
     return (
         <>
-            <hr className="m-0" />
             <div className="p-3 row w-100" style={{margin : 'auto'}}>
                 <div className="col-12 col-md-4 col-lg-3">
                     <MiniMyPageContainer />

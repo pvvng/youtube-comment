@@ -8,7 +8,7 @@ export default function CardListContainer(){
 
     return(
         <div 
-            className="p-2 border" 
+            className="p-2 border mt-md-0 mt-3" 
             style={{borderRadius : '10px'}}
         >
             <h6 className="fw-bold m-0">인기 유튜버</h6>

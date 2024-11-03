@@ -15,31 +15,29 @@ export default function InputContainer(){
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     return (
-        <>
-            <div 
-                className="input-container text-center"
+        <div 
+            className="input-container text-center"
+        >
+            <input 
+                className="input"
+                placeholder="Search something..." 
+                name="text" 
+                type="text"
+                ref={inputRef}
+                onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                        checkVideoId(inputRef, router);
+                    }
+                }}
+                // input 클릭 시 전체 선택
+                onFocus={() => handleFocus(inputRef)}
+        />
+            <button 
+                className='search-button'
+                onClick={() => checkVideoId(inputRef, router)}
             >
-                <input 
-                    className="input"
-                    placeholder="Search something..." 
-                    name="text" 
-                    type="text"
-                    ref={inputRef}
-                    onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                            checkVideoId(inputRef, router);
-                        }
-                    }}
-                    // input 클릭 시 전체 선택
-                    onFocus={() => handleFocus(inputRef)}
-            />
-                <button 
-                    className='search-button'
-                    onClick={() => checkVideoId(inputRef, router)}
-                >
-                    <FontAwesomeIcon icon={faSearch}/>
-                </button>
-            </div>
-        </>
+                <FontAwesomeIcon icon={faSearch}/>
+            </button>
+        </div>
     );
 }

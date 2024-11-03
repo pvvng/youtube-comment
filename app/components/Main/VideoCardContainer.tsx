@@ -19,7 +19,7 @@ export default function VideoCardContainer(
                     }}
                 >
                     <div 
-                        className="card mt-2 p-2" 
+                        className="card mt-2 mb-1 p-2" 
                         style={{cursor : 'pointer'}}
                     >
                         <div className="row row-center w-100" style={{margin : 'auto'}}>

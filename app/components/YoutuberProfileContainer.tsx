@@ -2,9 +2,11 @@
 
 import toLocaleString from "@/@util/functions/toLocaleString";
 import YoutuberInfoContainer from "./YoutuberInfoContainer";
+import fetchUpdateYoutuberPopularity from "@/@util/functions/fetch/fetchUpdateYoutuberPopularity";
 import { YoutuberDataType } from "@/types/youtuber";
 import { useEffect, useState } from "react";
 import { useVideoRenderStateStore } from "../store";
+import { useMutation } from "@tanstack/react-query";
 
 export default function YoutuberProfileContainer(
     {youtuber} : {youtuber : YoutuberDataType}
@@ -14,9 +16,22 @@ export default function YoutuberProfileContainer(
     // video detail page render state
     const { setVideoComponentState } = useVideoRenderStateStore();
 
+    const { mutate } = useMutation(
+        { 
+            mutationFn : () => fetchUpdateYoutuberPopularity(youtuber),
+            onError: (error) => {
+                console.error('Update failed:', error);
+            },
+        }
+    );
+
     useEffect(() => {
         setVideoComponentState(['youtuber', true]);
     },[]);
+
+    useEffect(() => {
+        mutate();
+    }, [mutate, youtuber]);
 
     return (
         <div style={{position : 'relative'}}>

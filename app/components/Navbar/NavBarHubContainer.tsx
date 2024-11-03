@@ -8,6 +8,7 @@ import { faArrowLeft, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import InputContainer from "./InputContainer";
 import MobileToggleButton from "./MobileToggleButton";
+import { useRouter } from 'next/navigation';
 
 /** Navbar Hub container */
 export default function NavBarHubContainer(
@@ -15,6 +16,7 @@ export default function NavBarHubContainer(
 ){
     /** 모바일 검색 토클 버튼 클릭 여부 확인 감시 상태 */
     const [isMobileBtnClick, setIsMobileBtnClick] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         // 리사이즈 핸들러 함수
@@ -38,44 +40,49 @@ export default function NavBarHubContainer(
     },[])
 
     return (
-        <div 
-            className='p-3 row-center' 
-            style={{minHeight : 100, display : 'flex'}}
-        >
-            <div className="row row-center w-100" style={{margin : 'auto'}}>
-                <div className="col-3 col-md-2 text-center">
-                    {
-                        isMobileBtnClick ?
-                        <button className="back-button" onClick={() => {
-                            setIsMobileBtnClick(false)
-                        }}>
-                            <FontAwesomeIcon icon={faArrowLeft} />
-                        </button>:
-                        <p className="m-0">홈버튼임</p>
-                    }
-                </div>
-                <div className="col-9 col-md-8">
-                    <div className="d-sm-block d-none">
-                        <InputContainer />
+        <>
+            <div 
+                className='p-3 row-center' 
+                style={{minHeight : 100, display : 'flex'}}
+            >
+                <div className="row row-center w-100" style={{margin : 'auto'}}>
+                    <div className="col-3 col-md-2 text-center">
+                        {
+                            isMobileBtnClick ?
+                            <button className="back-button" onClick={() => {
+                                setIsMobileBtnClick(false)
+                            }}>
+                                <FontAwesomeIcon icon={faArrowLeft} />
+                            </button>:
+                            <p className="m-0" onClick={() => {
+                                router.push('/');
+                            }}>홈버튼임</p>
+                        }
                     </div>
-                    {
-                        isMobileBtnClick ?
-                        <InputContainer />:
-                        <MobileToggleButton 
-                            isMobileBtnClick={isMobileBtnClick} 
-                            setIsMobileBtnClick={setIsMobileBtnClick} 
-                        />
-                    }
-                <div style={{clear : 'both'}}/>
-                </div>
-                <div className="col-2 d-none d-md-block text-end">
-                    {
-                        !session?
-                        <SignInBtn />:
-                        <SignOutBtn />
-                    }
+                    <div className="col-9 col-md-8">
+                        <div className="d-sm-block d-none">
+                            <InputContainer />
+                        </div>
+                        {
+                            isMobileBtnClick ?
+                            <InputContainer />:
+                            <MobileToggleButton 
+                                isMobileBtnClick={isMobileBtnClick} 
+                                setIsMobileBtnClick={setIsMobileBtnClick} 
+                            />
+                        }
+                    <div style={{clear : 'both'}}/>
+                    </div>
+                    <div className="col-2 d-none d-md-block text-end">
+                        {
+                            !session?
+                            <SignInBtn />:
+                            <SignOutBtn />
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
+            <hr className="m-0" />
+        </>
     )
 }

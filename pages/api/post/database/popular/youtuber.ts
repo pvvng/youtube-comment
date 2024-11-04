@@ -1,18 +1,8 @@
 import { connectDB } from "@/@util/database";
 import { PopularPostDataType } from "@/@util/functions/fetch/fetchUpdateYoutuberPopularity";
-import { Db, ObjectId } from "mongodb";
+import { Db } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import moment from "moment-timezone";
-
-interface PopularYoutuberType {
-    _id?: ObjectId;
-    name: string;
-    customUrl: string;
-    thumnailUrl: string;
-    channelId: string;
-    date: string;
-    counter: number;
-}
 
 export default async function handler(
     req: NextApiRequest,
@@ -23,6 +13,9 @@ export default async function handler(
     }
 
     const { youtuberName, customUrl, thumnailUrl, channelId }: PopularPostDataType = req.body;
+    // const userAgent = req.headers['user-agent'];
+    // console.log(userAgent)
+
     const koreaTime = moment().tz('Asia/Seoul').format('YYYY-MM-DD');
     let db: Db;
 
@@ -33,18 +26,18 @@ export default async function handler(
     }
 
     try {
-        const existingDoc = await db.collection('popular').findOne({
+        const existingDoc = await db.collection('popular-youtuber').findOne({
             channelId: channelId,
             date: koreaTime
         });
 
         if (existingDoc) {
-            await db.collection('popular').updateOne(
+            await db.collection('popular-youtuber').updateOne(
                 { channelId: channelId, date: koreaTime },
                 { $inc: { count: 1 } }
             );
         } else {
-            await db.collection('popular').insertOne({
+            await db.collection('popular-youtuber').insertOne({
                 name: youtuberName,
                 customUrl: customUrl,
                 thumnailUrl: thumnailUrl,

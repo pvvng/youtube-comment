@@ -23,7 +23,7 @@ export default function PopularCarouselContainer(
 ){
     const [carouselState, setCarouselState] = useState(0);
     const [hideCarouselArrowState, setHideCarouselArrowState] = useState(LEFT_LAST);
-    const [viewOffset, setViewOffset] = useState(3);
+    const [viewOffset, setViewOffset] = useState(0);
 
     const dataLength = useMemo(() => carouselData.length, [carouselData]);
     const moveLength = useMemo(() => parseInt((100 / dataLength).toFixed(2)), [dataLength]);

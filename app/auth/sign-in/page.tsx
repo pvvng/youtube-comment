@@ -1,19 +1,37 @@
+'use client';
+
+import '@/app/css/sign.css';
 import { GoogleSignInBtn } from "@/app/components/SignItems/SignBtn";
+import { useRouter } from "next/navigation";
 
 const BACKGROUND_STYE = {
-    width: '100%', 
+    width: '100%',
     // navbar 크기 빼기
-    height: 'calc(100vh - 100px)',
+    height: '100vh',
     display: 'grid',
     placeItems: 'center',
-    background : 'black',
+    background: 'white',
 }
 
-export default function SignInPage(){
+export default function SignInPage() {
+
+    const router = useRouter();
 
     return (
-        <div style={{...BACKGROUND_STYE, backgroundSize:'contain', backgroundPosition:'center center', backgroundRepeat:'no-repeat'}}>
-            <GoogleSignInBtn />
+        <div style={{ 
+            ...BACKGROUND_STYE, 
+            backgroundSize: 'contain', 
+            backgroundPosition: 'center center', 
+            backgroundRepeat: 'no-repeat', 
+            position : 'absolute',
+            top : 0,
+        }}>
+            <div className="text-center">
+                <GoogleSignInBtn />
+                <button className='go-main-button bg-dark' onClick={() => {
+                    router.push('/');
+                }}>메인화면으로 돌아가기</button>
+            </div>
         </div>
     )
 }

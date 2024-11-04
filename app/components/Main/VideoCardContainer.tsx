@@ -1,5 +1,6 @@
 'use client';
 
+import '@/app/css/recent.css';
 import { VideoCardType } from "./PopularList/CardListContainer";
 import { useRouter } from "next/navigation";
 
@@ -32,21 +33,10 @@ export default function VideoCardContainer(
                                     style={{borderRadius : '10px'}}
                                 />
                             </div>
-                            <div 
-                                className="col-6 col-sm-12"
-                                style={{
-                                    // 부모 요소 크기를 넘기면 잘리도록 설정
-                                    overflow: 'hidden',           
-                                    // 말줄임표(...) 적용
-                                    textOverflow: 'ellipsis',     
-                                    // 한 줄로 제한
-                                    whiteSpace: 'nowrap',         
-                                }}
-                            >
-                                <span className="fs-5 fw-bold">
+                            <div className="col-6 col-sm-12 text-container">
+                                <h6 className="m-0 mt-sm-2 mb-sm-2 fw-bold">
                                     {data.channelTitle}
-                                </span>
-                                <br/>
+                                </h6>
                                 <span>
                                     {data.videoTitle}
                                 </span>

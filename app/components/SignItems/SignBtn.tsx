@@ -1,8 +1,10 @@
 'use client'
 
+import '@/app/css/sign.css';
 import { signIn, signOut } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { Session } from "next-auth";
+import { GoogleLogoSvg } from '@/app/svg';
 
 // 카카오 로그인 버튼
 export function GoogleSignInBtn (){
@@ -11,14 +13,18 @@ export function GoogleSignInBtn (){
     if(searchParams){
         const callbackUrl = searchParams.get('callbackUrl') || '';
         return (
+            /* From Uiverse.io by Yaya12085 */ 
             <button 
+                className="google-sign-button"
                 onClick={() => signIn('google', { callbackUrl })} 
             >
-                구글 로그인 버튼
+                <GoogleLogoSvg />
+                Continue with Google
             </button>
         )
     }
 }
+
 // 로그인 페이지로 이동하는 버튼
 export function SignInBtn (){
     return (

@@ -20,7 +20,7 @@ export default function InputContainer(){
         >
             <input 
                 className="input"
-                placeholder="Search something..." 
+                placeholder="영상 url을 입력하세요" 
                 name="text" 
                 type="text"
                 ref={inputRef}

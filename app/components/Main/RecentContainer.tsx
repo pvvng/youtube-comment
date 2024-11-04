@@ -1,8 +1,9 @@
 'use client';
 
+import '@/app/css/recent.css';
 import { VideoCardType } from "./PopularList/CardListContainer";
-import VideoCardContainer from "./VideoCardContainer";
 import { useEffect, useState } from "react";
+import VideoCardContainer from "./VideoCardContainer";
 
 export default function RecentContainer(){
 
@@ -17,13 +18,14 @@ export default function RecentContainer(){
     },[])
 
     return(
-        <div className="border mt-3" style={{background : '#eee', borderRadius : '10px'}}>
+        <div className="border mt-3" style={{borderRadius : '10px'}}>
             <div 
-                className="bg-white pt-2 pb-2" 
+                className="bg-white p-2" 
                 style={{borderTopLeftRadius : '10px', borderTopRightRadius : '10px'}}
             >
                 <h6 className="fw-bold m-0 text-center">감상한 동영상</h6>
             </div>
+            <hr className="m-0 mb-2"/>
             <div className="row w-100" style={{margin : 'auto'}}>
                 {
                     recentArr.length > 0 ?

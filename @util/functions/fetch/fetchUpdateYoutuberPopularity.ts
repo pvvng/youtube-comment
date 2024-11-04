@@ -20,7 +20,8 @@ export default async function fetchUpdateYoutuberPopularity(
         }
         
         let resultPostPopularity = await axios.post('/api/post/database/popular/youtuber', postData);
-        
+
+        return resultPostPopularity.data.message;
     }catch(error){
         // error가 AxiosError인지 확인
         if (axios.isAxiosError(error)) {

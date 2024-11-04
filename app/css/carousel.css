@@ -1,0 +1,80 @@
+.thumnail-image {
+    width : 100%;
+}
+
+.image-square-container {
+    width: 100%;
+    padding-top: 100%; 
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+/* Hover 시 올라오는 반투명 그림자 */
+.image-square-container::after {
+    content: "더 알아보기";
+    position: absolute;
+    bottom: -100%; /* 초기 위치: 이미지 아래에 숨김 */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 반투명 검은색 그림자 */
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: bottom 0.3s ease; /* 부드러운 슬라이드 효과 */
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* Hover 시 반투명 그림자가 위로 슬라이드 */
+.image-square-container:hover::after {
+    bottom: 0; /* 이미지 전체를 덮도록 위로 이동 */
+}
+
+.thumbnail-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease; /* 살짝 확대 효과 */
+}
+
+.image-square-container:hover .thumbnail-container {
+    transform: scale(1.05); /* 이미지가 약간 확대 */
+}
+
+.left-arrow-head,
+.right-arrow-head {
+    position: absolute;
+    top: calc(50% - 18px);
+    font-size: 28px;
+    color: white;
+    text-shadow: 4px 4px 4px rgba(255, 255, 255, 0.8), -4px -4px 8px rgba(255, 255, 255, 0.8); /* 더 진하고 넓은 그림자 */
+    background-color: rgba(0, 0, 0, 0.6); /* 반투명한 배경 */
+    padding: 4px;
+    transition: all 0.3s;
+    border-radius: 9999px; /* 둥근 배경 */
+    z-index: 1; /* 이미지 위로 오게 설정 */
+}
+
+/* 개별 위치 설정 */
+.left-arrow-head {
+    left: 8px;
+}
+
+.right-arrow-head {
+    right: 8px;
+}
+
+/* Hover 시 색상 변경 */
+.left-arrow-head:hover,
+.right-arrow-head:hover {
+    color: #ff0000; /* 붉은색으로 변경 */
+    background-color: rgba(0, 0, 0, 1); /* 반투명한 배경 */
+}

@@ -1,14 +1,15 @@
+import { useQuery } from "@tanstack/react-query";
 import PopularCarouselContainer from "./PopularCarouselContainer";
 import fetchDBPopularYoutuber from "@/@util/functions/fetch/fetchDBPopularYoutuber";
 import useProcessError from "@/@util/hooks/useprocessError";
-import { useQuery } from "@tanstack/react-query";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
+import PopularContainerLoadingSpinner from "./PopularContainerLoadingSpinner";
+import CardHeaderContainer from "./CardHeaderContainer";
 
 export default function PopularYoutuberHubContainer(){
 
+
     const { data, isLoading, isError, error, refetch } = useQuery({
-        queryKey : ['commentData'],
+        queryKey : ['youtuberPopularity'],
         queryFn : () => fetchDBPopularYoutuber(),
         refetchOnWindowFocus : false,
         // 캐시타임 1시간(3600000ms)
@@ -20,27 +21,11 @@ export default function PopularYoutuberHubContainer(){
     
     return (
         <>
-            <button 
-                className="float-end refresh-btn"
-                onClick={() => {refetch()}}
-            >
-                <FontAwesomeIcon icon={faArrowsRotate} />
-            </button>
-            <h6 className="fw-bold m-0">인기 유튜버</h6>
-            <hr className="m-0 mt-2 mb-3" />
+            <CardHeaderContainer refetch={refetch} type="youtuber" />
             {
                 !data || isLoading ?
-                <div className="d-flex row-center" style={{minHeight : 100}}>
-                    <div 
-                        className="spinner-border" 
-                        role="status"
-                    >
-                        <span className="visually-hidden">
-                            Loading...
-                        </span>
-                    </div>
-                </div>:
-                <PopularCarouselContainer carouselData={data} />
+                <PopularContainerLoadingSpinner />:
+                <PopularCarouselContainer carouselData={data} type="youtuber" />
             }
             <div style={{clear : 'both'}} />
         </>

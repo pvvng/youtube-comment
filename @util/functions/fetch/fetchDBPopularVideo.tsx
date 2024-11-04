@@ -1,11 +1,11 @@
 import { PopularType } from "@/types/popular";
 import axios from "axios";
 
-export default async function fetchDBPopularYoutuber(){
+export default async function fetchDBPopularVideo(){
     try {
-        let resultGetYoutuber = await axios.get<PopularType[]>('api/get/database/popular/youtuber');
-
-        return resultGetYoutuber.data;
+        let resultGetVideo = await axios.get<PopularType[]>('api/get/database/popular/video');
+        
+        return resultGetVideo.data;
     }catch(error){
         // error가 AxiosError인지 확인
         if (axios.isAxiosError(error)) {

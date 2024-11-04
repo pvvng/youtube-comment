@@ -1,8 +1,8 @@
 import { connectDB } from "@/@util/database";
-import { PopularPostDataType } from "@/@util/functions/fetch/fetchUpdateYoutuberPopularity";
 import { Db } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import moment from "moment-timezone";
+import { PostDataType } from "@/@util/functions/fetch/fetchUpdateVideoPopularity";
 
 export default async function handler(
     req: NextApiRequest,
@@ -12,7 +12,7 @@ export default async function handler(
         return res.status(405).json({ message: "Method Not Allowed" });
     }
 
-    const { youtuberName, thumnailUrl, channelId }: PopularPostDataType = req.body;
+    const { videoId, title, thumnailUrl } :PostDataType = req.body;
 
     const koreaTime = moment().tz('Asia/Seoul').format('YYYY-MM-DD');
     let db: Db;
@@ -24,21 +24,21 @@ export default async function handler(
     }
 
     try {
-        const existingDoc = await db.collection('popular-youtuber').findOne({
-            dataId: channelId,
+        const existingDoc = await db.collection('popular-video').findOne({
+            dataId: videoId,
             date: koreaTime
         });
 
         if (existingDoc) {
-            await db.collection('popular-youtuber').updateOne(
-                { dataId: channelId, date: koreaTime },
+            await db.collection('popular-video').updateOne(
+                { dataId: videoId, date: koreaTime },
                 { $inc: { count: 1 } }
             );
         } else {
-            await db.collection('popular-youtuber').insertOne({
-                name: youtuberName,
-                thumnailUrl: thumnailUrl,
-                dataId: channelId,
+            await db.collection('popular-video').insertOne({
+                dataId: videoId,
+                name: title,
+                thumnailUrl : thumnailUrl,
                 date: koreaTime,
                 count: 1
             });

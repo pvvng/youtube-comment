@@ -9,14 +9,20 @@ export interface VideoCardType extends RecentVideoType{};
 export default function CardListContainer(){
 
     return(
-        <div 
-            className="p-2 border mt-md-0 mt-3" 
-            style={{borderRadius : '10px'}}
-        >
-            <PopularYoutuberHubContainer />
-            <h6 className="fw-bold m-0">인기 영상</h6>
-            <hr className="m-0 mt-2 mb-3" />
-            <PopularVideoHubContainer />
-        </div>
+        <>
+            <div 
+                className="border mt-md-0 mt-3" 
+                style={{borderRadius : '10px'}}
+            >
+                <PopularYoutuberHubContainer />
+            </div>
+            <div 
+                className="border mt-3" 
+                style={{borderRadius : '10px'}}
+            >
+                <PopularVideoHubContainer />
+            </div>
+        </>
+
     )
 }

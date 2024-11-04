@@ -1,11 +1,10 @@
 import { ObjectId } from "mongodb";
 
-export interface PopularYoutuberType {
+export interface PopularType {
     _id?: ObjectId;
     name: string;
-    customUrl: string;
     thumnailUrl: string;
-    channelId: string;
+    dataId: string;
     date: string;
     counter: number;
 }

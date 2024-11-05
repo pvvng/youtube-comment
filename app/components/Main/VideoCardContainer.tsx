@@ -13,7 +13,7 @@ export default function VideoCardContainer(
         cardData.map((data, i) => {
             return (
                 <div 
-                    className="col-12 col-sm-6 col-lg-3" 
+                    className="col-12 col-sm-6 col-lg-3 recent-card-container" 
                     key={data.thumbnailUrl +i}
                     onClick={() => {
                         router.push(`/video/${data.videoId}`);

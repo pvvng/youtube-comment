@@ -26,7 +26,8 @@ export default function SignInPage() {
             position : 'absolute',
             top : 0,
         }}>
-            <div className="text-center">
+            <div className="text-center" style={{margin : 'auto'}}>
+                <img src='/blue-logo-with-koname.png' width="100%" style={{maxWidth : 360}}/>
                 <GoogleSignInBtn />
                 <button className='go-main-button bg-dark' onClick={() => {
                     router.push('/');

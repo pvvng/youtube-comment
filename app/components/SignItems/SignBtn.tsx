@@ -19,7 +19,7 @@ export function GoogleSignInBtn (){
                 onClick={() => signIn('google', { callbackUrl })} 
             >
                 <GoogleLogoSvg />
-                Continue with Google
+                구글 아이디로 로그인하기
             </button>
         )
     }

@@ -13,17 +13,17 @@ export default function RecentContainer(){
         let getRecent = localStorage.getItem('recent')
         if(getRecent){
             let parsed = JSON.parse(getRecent);
-            setRecentArr(parsed);
+            setRecentArr(parsed.reverse());
         }
     },[])
 
     return(
         <div className="border mt-3" style={{borderRadius : '10px'}}>
             <div 
-                className="bg-white p-2" 
+                className="bg-white card-header-container" 
                 style={{borderTopLeftRadius : '10px', borderTopRightRadius : '10px'}}
             >
-                <h6 className="fw-bold m-0 text-center">감상한 동영상</h6>
+                <h6 className="fw-bold m-0 text-center">최근 감상한 동영상</h6>
             </div>
             <hr className="m-0 mb-2"/>
             <div className="row w-100" style={{margin : 'auto'}}>

@@ -14,7 +14,7 @@ export default function CardHeaderContainer(
 ){
     return (
         <>
-            <div className="p-2 row row-center" style={{margin : 'auto'}}>
+            <div className="row row-center card-header-container" style={{margin : 'auto'}}>
                 <div className="text-start col-8">
                     <span className="fw-bold m-0">
                         {

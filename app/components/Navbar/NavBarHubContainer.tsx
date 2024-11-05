@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import InputContainer from "./InputContainer";
 import MobileToggleButton from "./MobileToggleButton";
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 /** Navbar Hub container */
 export default function NavBarHubContainer(
@@ -42,8 +43,14 @@ export default function NavBarHubContainer(
     return (
         <>
             <div 
-                className='p-3 row-center' 
-                style={{minHeight : 100, display : 'flex'}}
+                className='p-2 row-center' 
+                style={{
+                    minHeight : 83, 
+                    display : 'flex',
+                    // background : '#1763b8',
+                    borderBottomLeftRadius : 10,
+                    borderBottomRightRadius : 10,
+                }}
             >
                 <div className="row row-center w-100" style={{margin : 'auto'}}>
                     <div className="col-3 col-md-2 text-center">
@@ -54,9 +61,16 @@ export default function NavBarHubContainer(
                             }}>
                                 <FontAwesomeIcon icon={faArrowLeft} />
                             </button>:
-                            <p className="m-0" onClick={() => {
-                                router.push('/');
-                            }}>홈버튼임</p>
+                            <Image
+                                src="/origin-logo.png" 
+                                width= {65}
+                                height= {65}
+                                alt='logo'
+                                priority
+                                onClick={() => {
+                                    router.push('/');
+                                }}
+                            />
                         }
                     </div>
                     <div className="col-9 col-md-8">

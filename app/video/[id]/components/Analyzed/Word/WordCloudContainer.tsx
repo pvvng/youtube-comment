@@ -4,7 +4,7 @@ import { PosType } from "@/types/word";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import WordCloud from "react-d3-cloud";
 
 interface WordType {

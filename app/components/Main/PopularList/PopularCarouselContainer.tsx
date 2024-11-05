@@ -60,16 +60,6 @@ export default function PopularCarouselContainer(
         setCarouselState(0);
     };
 
-    function clickThumbnail(dataId : string){
-        if(type === "youtuber"){
-            // 유튜버 상세페이지로 이동
-            router.push('/')
-        }else if (type === "video"){
-            // 영상 상세페이지로 이동
-            router.push(`/video/${dataId}`);
-        }
-    };
-
     useEffect(() => {
         updateViewOffset();
 
@@ -132,7 +122,9 @@ export default function PopularCarouselContainer(
                     >
                         <div 
                             className='image-square-container border'
-                            onClick={() => clickThumbnail(cd.dataId)}
+                            onClick={() => {
+                                router.push(`/${type}/${cd.dataId}`);
+                            }}
                         >
                             <img
                                 src={cd.thumnailUrl}

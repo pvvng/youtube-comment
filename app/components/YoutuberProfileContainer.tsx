@@ -1,12 +1,13 @@
 'use client';
 
-import toLocaleString from "@/@util/functions/toLocaleString";
-import YoutuberInfoContainer from "./YoutuberInfoContainer";
-import fetchUpdateYoutuberPopularity from "@/@util/functions/fetch/fetchUpdateYoutuberPopularity";
 import { YoutuberDataType } from "@/types/youtuber";
 import { useEffect, useState } from "react";
 import { useVideoRenderStateStore } from "../store";
 import { useMutation } from "@tanstack/react-query";
+import toLocaleString from "@/@util/functions/toLocaleString";
+import YoutuberInfoContainer from "./YoutuberInfoContainer";
+import fetchUpdateYoutuberPopularity from "@/@util/functions/fetch/fetchUpdateYoutuberPopularity";
+import fetchPostDBYoutuberData from "@/@util/functions/fetch/fetchPostDBYoutuberData";
 
 export default function YoutuberProfileContainer(
     {youtuber} : {youtuber : YoutuberDataType}
@@ -16,9 +17,18 @@ export default function YoutuberProfileContainer(
     // video detail page render state
     const { setVideoComponentState } = useVideoRenderStateStore();
 
-    const { mutate } = useMutation(
+    const { mutate: mutateYoutuberPopularity } = useMutation(
         { 
             mutationFn : () => fetchUpdateYoutuberPopularity(youtuber),
+            onError: (error) => {
+                console.error('Update failed:', error);
+            },
+        }
+    );
+
+    const { mutate: mutateYoutuberData } = useMutation(
+        { 
+            mutationFn : () => fetchPostDBYoutuberData(youtuber),
             onError: (error) => {
                 console.error('Update failed:', error);
             },
@@ -30,8 +40,9 @@ export default function YoutuberProfileContainer(
     },[]);
 
     useEffect(() => {
-        mutate();
-    }, [mutate, youtuber]);
+        mutateYoutuberPopularity();
+        mutateYoutuberData();
+    }, [mutateYoutuberPopularity, youtuber]);
 
     return (
         <div style={{position : 'relative'}}>

@@ -47,7 +47,7 @@ export default function WordHubContainer(
     
     return (
         <>
-            <FeelGraphContainer feelData={sentiment} />
+            <FeelGraphContainer feelData={sentiment} type="video" />
             <KeywordHubContainer keyWordData={keyWordData} />
             <FetchFreshCommentContainer 
                 commentData = {commentData} 

@@ -34,6 +34,6 @@ export default function KeywordHubContainer(
                     <KeywordListContainer keywordData={keyWordData} />
                 </div>
             </div>
-    </div>
+        </div>
     )
 }

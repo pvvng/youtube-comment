@@ -1,3 +1,4 @@
+import updateDBYAnalyzedDataYoutuberCollection from "@/@util/functions/fetch/updateDBAnalyzedDataYoutuberCollection";
 import updateDBYoutuberCollection from "@/@util/functions/fetch/updateDBYoutuberCollection";
 import { cleanUpText } from "@/@util/functions/wordAPI/cleanUpText";
 import { FilteredCommentType } from "@/types/comment";
@@ -65,6 +66,7 @@ export default async function handler(
 
         try {
             await updateDBYoutuberCollection(videoId, channelId, response.data);
+            await updateDBYAnalyzedDataYoutuberCollection(channelId, response.data);
         } catch (error) {
             return res.status(500).json({ message: 'Error update db collection', error: error });
         }

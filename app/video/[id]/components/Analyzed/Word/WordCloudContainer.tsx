@@ -1,11 +1,11 @@
 'use client';
 
-import ErrorContainer from "@/app/components/ErrorContainer";
 import { PosType } from "@/types/word";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import ErrorContainer from "@/app/components/ErrorContainer";
 import WordCloud from "react-d3-cloud";
 
 interface WordType {
@@ -28,7 +28,11 @@ export default function WordCloudContainer(
     let highValue = keyWordData[0].value;
 
     function valueCount(highValue: number) {
-        return (word: { value: number }) => word.value * (30 / highValue);
+        return (word: { value: number }) => {
+            // 제곱근 스케일
+            const scaledValue = Math.sqrt(word.value) / Math.sqrt(highValue); // 제곱근 스케일 적용
+            return scaledValue * 20;
+        };
     }
 
     function handleMouseOver (event: any, d: {text :string, value : number}){

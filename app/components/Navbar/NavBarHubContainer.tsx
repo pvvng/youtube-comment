@@ -63,7 +63,7 @@ export default function NavBarHubContainer(
                                 <FontAwesomeIcon icon={faArrowLeft} />
                             </button>:
                             <Image
-                                src="/origin-logo.png" 
+                                src="/logo.png" 
                                 width= {65}
                                 height= {65}
                                 alt='logo'

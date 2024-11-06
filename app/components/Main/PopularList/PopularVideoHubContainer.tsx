@@ -8,13 +8,13 @@ import ErrorContainer from "../../ErrorContainer";
 
 export default function PopularYoutuberHubContainer(){
 
-    const { data, isLoading, isError, error, refetch } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey : ['videoPopularity'],
         queryFn : () => fetchDBPopularVideo(),
         refetchOnWindowFocus : false,
-        // 캐시타임 1시간(3600000ms)
-        gcTime : 3600000,
-        staleTime : 3600000,
+        // no cache
+        gcTime : 0,
+        staleTime : 0,
     })
 
     const errorMessage = useProcessError(isError, error, "null");
@@ -23,7 +23,7 @@ export default function PopularYoutuberHubContainer(){
     
     return (
         <>
-            <CardHeaderContainer refetch={refetch} type="video" />
+            <CardHeaderContainer type="video" />
             {
                 !data || isLoading ?
                 <PopularContainerLoadingSpinner />:

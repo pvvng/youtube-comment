@@ -27,9 +27,9 @@ export default function SignInPage() {
             top : 0,
         }}>
             <div className="text-center" style={{margin : 'auto'}}>
-                <img src='/blue-logo-with-koname.png' width="100%" style={{maxWidth : 360}}/>
+                <img src='/logo.png' className='mb-3' width="100%" style={{maxWidth : 360}}/>
                 <GoogleSignInBtn />
-                <button className='go-main-button bg-dark' onClick={() => {
+                <button className='go-main-button mt-2 bg-dark' onClick={() => {
                     router.push('/');
                 }}>메인화면으로 돌아가기</button>
             </div>

@@ -74,7 +74,7 @@ export default async function handler(
                 rsc.snippet.thumbnails.medium?.url || 
                 rsc.snippet.thumbnails.default.url
             };
-        })
+        });
 
         // 전체 구독 목록 반환
         return res.status(200).json(subscriptions);

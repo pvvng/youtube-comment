@@ -8,11 +8,6 @@ import { useRef } from "react";
 import ErrorContainer from "@/app/components/ErrorContainer";
 import WordCloud from "react-d3-cloud";
 
-interface WordType {
-    x : number;
-    y : number;
-}
-
 export default function WordCloudContainer(
     {keyWordData} : {keyWordData : PosType[]}
 ){

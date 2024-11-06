@@ -27,7 +27,7 @@
 }
 
 .loading-preloader span {
-    --c: #f23f3f;
+    --c: #175fb8;
     position: absolute;
     display: block;
     height: 64px;

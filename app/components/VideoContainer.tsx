@@ -4,10 +4,12 @@ import '@/app/css/video.css'
 import { FilteredVideoSnippet, VideoStatisticsType } from "@/types/video";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faCommentDots, faSeedling } from '@fortawesome/free-solid-svg-icons'
-import toLocaleString from '@/@util/functions/toLocaleString';
-import dateToString from '@/@util/functions/dateToString';
 import { useVideoRenderStateStore } from '../store';
 import { useEffect } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import toLocaleString from '@/@util/functions/toLocaleString';
+import dateToString from '@/@util/functions/dateToString';
+import fetchUpdateVideoPopularity from '@/@util/functions/fetch/fetchUpdateVideoPopularity';
 
 interface PropsType {
     video : FilteredVideoSnippet & VideoStatisticsType; 
@@ -19,9 +21,23 @@ export default function VideoContainer({video, videoId} : PropsType){
     // video detail page render state
     const { setVideoComponentState } = useVideoRenderStateStore();
 
+    const { mutate } = useMutation(
+        { 
+            mutationFn : () => fetchUpdateVideoPopularity(video, videoId),
+            onError: (error) => {
+                console.error('Update failed:', error);
+            },
+        }
+    );
+
     useEffect(() => {
         setVideoComponentState(['video', true]);
     },[]);
+
+    
+    useEffect(() => {
+        mutate();
+    }, [mutate, video]);
 
     // 아이콘 hover 상태 관리
     const ICON_ARR = [

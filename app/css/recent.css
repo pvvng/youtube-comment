@@ -1,0 +1,13 @@
+.text-container{
+    overflow: hidden;           
+    text-overflow: ellipsis;    
+    white-space: nowrap;  
+}
+
+.recent-card-container{
+    transition: all 0.5s;
+}
+
+.recent-card-container:hover{
+    scale: 0.98;
+}

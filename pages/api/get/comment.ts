@@ -17,9 +17,6 @@ export default async function handler(
         return res.status(400).json({ message: 'videoId is required and must be a string.' });
     }
 
-    // 댓글 수에 따라 불러올 댓글의 데이터 수 정하기
-    // let targetCount :number = samplingCount(numCommentCount);
-
     let allCommentsData :RawCommentData[] = [];
     let nextPageToken = null;
     while (true) {

@@ -2,6 +2,7 @@
 
 import { fetchAnalyzedCommentData } from "@/@util/functions/fetch/fetchAnalyzedCommentData";
 import useProcessError from "@/@util/hooks/useprocessError";
+import ErrorContainer from "@/app/components/ErrorContainer";
 import { FilteredCommentType } from "@/types/comment";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment-timezone";
@@ -33,8 +34,6 @@ export default function FetchFreshCommentContainer(
         enabled: queryKeyState === true
     });
 
-    useProcessError(isError, error, 'null');
-
     // 쿼리가 성공적으로 완료되고 데이터가 존재하면 한 번만 새로고침
     useEffect(() => {
         if (isSuccess && data) {
@@ -44,6 +43,10 @@ export default function FetchFreshCommentContainer(
             });
         }
     }, [isSuccess, data, queryClient]);
+
+    const errorMessage = useProcessError(isError, error, "null");
+
+    if(errorMessage) return <ErrorContainer errorMessage={errorMessage} />;
 
     return(
         <div className="w-100 text-center card-container mt-3 mb-3">
@@ -60,8 +63,8 @@ export default function FetchFreshCommentContainer(
                             Loading...
                         </span>
                     </div>
-                    <p className="fw-bold m-0 fw-bold">
-                        영상 분석은 네트워크 환경에 따라 최대 5분 정도 소요될 수 있습니다.
+                    <p className="fw-bold m-0 mt-2 fw-bold">
+                        영상 분석은 네트워크 환경에 따라 5분 정도 소요될 수 있습니다.
                     </p>
                 </>:
                 null
@@ -75,6 +78,7 @@ function returnHtmlByComponetType(
     setQueryKeyState : Dispatch<SetStateAction<string | boolean>>
 ){
     const koreaTime = moment().tz('Asia/Seoul').format('YYYY-MM-DD');
+    const daysDifference = moment(koreaTime).diff(moment(type), 'days');
 
     if(type === undefined){
         return (
@@ -86,18 +90,20 @@ function returnHtmlByComponetType(
             </>
         )
     }else if(typeof type === "string"){
-        const [year, month, day] = type.split('-');
+
+        const [saveYear, saveMonth, saveDay] = type.split('-');
+
         return (
             <>
                 <p className="fw-bold m-0">
-                    {`${year}년 ${month}월 ${day}일`}에 분석된 영상입니다.
+                    {`${saveYear}년 ${saveMonth}월 ${saveDay}일`}에 분석된 영상입니다.
                 </p>
                 {
-                    type !== koreaTime ?
+                    daysDifference >= 7 ?
                     <button className="mt-2 btn btn-dark" onClick={() => {
                         setQueryKeyState(true);
                     }}>따끈따끈한 데이터로 변경하기</button>:
-                    <p className="m-0">따끈따끈한 최신 데이터입니다.</p>
+                    <p className="m-0">일주일 이내에 분석된 데이터에요.</p>
                 }
             </>
         )

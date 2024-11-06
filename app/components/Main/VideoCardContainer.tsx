@@ -1,5 +1,6 @@
 'use client';
 
+import '@/app/css/recent.css';
 import { VideoCardType } from "./PopularList/CardListContainer";
 import { useRouter } from "next/navigation";
 
@@ -12,14 +13,14 @@ export default function VideoCardContainer(
         cardData.map((data, i) => {
             return (
                 <div 
-                    className="col-12 col-sm-6 col-lg-4" 
+                    className="col-12 col-sm-6 col-lg-3 recent-card-container" 
                     key={data.thumbnailUrl +i}
                     onClick={() => {
                         router.push(`/video/${data.videoId}`);
                     }}
                 >
                     <div 
-                        className="card mt-2 p-2" 
+                        className="card mt-2 mb-1 p-2" 
                         style={{cursor : 'pointer'}}
                     >
                         <div className="row row-center w-100" style={{margin : 'auto'}}>
@@ -32,21 +33,10 @@ export default function VideoCardContainer(
                                     style={{borderRadius : '10px'}}
                                 />
                             </div>
-                            <div 
-                                className="col-6 col-sm-12"
-                                style={{
-                                    // 부모 요소 크기를 넘기면 잘리도록 설정
-                                    overflow: 'hidden',           
-                                    // 말줄임표(...) 적용
-                                    textOverflow: 'ellipsis',     
-                                    // 한 줄로 제한
-                                    whiteSpace: 'nowrap',         
-                                }}
-                            >
-                                <span className="fs-5 fw-bold">
+                            <div className="col-6 col-sm-12 text-container">
+                                <h6 className="m-0 mt-sm-2 mb-sm-2 fw-bold">
                                     {data.channelTitle}
-                                </span>
-                                <br/>
+                                </h6>
                                 <span>
                                     {data.videoTitle}
                                 </span>

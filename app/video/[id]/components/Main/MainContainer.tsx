@@ -1,15 +1,17 @@
 'use client';
 
-import VideoContainer from "@/app/components/VideoContainer";
-import YoutuberProfileContainer from "@/app/components/YoutuberProfileContainer";
-import CommentContainer from "../Comment/CommentContainer";
-import useProcessError from "@/@util/hooks/useprocessError";
 import { fetchVideoData } from "@/@util/functions/fetch/fetchVideoData";
 import { useUpdateRecentVideoLocalStorage } from "@/@util/hooks/useUpdateRecentVideoLocalStorage";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 import { useScrollStore } from "@/app/store";
+import VideoContainer from "@/app/components/VideoContainer";
+import YoutuberProfileContainer from "@/app/components/YoutuberProfileContainer";
+import CommentContainer from "../Comment/CommentContainer";
+import useProcessError from "@/@util/hooks/useprocessError";
 import useCheckCachedData from "@/@util/hooks/useCheckCachedData";
+import LoadingContianer from "@/app/components/LoadingContainer";
+import ErrorContainer from "@/app/components/ErrorContainer";
 
 
 export default function MainContainer(
@@ -46,8 +48,8 @@ export default function MainContainer(
         data?.video.thumbnails.url
     );
 
-    if(isLoading) return <h1>로딩중입니다.</h1>
-    if(!data) return <h1>no Data</h1>
+    if(isLoading) return <LoadingContianer height={'calc(100vh - 100px)'} />
+    if(!data) return <ErrorContainer errorMessage="데이터가 존재하지 않습니다." />
 
     const { youtuber, video } = data;
 

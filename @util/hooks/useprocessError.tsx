@@ -32,8 +32,11 @@ export default function useProcessError(
         if(type === "mc"){
             alert(errorMessage);
             router.back();
+            return null;
         }else{
-            return <p className="text-center">{errorMessage}</p>;
+            return errorMessage;
         }
     }
+
+    return null;
 }

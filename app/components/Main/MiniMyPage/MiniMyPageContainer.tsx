@@ -9,9 +9,7 @@ export default async function MiniMyPageContainer(){
     return(
         <div 
             className="w-100 border" 
-            style={{
-                borderRadius : '10px'
-            }}
+            style={{borderRadius : 10}}
         >
             <MiniMyPageHeader session={session} />
             <hr className="m-0"/>

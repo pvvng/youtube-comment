@@ -4,10 +4,10 @@ import { FilteredCommentType } from "@/types/comment";
 import dateToString from "@/@util/functions/dateToString";
 
 export function CommentCardContainer(
-    { cd, videoId }: { cd: FilteredCommentType, videoId: string }
+    { cd : commentData, videoId }: { cd: FilteredCommentType, videoId: string }
 ) {
     // 줄바꿈 단어 존재 시 단어 분리
-    let textArr: string[] = [...cd.text.split('\n')];
+    let textArr: string[] = [...commentData.text.split('\n')];
     const timestampRegex = /(\d{1,2}):(\d{2})/g;
 
     // jsx 반환 함수
@@ -44,19 +44,19 @@ export function CommentCardContainer(
             <div className="row row-center w-100" style={{ margin: 'auto' }}>
                 <div className="col-12 col-sm-2 col-lg-1">
                     <img
-                        src={cd.autohorProfileImageUrl}
+                        src={commentData.autohorProfileImageUrl}
                         width="100%"
-                        alt={cd.authorDisplayName}
+                        alt={commentData.authorDisplayName}
                         style={{ borderRadius: '50%', maxWidth: '50px' }}
                     />
                     <p className="m-sm-0 fw-bold d-sm-none text-start">
-                        {cd.authorDisplayName}
+                        {commentData.authorDisplayName}
                     </p>
                 </div>
                 <div className="col-12 col-sm-10 col-lg-11">
                     <div className="row row-center w-100" style={{ margin: 'auto' }}>
                         <div className="col-12 col-lg-8 px-sm-2 px-0">
-                            <p className="m-sm-0 fw-bold d-sm-block d-none">{cd.authorDisplayName}</p>
+                            <p className="m-sm-0 fw-bold d-sm-block d-none">{commentData.authorDisplayName}</p>
                             {
                                 textArr.map((line, index) => (
                                     <p className="m-sm-0" key={index}>
@@ -66,12 +66,12 @@ export function CommentCardContainer(
                             }
                         </div>
                         <div className="col-12 col-lg-4 px-sm-2 px-0 text-sm-start text-end">
-                            <p className="m-0">{dateToString(cd.publishedAt)}</p>
+                            <p className="m-0">{dateToString(commentData.publishedAt)}</p>
                             <p className="m-0">
                                 <span style={{color : '#ff0000'}}>
                                     <FontAwesomeIcon icon={faHeart} />
                                 </span>
-                                {' '}{cd.likeCount.toLocaleString()}
+                                {' '}{commentData.likeCount.toLocaleString()}
                             </p>
                         </div>
                     </div>

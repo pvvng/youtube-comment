@@ -7,6 +7,8 @@ import useProcessError from "@/@util/hooks/useprocessError";
 import KeywordHubContainer from "./Word/KeywordHubContainer";
 import { fetchDBAnalyzedData } from "@/@util/functions/fetch/fetchDBAnalyzedData";
 import FetchFreshCommentContainer from "./FetchFreshCommentContainer";
+import LoadingContianer from "@/app/components/LoadingContainer";
+import ErrorContainer from "@/app/components/ErrorContainer";
 
 interface PropsType {
     commentData : FilteredCommentType[]
@@ -29,10 +31,12 @@ export default function WordHubContainer(
         staleTime : 3600000,
     });
     
-    useProcessError(isError, error, 'null');
+    const errorMessage = useProcessError(isError, error, "null");
+
+    if(errorMessage) return <ErrorContainer errorMessage={errorMessage} />;
 
     if(isLoading || isFetching || data === undefined){
-        return <h3>댓글 데이터 로딩 중임</h3>
+        return <LoadingContianer height={300} />
     }else if(data === null) {
         return (
             <FetchFreshCommentContainer 
@@ -47,7 +51,7 @@ export default function WordHubContainer(
     
     return (
         <>
-            <FeelGraphContainer feelData={sentiment} />
+            <FeelGraphContainer feelData={sentiment} type="video" />
             <KeywordHubContainer keyWordData={keyWordData} />
             <FetchFreshCommentContainer 
                 commentData = {commentData} 

@@ -1,8 +1,9 @@
 'use client';
 
+import '@/app/css/recent.css';
 import { VideoCardType } from "./PopularList/CardListContainer";
-import VideoCardContainer from "./VideoCardContainer";
 import { useEffect, useState } from "react";
+import VideoCardContainer from "./VideoCardContainer";
 
 export default function RecentContainer(){
 
@@ -12,23 +13,29 @@ export default function RecentContainer(){
         let getRecent = localStorage.getItem('recent')
         if(getRecent){
             let parsed = JSON.parse(getRecent);
-            setRecentArr(parsed);
+            setRecentArr(parsed.reverse());
         }
     },[])
 
     return(
-        <div className="border" style={{background : '#eee', borderRadius : '10px'}}>
+        <div className="border mt-3" style={{borderRadius : '10px'}}>
             <div 
-                className="bg-white pt-2 pb-2" 
+                className="bg-white card-header-container" 
                 style={{borderTopLeftRadius : '10px', borderTopRightRadius : '10px'}}
             >
-                <h6 className="fw-bold m-0 text-center">최근에 확인한 영상</h6>
+                <h6 className="fw-bold m-0 text-center">최근 감상한 동영상</h6>
             </div>
-            <div className="row row-center w-100" style={{margin : 'auto'}}>
+            <hr className="m-0 mb-2"/>
+            <div className="row w-100" style={{margin : 'auto'}}>
                 {
                     recentArr.length > 0 ?
                     <VideoCardContainer cardData={recentArr} /> :
-                    <p>최근 확인한 영상이 없습니다.</p>
+                    <div 
+                        className="row-center" 
+                        style={{display : 'flex', minHeight : 200}}
+                    >
+                        <p className="text-center m-0">감상한 영상이 없습니다.</p>
+                    </div>
                 }
             </div>
         </div>

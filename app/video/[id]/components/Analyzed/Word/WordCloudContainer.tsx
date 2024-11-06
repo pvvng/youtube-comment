@@ -4,13 +4,9 @@ import { PosType } from "@/types/word";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
+import ErrorContainer from "@/app/components/ErrorContainer";
 import WordCloud from "react-d3-cloud";
-
-interface WordType {
-    x : number;
-    y : number;
-}
 
 export default function WordCloudContainer(
     {keyWordData} : {keyWordData : PosType[]}
@@ -27,7 +23,11 @@ export default function WordCloudContainer(
     let highValue = keyWordData[0].value;
 
     function valueCount(highValue: number) {
-        return (word: { value: number }) => word.value * (50 / highValue);
+        return (word: { value: number }) => {
+            // 제곱근 스케일
+            const scaledValue = Math.sqrt(word.value) / Math.sqrt(highValue); // 제곱근 스케일 적용
+            return scaledValue * 20;
+        };
     }
 
     function handleMouseOver (event: any, d: {text :string, value : number}){
@@ -53,7 +53,7 @@ export default function WordCloudContainer(
         }
     };
 
-    if(keyWordData.length === 0) return <h3>데이터 없음</h3>
+    if(keyWordData.length === 0) return <ErrorContainer errorMessage="데이터가 존재하지 않습니다." />
 
     return (
         <>

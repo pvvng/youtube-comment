@@ -52,26 +52,30 @@ export default async function updateDBYoutuberCollection(
         lastUpdate: koreaTime 
     };
 
-    const videoCollectionResult = 
-    await db.collection<videoCollectionTypeWithId>('video')
-    .findOne({videoId});
-
-    if(!videoCollectionResult){
-        db.collection('video')
-        .insertOne(updateData)        
-        .catch(error => {
-            console.error("Error during upload:", error);
-        });
-        console.log(`${videoId} 영상 데이터 콜렉션에 추가 성공`);
-    }else if(videoCollectionResult.lastUpdate !== koreaTime){
-        db.collection('video').updateOne(
-            { videoId : videoId },
-            { $set : updateData }
-        ).catch(error => {
-            console.error("Error during update:", error);
-        });
-        console.log(`${videoId} 영상 데이터가 콜렉션에 ${koreaTime} 날짜로 업데이트 완료`);
-    }else{
-        console.log('최근 문서가 이미 존재합니다.');
+    try{
+        const videoCollectionResult = 
+        await db.collection<videoCollectionTypeWithId>('video')
+        .findOne({videoId});
+    
+        if(!videoCollectionResult){
+            db.collection('video')
+            .insertOne(updateData)        
+            .catch(error => {
+                console.error("Error during upload:", error);
+            });
+            console.log(`${videoId} 영상 데이터 콜렉션에 추가 성공`);
+        }else if(videoCollectionResult.lastUpdate !== koreaTime){
+            db.collection('video').updateOne(
+                { videoId : videoId },
+                { $set : updateData }
+            ).catch(error => {
+                console.error("Error during update:", error);
+            });
+            console.log(`${videoId} 영상 데이터가 콜렉션에 ${koreaTime} 날짜로 업데이트 완료`);
+        }else{
+            console.log('최근 문서가 이미 존재합니다.');
+        }
+    }catch(error){
+        console.error("Error during update:", error);
     }
 }

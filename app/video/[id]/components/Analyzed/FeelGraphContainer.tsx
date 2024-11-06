@@ -11,7 +11,11 @@ const BAR_COLORS = {
     neutral: '#CCCCCC',
 };
 
-export default function FeelGraphContainer({ feelData }: PropsType) {
+interface FeelGrapthContainerPropsType extends PropsType {
+    type : string;
+}
+
+export default function FeelGraphContainer({ feelData, type }: FeelGrapthContainerPropsType) {
 
     // 사이드바 스크롤을 위한 설정
     const sentimentContainerRef = useRef(null);
@@ -40,7 +44,13 @@ export default function FeelGraphContainer({ feelData }: PropsType) {
 
     return (
         <div ref={sentimentContainerRef} id="sentiment" className='card-container mt-3'>
-            <p className='fw-bold'>댓글 감정 분석</p>
+            <p className='fw-bold'>
+                {
+                    type === "video" ?
+                    <span>댓글 감정 분석</span>:
+                    <span>{`${type} 채널 감정 분석`}</span>
+                }
+            </p>
             <div style={{ height: '300px' }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart

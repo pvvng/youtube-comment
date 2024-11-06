@@ -1,4 +1,3 @@
-import moment from "moment-timezone";
 import { useEffect } from "react";
 
 export interface RecentVideoType {
@@ -8,14 +7,16 @@ export interface RecentVideoType {
     thumbnailUrl : string;
 }
 
-/** localstorage에 최근 본 6개 영상 저장하는 커스텀 훅 */
+const SAVE_NUM = 4; 
+
+/** localstorage에 최근 본 n개 영상 저장하는 커스텀 훅 */
 export function useUpdateRecentVideoLocalStorage(
     videoId :string, 
     videoTitle :string | undefined, 
     channelTitle : string | undefined,
     thumbnailUrl : string | undefined,
 ) {
-    // localStorage에 최근 본 영상 6개까지 저장하기
+    // localStorage에 최근 본 영상 n개까지 저장하기
     useEffect(() => {
         // 조건이 맞지 않으면 훅 실행하지 않음
         if (!videoTitle || !channelTitle || !thumbnailUrl) return; 
@@ -45,7 +46,7 @@ export function useUpdateRecentVideoLocalStorage(
         }
 
         // localStorage에 저장된 recent의 길이가 6 이상일 때
-        if (parsedRecent.length > 6) {
+        if (parsedRecent.length > SAVE_NUM) {
             // 제일 오래된 것 제거 (제일 앞에 있는 것)
             parsedRecent.shift();
         }

@@ -2,6 +2,7 @@
 
 import { fetchAnalyzedCommentData } from "@/@util/functions/fetch/fetchAnalyzedCommentData";
 import useProcessError from "@/@util/hooks/useprocessError";
+import ErrorContainer from "@/app/components/ErrorContainer";
 import { FilteredCommentType } from "@/types/comment";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment-timezone";
@@ -33,8 +34,6 @@ export default function FetchFreshCommentContainer(
         enabled: queryKeyState === true
     });
 
-    useProcessError(isError, error, 'null');
-
     // 쿼리가 성공적으로 완료되고 데이터가 존재하면 한 번만 새로고침
     useEffect(() => {
         if (isSuccess && data) {
@@ -44,6 +43,10 @@ export default function FetchFreshCommentContainer(
             });
         }
     }, [isSuccess, data, queryClient]);
+
+    const errorMessage = useProcessError(isError, error, "null");
+
+    if(errorMessage) return <ErrorContainer errorMessage={errorMessage} />;
 
     return(
         <div className="w-100 text-center card-container mt-3 mb-3">
@@ -60,8 +63,8 @@ export default function FetchFreshCommentContainer(
                             Loading...
                         </span>
                     </div>
-                    <p className="fw-bold m-0 fw-bold">
-                        영상 분석은 네트워크 환경에 따라 최대 5분 정도 소요될 수 있습니다.
+                    <p className="fw-bold m-0 mt-2 fw-bold">
+                        영상 분석은 네트워크 환경에 따라 5분 정도 소요될 수 있습니다.
                     </p>
                 </>:
                 null

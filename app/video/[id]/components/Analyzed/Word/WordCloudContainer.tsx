@@ -1,5 +1,6 @@
 'use client';
 
+import ErrorContainer from "@/app/components/ErrorContainer";
 import { PosType } from "@/types/word";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,7 +28,7 @@ export default function WordCloudContainer(
     let highValue = keyWordData[0].value;
 
     function valueCount(highValue: number) {
-        return (word: { value: number }) => word.value * (50 / highValue);
+        return (word: { value: number }) => word.value * (30 / highValue);
     }
 
     function handleMouseOver (event: any, d: {text :string, value : number}){
@@ -53,7 +54,7 @@ export default function WordCloudContainer(
         }
     };
 
-    if(keyWordData.length === 0) return <h3>데이터 없음</h3>
+    if(keyWordData.length === 0) return <ErrorContainer errorMessage="데이터가 존재하지 않습니다." />
 
     return (
         <>

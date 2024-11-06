@@ -4,6 +4,7 @@ import useProcessError from "@/@util/hooks/useprocessError";
 import fetchDBPopularVideo from "@/@util/functions/fetch/fetchDBPopularVideo";
 import PopularContainerLoadingSpinner from "./PopularContainerLoadingSpinner";
 import CardHeaderContainer from "./CardHeaderContainer";
+import ErrorContainer from "../../ErrorContainer";
 
 export default function PopularYoutuberHubContainer(){
 
@@ -16,7 +17,9 @@ export default function PopularYoutuberHubContainer(){
         staleTime : 3600000,
     })
 
-    useProcessError(isError, error, "null");
+    const errorMessage = useProcessError(isError, error, "null");
+
+    if(errorMessage) return <ErrorContainer errorMessage={errorMessage} />;
     
     return (
         <>

@@ -18,6 +18,7 @@ const URL = 'https://www.googleapis.com/youtube/v3/subscriptions';
  * **예외상황 2** :
  * 로그인 하지 않았을때는 에러 반환
  * */
+
 export default async function handler(
     req : NextApiRequest, res : NextApiResponse
 ){

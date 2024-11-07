@@ -27,7 +27,7 @@ export default function SignInPage() {
             top : 0,
         }}>
             <div className="text-center" style={{margin : 'auto'}}>
-                <img src='/logo.png' className='mb-3' width="100%" style={{maxWidth : 360}}/>
+                <img src='/logo/logo-full.png' className='mb-3' width="100%" style={{maxWidth : 360}}/>
                 <GoogleSignInBtn />
                 <button className='go-main-button mt-2 bg-dark' onClick={() => {
                     router.push('/');

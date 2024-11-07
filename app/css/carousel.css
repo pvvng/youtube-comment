@@ -75,6 +75,6 @@
 /* Hover 시 색상 변경 */
 .left-arrow-head:hover,
 .right-arrow-head:hover {
-    color: #ff0000; /* 붉은색으로 변경 */
+    color: #1b72dd; 
     background-color: rgba(0, 0, 0, 1); /* 반투명한 배경 */
 }

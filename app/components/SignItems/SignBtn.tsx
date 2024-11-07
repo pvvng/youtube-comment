@@ -4,7 +4,6 @@ import '@/app/css/sign.css';
 import { signIn, signOut } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { GoogleLogoSvg } from '@/app/SvgContainer';
-import { Session } from "next-auth";
 
 // 카카오 로그인 버튼
 export function GoogleSignInBtn (){

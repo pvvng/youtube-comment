@@ -1,7 +1,7 @@
 'use client';
 
 import { Session } from "next-auth";
-import { SignInBtn } from "../../SignItems/SignBtn";
+import { SignInBtn } from "@/app/components/SignItems/SignBtn";
 import { useRouter } from "next/navigation";
 
 export default function MiniMyPageBody(

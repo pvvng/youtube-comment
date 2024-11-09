@@ -28,7 +28,7 @@ export function GoogleSignInBtn (){
 export function SignInBtn (){
     return (
       <button 
-        className="btn btn-dark"
+        className="btn-main"
         onClick={() => { signIn() }}
       >
         로그인
@@ -39,7 +39,7 @@ export function SignInBtn (){
 export function SignOutBtn (){
     return (
       <button 
-        className="btn btn-dark"
+        className="btn-main"
         onClick={() => { signOut() }}
       >
         로그아웃

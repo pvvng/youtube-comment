@@ -24,6 +24,7 @@ export default function YoutuberInfoContainer({name, info, infoClicker, setInfoC
             }}
         >
             <div style={{background : 'white', borderRadius : 10, minWidth : '200px'}}>
+
                 {/* head */}
                 <div 
                     className="bg-black w-100 p-2 text-center" 
@@ -33,6 +34,7 @@ export default function YoutuberInfoContainer({name, info, infoClicker, setInfoC
                         borderTopRightRadius : 10
                     }}
                 ><span className="fw-bold">{name}</span></div>
+
                 {/* body */}
                 <div className="p-3">
                     {splitedInfo.map((si, i) => <p key={si +i} className="">{si}</p>)}

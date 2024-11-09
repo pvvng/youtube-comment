@@ -4,11 +4,11 @@ body {
 }
 
 .c-main {
-    color : #ff0000;
+    color : #175fb8;
 }
 
 .bg-main{
-    background-color: #ff0000;
+    background-color: #175fb8;
 }
 
 .a-tag {
@@ -18,7 +18,23 @@ body {
 }
 
 .a-tag:hover {
-    color : #ff0000;
+    color : #175fb8;
+}
+
+.btn-main{
+    background-color: #175fb8;
+    border: 1px solid #14529d;
+    color: white;
+    padding: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.5s;
+}
+
+.btn-main:hover{
+    background-color: #14529d;
 }
 
 .row-center{

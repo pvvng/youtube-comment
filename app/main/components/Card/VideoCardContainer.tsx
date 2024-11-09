@@ -1,7 +1,7 @@
 'use client';
 
 import '@/app/css/recent.css';
-import { VideoCardType } from "./PopularList/CardListContainer";
+import { VideoCardType } from '@/app/main/components/Popularlist/CardListContainer';
 import { useRouter } from "next/navigation";
 
 export default function VideoCardContainer(

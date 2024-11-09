@@ -75,6 +75,5 @@
 /* Hover 시 색상 변경 */
 .left-arrow-head:hover,
 .right-arrow-head:hover {
-    color: #1b72dd; 
-    background-color: rgba(0, 0, 0, 1); /* 반투명한 배경 */
+    background-color: #175fb8; /* 반투명한 배경 */
 }

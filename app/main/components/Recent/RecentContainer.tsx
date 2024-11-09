@@ -1,9 +1,9 @@
 'use client';
 
 import '@/app/css/recent.css';
-import { VideoCardType } from "./PopularList/CardListContainer";
+import { VideoCardType } from '../Popularlist/CardListContainer';
 import { useEffect, useState } from "react";
-import VideoCardContainer from "./VideoCardContainer";
+import VideoCardContainer from '@/app/main/components/Card/VideoCardContainer';
 
 export default function RecentContainer(){
 

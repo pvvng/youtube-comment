@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import PopularCarouselContainer from "./PopularCarouselContainer";
+import PopularCarouselContainer from "../../../main/components/Popularlist/PopularCarouselContainer";
 import useProcessError from "@/@util/hooks/useprocessError";
 import fetchDBPopularVideo from "@/@util/functions/fetch/fetchDBPopularVideo";
-import PopularContainerLoadingSpinner from "./PopularContainerLoadingSpinner";
-import CardHeaderContainer from "./CardHeaderContainer";
-import ErrorContainer from "../../ErrorContainer";
+import PopularContainerLoadingSpinner from "../../../main/components/Popularlist/PopularContainerLoadingSpinner";
+import CardHeaderContainer from "../../../main/components/Popularlist/CardHeaderContainer";
+import ErrorContainer from "@/app/components/ErrorContainer";
 
-export default function PopularYoutuberHubContainer(){
+export default function PopularVideoHubContainer(){
 
     const { data, isLoading, isError, error } = useQuery({
         queryKey : ['videoPopularity'],

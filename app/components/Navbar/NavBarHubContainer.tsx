@@ -68,7 +68,7 @@ export default function NavBarHubContainer(
                                 height="auto"
                                 alt='logo'
                                 onClick={() => {
-                                    router.push('/');
+                                    router.push('/main');
                                 }}
                             />
                         }

@@ -1,4 +1,4 @@
-import ErrorContainer from "@/app/components/ErrorContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
 import FeelGraphContainer from "@/app/video/[id]/components/Analyzed/FeelGraphContainer";
 import { SentimentType } from "@/types/word";
 

@@ -4,7 +4,7 @@ import '@/app/css/video.css'
 import { FilteredVideoSnippet, VideoStatisticsType } from "@/types/video";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faCommentDots, faSeedling } from '@fortawesome/free-solid-svg-icons'
-import { useVideoRenderStateStore } from '../store';
+import { useVideoRenderStateStore } from '@/app/store';
 import { useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import toLocaleString from '@/@util/functions/toLocaleString';

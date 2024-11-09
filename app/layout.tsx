@@ -27,7 +27,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ReactQueryProvider>
-            <NavbarContainer />
           {children}
         </ReactQueryProvider>
       </body>

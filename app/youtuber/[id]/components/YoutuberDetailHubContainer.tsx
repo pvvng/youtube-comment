@@ -2,15 +2,12 @@
 
 import fetchGetDBYoutuberData from "@/@util/functions/fetch/fetchGetDBYoutuberData";
 import useProcessError from "@/@util/hooks/useprocessError";
-import LoadingContianer from "@/app/components/LoadingContainer";
-import YoutuberProfileContainer from "@/app/components/YoutuberProfileContainer";
-import FeelGraphContainer from "@/app/video/[id]/components/Analyzed/FeelGraphContainer";
-import KeywordListContainer from "@/app/video/[id]/components/Analyzed/Word/KeywordListContainer";
-import WordCloudContainer from "@/app/video/[id]/components/Analyzed/Word/WordCloudContainer";
+import LoadingContianer from "@/app/components/Loading/LoadingContainer";
+import YoutuberProfileContainer from "@/app/components/Youtuber/YoutuberProfileContainer";
 import { useQuery } from "@tanstack/react-query";
 import YoutuberDetailKeywordContainer from "./YoutuberDetailKeywordContainer";
 import YoutuberDetailSentimentContainer from "./YoutuberDetailSentimentContainer";
-import ErrorContainer from "@/app/components/ErrorContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
 
 export default function YoutuberDetailHubContainer(
     {channelId} : {channelId : string}

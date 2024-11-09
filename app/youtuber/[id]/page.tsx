@@ -1,3 +1,4 @@
+import NavbarContainer from "@/app/components/Navbar/NavbarContainer";
 import YoutuberDetailHubContainer from "./components/YoutuberDetailHubContainer";
 
 interface PropsType {
@@ -10,6 +11,9 @@ export default function Youtuber(
     const channelId = props.params.id;
 
     return(
-        <YoutuberDetailHubContainer channelId={channelId} />
+        <>
+            <NavbarContainer />
+            <YoutuberDetailHubContainer channelId={channelId} />
+        </>
     )
 }

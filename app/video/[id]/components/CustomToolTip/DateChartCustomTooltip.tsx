@@ -1,7 +1,6 @@
 import '@/app/css/video.css';
 import { faFire, faHeart, faSnowflake } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect } from 'react';
 
 interface DateChartCustomTooltipProps {
     active?: boolean;

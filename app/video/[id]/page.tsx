@@ -1,3 +1,4 @@
+import NavbarContainer from "@/app/components/Navbar/NavbarContainer";
 import MainContainer from "./components/Main/MainContainer";
 import SideBarContainer from "./components/Main/SideBarContainer";
 
@@ -11,9 +12,12 @@ export default function VideoDetail(props :PropsType){
     const videoId = props.params.id;
 
     return (
-        <div style={{position : 'relative'}}>
-            <SideBarContainer />
-            <MainContainer videoId={videoId} />
-        </div>
+        <>
+            <NavbarContainer />
+            <div style={{position : 'relative'}}>
+                <SideBarContainer />
+                <MainContainer videoId={videoId} />
+            </div>
+        </>
     )
 }

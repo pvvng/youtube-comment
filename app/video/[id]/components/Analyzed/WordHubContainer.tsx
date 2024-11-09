@@ -7,8 +7,8 @@ import useProcessError from "@/@util/hooks/useprocessError";
 import KeywordHubContainer from "./Word/KeywordHubContainer";
 import { fetchDBAnalyzedData } from "@/@util/functions/fetch/fetchDBAnalyzedData";
 import FetchFreshCommentContainer from "./FetchFreshCommentContainer";
-import LoadingContianer from "@/app/components/LoadingContainer";
-import ErrorContainer from "@/app/components/ErrorContainer";
+import LoadingContianer from "@/app/components/Loading/LoadingContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
 
 interface PropsType {
     commentData : FilteredCommentType[]

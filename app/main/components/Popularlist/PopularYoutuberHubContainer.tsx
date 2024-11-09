@@ -4,7 +4,7 @@ import fetchDBPopularYoutuber from "@/@util/functions/fetch/fetchDBPopularYoutub
 import useProcessError from "@/@util/hooks/useprocessError";
 import PopularContainerLoadingSpinner from "../../../main/components/Popularlist/PopularContainerLoadingSpinner";
 import CardHeaderContainer from "../../../main/components/Popularlist/CardHeaderContainer";
-import ErrorContainer from "@/app/components/ErrorContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
 
 export default function PopularYoutuberHubContainer(){
 

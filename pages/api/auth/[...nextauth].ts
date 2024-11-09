@@ -6,15 +6,15 @@ export const authOptions = {
     // Configure one or more authentication providers
     providers: [
         GoogleProvider({
-        clientId: process.env.GOOGLE_CLIENT_ID || '',
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-        authorization: {
-            params: {
-                // YouTube 구독 목록 읽기 권한
-                scope: "openid email profile https://www.googleapis.com/auth/youtube.readonly",  
-                redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/google`
+            clientId: process.env.GOOGLE_CLIENT_ID || '',
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+            authorization: {
+                params: {
+                    // YouTube 구독 목록 읽기 권한
+                    scope: "openid email profile https://www.googleapis.com/auth/youtube.readonly",  
+                    redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/google`,
+                }
             }
-        }
         })
         // ...add more providers here
     ],

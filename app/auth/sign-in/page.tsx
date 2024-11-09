@@ -1,7 +1,7 @@
 'use client';
 
 import '@/app/css/sign.css';
-import { GoogleSignInBtn } from "@/app/components/SignItems/SignBtn";
+import { GoogleSignInBtn, LoginAnotherAccountBtn } from "@/app/components/SignItems/SignBtn";
 import { useRouter } from "next/navigation";
 
 const BACKGROUND_STYE = {
@@ -20,9 +20,12 @@ export default function SignInPage() {
             <div className="text-center" style={{margin : 'auto'}}>
                 <img src='/logo/logo-full.png' className='mb-3' width="100%" style={{maxWidth : 360}}/>
                 <GoogleSignInBtn />
-                <button className='go-main-button mt-2 btn-main' onClick={() => {
+                <button className='go-main-button mt-2 mb-2 btn-main' onClick={() => {
                     router.push('/main');
                 }}>메인화면으로 돌아가기</button>
+                <div className='mt-4'>
+                    <LoginAnotherAccountBtn />
+                </div>
             </div>
         </div>
     )

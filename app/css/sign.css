@@ -41,3 +41,18 @@
 .go-main-button:hover {
     transform: scale(1.02);
 }
+
+.another-account-btn{
+    border: none;
+    background: none;
+    border-bottom: 1px solid;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    transition: all 0.5s;
+}
+
+.another-account-btn:hover{
+    color: #175fb8;
+    border-bottom : 1px solid #175fb8;
+}

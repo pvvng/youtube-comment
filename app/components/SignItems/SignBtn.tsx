@@ -47,27 +47,18 @@ export function SignOutBtn (){
     )
 }
 
-// 로그 아웃 버튼
-// export function SignOutBtn (
-//   {session} : {session : Session | null}
-// ){
-//     return (
-//       <div  onClick={() => { signOut() }}>
-//         {
-//           session ?
-//           <img 
-//               src={session.user?.image || "/temp-user.png"} 
-//               width="50px" 
-//               alt="user-profile" 
-//               style={{ borderRadius: '50%' }}
-//           /> :
-//           <img 
-//               src="/temp-user.png"
-//               width="50px" 
-//               alt="user-temp-profile" 
-//               style={{ borderRadius: '50%' }}
-//           />
-//         }
-//       </div>
-//     )
-// }
+/** 다른 아이디로 로그인 지원 함수 */
+export function LoginAnotherAccountBtn() {
+    const handleLogin = () => {
+        signIn('google', {
+            callbackUrl: '/main',
+            prompt: 'select_account',  // 항상 계정 선택을 요구
+        });
+    };
+
+    return (
+        <button className='another-account-btn' onClick={handleLogin}>
+            다른 계정으로 로그인
+        </button>
+    );
+}

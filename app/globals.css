@@ -11,6 +11,15 @@ body {
     background-color: #175fb8;
 }
 
+.c-white {
+    color : white;
+}
+
+.bg-white{
+    background-color: white;
+}
+
+
 .a-tag {
     text-decoration: none;
     color: black;

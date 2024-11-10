@@ -4,9 +4,6 @@ import fetchGetDBYoutuberData from "@/@util/functions/fetch/fetchGetDBYoutuberDa
 import useProcessError from "@/@util/hooks/useprocessError";
 import LoadingContianer from "@/app/components/LoadingContainer";
 import YoutuberProfileContainer from "@/app/components/YoutuberProfileContainer";
-import FeelGraphContainer from "@/app/video/[id]/components/Analyzed/FeelGraphContainer";
-import KeywordListContainer from "@/app/video/[id]/components/Analyzed/Word/KeywordListContainer";
-import WordCloudContainer from "@/app/video/[id]/components/Analyzed/Word/WordCloudContainer";
 import { useQuery } from "@tanstack/react-query";
 import YoutuberDetailKeywordContainer from "./YoutuberDetailKeywordContainer";
 import YoutuberDetailSentimentContainer from "./YoutuberDetailSentimentContainer";
@@ -24,7 +21,7 @@ export default function YoutuberDetailHubContainer(
         gcTime : 0,
         staleTime : 0,
     })
-
+    
     useProcessError(isError, error, "mc");
 
     if(data === undefined || isLoading) { 
@@ -34,6 +31,7 @@ export default function YoutuberDetailHubContainer(
             <p className="text-center">저장된 데이터가 없습니다.</p>
         )
     }
+
 
     const { youtuber, extra } = data;
     const { keyword, sentiment, popularity } = extra;

@@ -24,7 +24,7 @@ export default function YoutuberDetailHubContainer(
         gcTime : 0,
         staleTime : 0,
     })
-
+    
     useProcessError(isError, error, "mc");
 
     if(data === undefined || isLoading) { 
@@ -34,6 +34,8 @@ export default function YoutuberDetailHubContainer(
             <p className="text-center">저장된 데이터가 없습니다.</p>
         )
     }
+
+    console.log(data)
 
     const { youtuber, extra } = data;
     const { keyword, sentiment, popularity } = extra;

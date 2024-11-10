@@ -3,13 +3,11 @@
 import fetchSubscribedYoutuberData from "@/@util/functions/fetch/fetchSubscribedYoutuberData";
 import useProcessError from "@/@util/hooks/useprocessError";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useRef, useState } from "react";
-import { useScrollStore, useVideoRenderStateStore } from "@/app/store";
-import { fetchVideoData } from "@/@util/functions/fetch/fetchVideoData";
+import { useRef, useState } from "react";
 import SortDropdown from "../components/SortDropdown";
 import SortData from "../components/SortData";
-import ErrorContainer from "@/app/components/ErrorContainer";
-import LoadingContianer from "@/app/components/LoadingContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
+import LoadingContianer from "@/app/components/Loading/LoadingContainer";
 // 지금 page.tsx에서 클라이언트 컴포넌트로 실행되는데 변경 부탁드리겠습니다.
 
 export default function MyPage() {

@@ -5,16 +5,16 @@ export default function  MiniMyPageHeader(
 ){
     return (
         <div className="row row-center w-100 p-2" style={{margin : 'auto'}}>
-            <div className="col-3 col-lg-4">
+            <div className="col-3 col-md-4 text-center">
                 <img 
-                    src={session?.user?.image || "/temp-user.png"} 
+                    src={session?.user?.image || "/logo/logo-mask.png"} 
                     width="100%" 
                     alt="user-profile" 
-                    style={{borderRadius : "50%"}}
+                    style={{maxWidth : 100}}
                 />
             </div>
-            <div className="col-9 col-lg-8">
-                <p className="m-0 fw-bold">{session?.user?.name || 'user'}님</p>   
+            <div className="col-9 col-md-8">
+                <p className="m-0 fw-bold">{session?.user?.name || '사용자'}님</p>   
                 <p className="m-0">안녕하세요</p>
             </div> 
         </div>

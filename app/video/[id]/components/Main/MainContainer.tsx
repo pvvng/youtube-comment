@@ -5,13 +5,13 @@ import { useUpdateRecentVideoLocalStorage } from "@/@util/hooks/useUpdateRecentV
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 import { useScrollStore } from "@/app/store";
-import VideoContainer from "@/app/components/VideoContainer";
-import YoutuberProfileContainer from "@/app/components/YoutuberProfileContainer";
+import VideoContainer from "@/app/components/Video/VideoContainer";
+import YoutuberProfileContainer from "@/app/components/Youtuber/YoutuberProfileContainer";
 import CommentContainer from "../Comment/CommentContainer";
 import useProcessError from "@/@util/hooks/useprocessError";
 import useCheckCachedData from "@/@util/hooks/useCheckCachedData";
-import LoadingContianer from "@/app/components/LoadingContainer";
-import ErrorContainer from "@/app/components/ErrorContainer";
+import LoadingContianer from "@/app/components/Loading/LoadingContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
 
 
 export default function MainContainer(

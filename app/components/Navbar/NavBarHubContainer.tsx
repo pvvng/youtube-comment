@@ -62,14 +62,13 @@ export default function NavBarHubContainer(
                             }}>
                                 <FontAwesomeIcon icon={faArrowLeft} />
                             </button>:
-                            <Image
-                                src="/origin-logo.png" 
-                                width= {65}
-                                height= {65}
+                            <img
+                                src="/logo/font-ko.png" 
+                                width= "100px"
+                                height="auto"
                                 alt='logo'
-                                priority
                                 onClick={() => {
-                                    router.push('/');
+                                    router.push('/main');
                                 }}
                             />
                         }

@@ -2,7 +2,7 @@
 
 import { fetchAnalyzedCommentData } from "@/@util/functions/fetch/fetchAnalyzedCommentData";
 import useProcessError from "@/@util/hooks/useprocessError";
-import ErrorContainer from "@/app/components/ErrorContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
 import { FilteredCommentType } from "@/types/comment";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import moment from "moment-timezone";

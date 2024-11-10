@@ -1,13 +1,13 @@
 'use client';
 
+import { useQuery } from "@tanstack/react-query";
 import fetchGetDBYoutuberData from "@/@util/functions/fetch/fetchGetDBYoutuberData";
 import useProcessError from "@/@util/hooks/useprocessError";
-import LoadingContianer from "@/app/components/LoadingContainer";
-import YoutuberProfileContainer from "@/app/components/YoutuberProfileContainer";
-import { useQuery } from "@tanstack/react-query";
+import LoadingContianer from "@/app/components/Loading/LoadingContainer";
+import YoutuberProfileContainer from "@/app/components/Youtuber/YoutuberProfileContainer";
 import YoutuberDetailKeywordContainer from "./YoutuberDetailKeywordContainer";
 import YoutuberDetailSentimentContainer from "./YoutuberDetailSentimentContainer";
-import ErrorContainer from "@/app/components/ErrorContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
 
 export default function YoutuberDetailHubContainer(
     {channelId} : {channelId : string}

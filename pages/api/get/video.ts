@@ -1,6 +1,6 @@
+import axios from "axios";
 import { FilteredVideoSnippet, VideoSnippetType, VideoStatisticsType } from "@/types/video";
 import { YoutuberDataType, YoutuberSnippetType, YoutuberStatisticsType } from "@/types/youtuber";
-import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const BASE_URL = 'https://www.googleapis.com/youtube/v3/videos';

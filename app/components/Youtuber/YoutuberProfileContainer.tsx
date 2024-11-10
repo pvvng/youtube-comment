@@ -2,7 +2,7 @@
 
 import { YoutuberDataType } from "@/types/youtuber";
 import { useEffect, useState } from "react";
-import { useVideoRenderStateStore } from "../store";
+import { useVideoRenderStateStore } from "../../store";
 import { useMutation } from "@tanstack/react-query";
 import toLocaleString from "@/@util/functions/toLocaleString";
 import YoutuberInfoContainer from "./YoutuberInfoContainer";

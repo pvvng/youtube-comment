@@ -5,7 +5,7 @@ import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
-import ErrorContainer from "@/app/components/ErrorContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
 import WordCloud from "react-d3-cloud";
 
 export default function WordCloudContainer(

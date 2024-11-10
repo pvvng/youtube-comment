@@ -6,8 +6,8 @@ import DatechartContainer from "../Analyzed/DateChartContainer";
 import WordHubContainer from "../Analyzed/WordHubContainer";
 import TopLikeContainer from "./TopLikeCountContainer";
 import useProcessError from "@/@util/hooks/useprocessError";
-import LoadingContianer from "@/app/components/LoadingContainer";
-import ErrorContainer from "@/app/components/ErrorContainer";
+import LoadingContianer from "@/app/components/Loading/LoadingContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
 
 interface PropsType {
     videoId : string;

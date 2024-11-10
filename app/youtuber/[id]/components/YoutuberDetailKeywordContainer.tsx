@@ -1,4 +1,4 @@
-import ErrorContainer from "@/app/components/ErrorContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
 import KeywordListContainer from "@/app/video/[id]/components/Analyzed/Word/KeywordListContainer";
 import WordCloudContainer from "@/app/video/[id]/components/Analyzed/Word/WordCloudContainer";
 import { PosType } from "@/types/word";

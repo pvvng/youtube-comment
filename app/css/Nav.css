@@ -1,0 +1,41 @@
+.input-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.input {
+    width: 80%;
+    padding: 10px;
+    padding-bottom: 10px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border: 1px solid grey;
+}
+
+.search-button{
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border: 1px solid grey;
+    border-left: none;
+}
+
+.hidden-button{
+    float: inline-end;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 15px;
+    background: transparent;
+    border: none;
+}
+
+.back-button{
+    background-color: transparent;
+    border: none;
+}

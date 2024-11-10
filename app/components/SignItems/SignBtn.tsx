@@ -1,7 +1,9 @@
 'use client'
 
+import '@/app/css/sign.css';
 import { signIn, signOut } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
+import { GoogleLogoSvg } from '@/app/SvgContainer';
 
 // 카카오 로그인 버튼
 export function GoogleSignInBtn (){
@@ -10,26 +12,53 @@ export function GoogleSignInBtn (){
     if(searchParams){
         const callbackUrl = searchParams.get('callbackUrl') || '';
         return (
+            /* From Uiverse.io by Yaya12085 */ 
             <button 
+                className="google-sign-button"
                 onClick={() => signIn('google', { callbackUrl })} 
             >
-                구글 로그인 버튼
+                <GoogleLogoSvg />
+                구글 아이디로 로그인하기
             </button>
         )
     }
 }
+
 // 로그인 페이지로 이동하는 버튼
 export function SignInBtn (){
-    return <button 
-    onClick={() => {
-        signIn();
-    }}>로그인</button>
+    return (
+      <button 
+        className="btn-main"
+        onClick={() => { signIn() }}
+      >
+        로그인
+      </button>
+    )
 }
 
-// 로그 아웃 버튼
 export function SignOutBtn (){
-    return <button 
-    onClick={() => {
-        signOut();
-    }}>로그아웃</button>
+    return (
+      <button 
+        className="btn-main"
+        onClick={() => { signOut() }}
+      >
+        로그아웃
+      </button>
+    )
+}
+
+/** 다른 아이디로 로그인 지원 함수 */
+export function LoginAnotherAccountBtn() {
+    const handleLogin = () => {
+        signIn('google', {
+            callbackUrl: '/main',
+            prompt: 'select_account',  // 항상 계정 선택을 요구
+        });
+    };
+
+    return (
+        <button className='another-account-btn' onClick={handleLogin}>
+            다른 계정으로 로그인
+        </button>
+    );
 }

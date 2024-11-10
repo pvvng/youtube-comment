@@ -6,6 +6,8 @@ import DatechartContainer from "../Analyzed/DateChartContainer";
 import WordHubContainer from "../Analyzed/WordHubContainer";
 import TopLikeContainer from "./TopLikeCountContainer";
 import useProcessError from "@/@util/hooks/useprocessError";
+import LoadingContianer from "@/app/components/Loading/LoadingContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
 
 interface PropsType {
     videoId : string;
@@ -15,8 +17,7 @@ interface PropsType {
 export default function CommentContainer(
     {videoId, channelId} : PropsType
 ){
-    
-    const {data, isLoading, isError, error} = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey : ['commentData', videoId],
         queryFn : () => fetchCommentData(videoId),
         refetchOnWindowFocus : false,
@@ -25,8 +26,10 @@ export default function CommentContainer(
         staleTime : 3600000,
     })
 
-    useProcessError(isError, error, '');
-    if(isLoading) return <h2>로딩중임</h2>;
+    const errorMessage = useProcessError(isError, error, 'null');
+
+    if(isLoading) return <LoadingContianer height={300} />;
+    if(errorMessage) return <ErrorContainer errorMessage={errorMessage} />;
     if(data === undefined) return null;
 
     // 각각 댓글 데이터, 날짜 데이터
@@ -41,9 +44,8 @@ export default function CommentContainer(
     return(
         <div className="w-100" id="topicality">
             <TopLikeContainer commentData={sortedCommentData} videoId={videoId} />
-            <h3>화제성 분석</h3>
             <DatechartContainer dateData={dateData} />
-            <WordHubContainer commentData={commentData} channelId={channelId} />
+            <WordHubContainer commentData={commentData} channelId={channelId} videoId={videoId} />
         </div>
     )
 }

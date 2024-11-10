@@ -6,15 +6,15 @@ export const authOptions = {
     // Configure one or more authentication providers
     providers: [
         GoogleProvider({
-        clientId: process.env.GOOGLE_CLIENT_ID || '',
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
-        authorization: {
-            params: {
-                // YouTube 구독 목록 읽기 권한
-                scope: "openid email profile https://www.googleapis.com/auth/youtube.readonly",  
-                redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/google`
+            clientId: process.env.GOOGLE_CLIENT_ID || '',
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+            authorization: {
+                params: {
+                    // YouTube 구독 목록 읽기 권한
+                    scope: "openid email profile https://www.googleapis.com/auth/youtube.readonly",  
+                    redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/google`,
+                }
             }
-        }
         })
         // ...add more providers here
     ],
@@ -23,9 +23,9 @@ export const authOptions = {
     },
     secret : process.env.NEXTAUTH_SECRET,
     callbacks: {
-        async redirect({ url, baseUrl } : { url :string, baseUrl:string}) {
-            // 외부 URL 리디렉션을 허용하지 않으려면 이 콜백을 사용자 정의합니다.
-            return url.startsWith(baseUrl) ? url : baseUrl
+        async redirect({ baseUrl } : { baseUrl: string }) {
+            // /main 루트로 리디렉트
+            return `${baseUrl}/main`;
         },
         // idToken = 사용자의 신원 검증에 사용하는 jwt token
         // 당장은 필요없어서 주석처리

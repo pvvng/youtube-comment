@@ -1,6 +1,6 @@
+import axios from "axios";
 import { FilteredVideoSnippet, VideoSnippetType, VideoStatisticsType } from "@/types/video";
 import { YoutuberDataType, YoutuberSnippetType, YoutuberStatisticsType } from "@/types/youtuber";
-import axios from "axios";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const BASE_URL = 'https://www.googleapis.com/youtube/v3/videos';
@@ -9,6 +9,8 @@ const apiKey = process.env.YOUTUBE_API_KEY;
 export default async function handler(
     req: NextApiRequest, res: NextApiResponse
 ){
+    if(req.method !== "GET") return res.status(405).json({message : "Not Allowed Method"})
+
     const videoId = req.query.videoId;
 
     // videoId 유효성 검사

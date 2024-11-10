@@ -4,21 +4,46 @@ body {
 }
 
 .c-main {
-    color : #ff0000;
+    color : #175fb8;
 }
 
 .bg-main{
-    background-color: #ff0000;
+    background-color: #175fb8;
 }
+
+.c-white {
+    color : white;
+}
+
+.bg-white{
+    background-color: white;
+}
+
 
 .a-tag {
     text-decoration: none;
     color: black;
-    transition: all 0.5s;
+    transition: all 0.3s;
 }
 
 .a-tag:hover {
-    color : #ff0000;
+    color : #175fb8;
+}
+
+.btn-main{
+    background-color: #175fb8;
+    border: 1px solid #14529d;
+    color: white;
+    padding: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.5s;
+}
+
+.btn-main:hover{
+    background-color: #14529d;
 }
 
 .row-center{
@@ -36,4 +61,75 @@ body {
     border: 1px solid #999999;
     padding : 20px;
     border-radius: 10px;
+    @media screen and (max-width : 360px) {
+        padding : 10px;
+    }
+}
+
+.refresh-btn {
+    background: none;
+    border : none;
+    transition: all 0.5s;
+}
+
+.refresh-btn:hover {
+    transform: rotate(180deg);
+}
+
+.tooltip {
+    position: absolute;
+    top: -35px; /* 아이콘 위에 표시되도록 위치 설정 */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    white-space: nowrap;
+    z-index: 10;
+    /* 말풍선처럼 삐죽 튀어나오게 하기 위해 추가 */
+    display: inline-block;
+    opacity: 0;
+    transition: all 0.3s;
+    visibility: hidden;
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -10px; /* 말풍선이 아래로 튀어나오도록 설정 */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 6px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent; /* 위쪽 삼각형 */
+}
+
+.icon-item:hover .tooltip {
+    opacity: 1; /* hover 시 툴팁 표시 */
+    visibility: visible; /* hover 시 툴팁 표시 */
+}
+
+/* 알림창 백그라운드 */
+.alert-overlay {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top : 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    transition: all 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-header-container{
+    padding : 10px;
+    background : white; 
+    color : black;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }

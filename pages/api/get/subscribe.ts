@@ -18,11 +18,12 @@ const URL = 'https://www.googleapis.com/youtube/v3/subscriptions';
  * **예외상황 2** :
  * 로그인 하지 않았을때는 에러 반환
  * */
+
 export default async function handler(
     req : NextApiRequest, res : NextApiResponse
 ){
     // 메소드 검증
-    if(req.method !== "GET") return res.status(500).json({message : "Not Allowed Method"})
+    if(req.method !== "GET") return res.status(405).json({message : "Not Allowed Method"})
 
     const session = await getServerSession(req, res, authOptions);
 
@@ -74,7 +75,7 @@ export default async function handler(
                 rsc.snippet.thumbnails.medium?.url || 
                 rsc.snippet.thumbnails.default.url
             };
-        })
+        });
 
         // 전체 구독 목록 반환
         return res.status(200).json(subscriptions);

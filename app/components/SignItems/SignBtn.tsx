@@ -4,28 +4,24 @@ import '@/app/css/sign.css';
 import { signIn, signOut } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { GoogleLogoSvg } from '@/app/SvgContainer';
-import { useEffect, useState } from 'react';
 
-// 카카오 로그인 버튼
+// 구글 로그인 버튼
 export function GoogleSignInBtn() {
+    // 메인 페이지로 리다이렉트
     const searchParams = useSearchParams();
-    const [callbackUrl, setCallbackUrl] = useState('');
 
-    useEffect(() => {
-        if (searchParams) {
-            setCallbackUrl(searchParams.get('callbackUrl') || '');
-        }
-    }, [searchParams]);
-
-    return (
-        <button
-            className="google-sign-button"
-            onClick={() => signIn('google', { callbackUrl })}
-        >
-            <GoogleLogoSvg />
-            구글 아이디로 로그인하기
-        </button>
-    );
+    if(searchParams){
+        const callbackUrl = searchParams.get('callbackUrl') || '';
+        return (
+            <button
+                className="google-sign-button"
+                onClick={() => signIn('google', { callbackUrl })}
+            >
+                <GoogleLogoSvg />
+                구글 아이디로 로그인하기
+            </button>
+        );
+    }
 }
 
 // 로그인 페이지로 이동하는 버튼

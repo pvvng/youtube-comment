@@ -4,9 +4,6 @@ import fetchGetDBYoutuberData from "@/@util/functions/fetch/fetchGetDBYoutuberDa
 import useProcessError from "@/@util/hooks/useprocessError";
 import LoadingContianer from "@/app/components/LoadingContainer";
 import YoutuberProfileContainer from "@/app/components/YoutuberProfileContainer";
-import FeelGraphContainer from "@/app/video/[id]/components/Analyzed/FeelGraphContainer";
-import KeywordListContainer from "@/app/video/[id]/components/Analyzed/Word/KeywordListContainer";
-import WordCloudContainer from "@/app/video/[id]/components/Analyzed/Word/WordCloudContainer";
 import { useQuery } from "@tanstack/react-query";
 import YoutuberDetailKeywordContainer from "./YoutuberDetailKeywordContainer";
 import YoutuberDetailSentimentContainer from "./YoutuberDetailSentimentContainer";
@@ -35,7 +32,6 @@ export default function YoutuberDetailHubContainer(
         )
     }
 
-    console.log(data)
 
     const { youtuber, extra } = data;
     const { keyword, sentiment, popularity } = extra;

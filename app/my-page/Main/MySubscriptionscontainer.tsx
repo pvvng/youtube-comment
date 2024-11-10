@@ -8,9 +8,16 @@ import { useScrollStore, useVideoRenderStateStore } from "@/app/store";
 import { fetchVideoData } from "@/@util/functions/fetch/fetchVideoData";
 import SortDropdown from "../components/SortDropdown";
 import SortData from "../components/SortData";
+import ErrorContainer from "@/app/components/ErrorContainer";
+import LoadingContianer from "@/app/components/LoadingContainer";
 // 지금 page.tsx에서 클라이언트 컴포넌트로 실행되는데 변경 부탁드리겠습니다.
 
 export default function MyPage() {
+
+    const [sortOption, setSortOption] = useState<string>("기본");
+    const [isVisible, setIsVisible] = useState(false);
+    const buttonRef = useRef<HTMLButtonElement>(null);
+    
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ["subscription"],
         queryFn: () => fetchSubscribedYoutuberData(),
@@ -19,10 +26,6 @@ export default function MyPage() {
         gcTime: 3600000,
         staleTime: 3600000,
     });
-    
-    const [sortOption, setSortOption] = useState<string>("기본");
-    const [isVisible, setIsVisible] = useState(false);
-    const buttonRef = useRef<HTMLButtonElement>(null);
 
     const handleButtonClick = () => {
         setIsVisible(true);
@@ -45,16 +48,7 @@ export default function MyPage() {
     // 또한, video/[id]/components/Comment/TopLikeCountContainer 컴포넌트를 참고해서
     // 무한 스크롤 구현까지 해주신다면 감사하겠습니다.
 
-    if (isLoading) {
-        return <div className="text-center">로딩 중...</div>;
-    }
-
-    // 데이터가 없을 경우 처리
-    if (!data || data.length === 0) {
-        return <div className="text-center">구독한 유튜버가 없습니다.</div>;
-    }
-
-    //**드롭다운 메뉴 변경 함수 */
+    /**드롭다운 메뉴 변경 함수 */
     const handleSortChange = (option: string) => {
         setSortOption(option);
     };
@@ -76,6 +70,11 @@ export default function MyPage() {
         }
     };
 
+    if (isLoading) return <LoadingContianer height={300} />;
+
+    // 데이터가 없을 경우 처리
+    if (!data || data.length === 0) return <ErrorContainer errorMessage="구독한 유튜버가 없습니다." />;
+
     const sortedData = sortItems(data, sortOption);
 
     return (
@@ -84,22 +83,26 @@ export default function MyPage() {
             style={{ maxHeight: "400px", overflowY: "auto" }}
         >
             {" "}
-            {!isVisible && (
-                <button className="btn btn-dark" onClick={handleButtonClick}>
-                    구독중인 유투버 확인하기
-                </button>
-            )}
-            {isVisible && (
-                <>
-                    <div className="d-flex justify-content-between align-items-center mb-3">
-                        <h5 className="mb-0">구독 유튜버 목록</h5>
-                        <SortDropdown onSortChange={handleSortChange} />
+            {
+                !isVisible && (
+                    <div className="text-center">
+                        <button className="btn btn-dark" onClick={handleButtonClick}>
+                            구독중인 유투버 확인하기
+                        </button>
                     </div>
-                    <div className="row">
+                )
+            }
+            {
+                isVisible && (
+                    <>
+                        <div className="row row-center mb-3" style={{margin : 'auto'}}>
+                            <h5 className="mb-0">구독 유튜버 목록</h5>
+                            <SortDropdown onSortChange={handleSortChange} />
+                        </div>
                         <SortData youtuber={sortedData}></SortData>
-                    </div>
-                </>
-            )}
+                    </>
+                )
+            }
         </div>
     );
 }

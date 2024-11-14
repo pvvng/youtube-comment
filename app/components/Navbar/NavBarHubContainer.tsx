@@ -1,19 +1,26 @@
 'use client';
 
 import '@/app/css/nav.css';
+
 import { SignInBtn, SignOutBtn } from "../SignItems/SignBtn";
 import { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from 'next/navigation';
+import { DBUserdataType } from '@/types/userdata';
+import { useQuery } from '@tanstack/react-query';
 import InputContainer from "./InputContainer";
 import MobileToggleButton from "./MobileToggleButton";
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import fetchGetDBUserData from '@/@util/functions/fetch/fetchGetDBUserData';
+
+interface PropsType {
+    session : Session|null; 
+};
 
 /** Navbar Hub container */
 export default function NavBarHubContainer(
-    {session} : {session : Session|null}
+    {session} : PropsType
 ){
     const router = useRouter();
 
@@ -39,7 +46,7 @@ export default function NavBarHubContainer(
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    },[])
+    },[]);
 
     return (
         <>

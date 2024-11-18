@@ -1,10 +1,7 @@
-// 'use client';
-
 import '@/app/css/sign.css';
-
-import { Suspense } from 'react';
 import { GoogleSignInBtn, LoginAnotherAccountBtn } from "@/app/components/SignItems/SignBtn";
 import GoToMainBtn from './component/GoToMainBtn';
+import { Suspense } from 'react';
 
 const BACKGROUND_STYE = {
     width: '100%',

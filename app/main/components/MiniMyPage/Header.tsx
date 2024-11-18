@@ -3,7 +3,6 @@ import { Session } from "next-auth";
 export default function  MiniMyPageHeader(
     {session} : {session : Session | null}
 ){
-
     return (
         <div className="row row-center w-100 p-2" style={{margin : 'auto'}}>
             <div className="col-3 col-md-4 text-center">
@@ -11,7 +10,7 @@ export default function  MiniMyPageHeader(
                     src={session?.user?.image || "/logo/logo-mask.png"} 
                     width="100%" 
                     alt="user-profile" 
-                    style={{maxWidth : 100, borderRadius : 15}}
+                    style={{maxWidth : 100}}
                 />
             </div>
             <div className="col-9 col-md-8">

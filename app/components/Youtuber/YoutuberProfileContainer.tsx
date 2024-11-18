@@ -8,7 +8,6 @@ import toLocaleString from "@/@util/functions/toLocaleString";
 import YoutuberInfoContainer from "./YoutuberInfoContainer";
 import fetchUpdateYoutuberPopularity from "@/@util/functions/fetch/fetchUpdateYoutuberPopularity";
 import fetchPostDBYoutuberData from "@/@util/functions/fetch/fetchPostDBYoutuberData";
-import HeartBtn from "../HeartBtn/HeartBtn";
 
 export default function YoutuberProfileContainer(
     {youtuber} : {youtuber : YoutuberDataType}
@@ -46,7 +45,7 @@ export default function YoutuberProfileContainer(
     }, [mutateYoutuberPopularity, youtuber]);
 
     return (
-        <div style={{position : 'relative', overflow : 'hidden'}}>
+        <div style={{position : 'relative'}}>
             {/* 정보 알림창 */}
             <YoutuberInfoContainer 
                 name={youtuber.name}
@@ -81,6 +80,7 @@ export default function YoutuberProfileContainer(
                             {youtuber.customUrl}
                         </a>
                     </div>
+
                     <p className="m-1">
                         <span className="fw-bold">구독자</span> 
                         {' '}{toLocaleString(youtuber.subscriber)} 명
@@ -93,21 +93,9 @@ export default function YoutuberProfileContainer(
                         <span className="fw-bold">영상수</span> 
                         {' '}{toLocaleString(youtuber.videoCount)} 개
                     </p>
-                    <div className="mt-2 w-100">
-                        <button 
-                            className="btn btn-dark justify-content-start" 
-                            onClick={() => {setInfoClicker([10000, 1, 'visible'])}}
-                        >정보</button>
-                    </div>
-                    <div className="float-end mb-3">
-                        <HeartBtn 
-                            id={youtuber.channelId} 
-                            name={youtuber.name} 
-                            thumbnailUrl={youtuber.thumbnail.url} 
-                            type='youtuber' 
-                        />
-                    </div>
-                    <div style={{clear : 'both'}}/>
+                    <button className="btn btn-dark mt-2 mb-3" onClick={() => {
+                        setInfoClicker([10000, 1, 'visible']);
+                    }}>정보</button>
                 </div>
             </div>
         </div>

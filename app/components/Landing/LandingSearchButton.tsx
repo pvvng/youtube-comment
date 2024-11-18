@@ -4,7 +4,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useRouter } from 'next/navigation';
 import { useRef } from 'react';
-import { checkVideoId } from "@/@util/functions/checkVideoId";
+import { checkVideoId } from "@/@util/hooks/checkVideoId";
 import { handleFocus } from '@/@util/functions/input/handleFocus';
 
 export default function LadingSearchButton(){

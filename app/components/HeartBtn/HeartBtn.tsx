@@ -26,6 +26,7 @@ export default function HeartBtn(
 
     // heart btn 감시 상태
     const [isChecked, setIsChecked] = useState(false);
+    
     // loading btn 감시 상태
     const [isLoading, setIsLoading] = useState(false);
 
@@ -47,6 +48,7 @@ export default function HeartBtn(
 
         if (!userEmail) {
             alert("회원 정보가 확인되지 않습니다.");
+
             return;
         }
 

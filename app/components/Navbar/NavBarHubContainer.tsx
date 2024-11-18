@@ -55,6 +55,7 @@ export default function NavBarHubContainer(
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ["dbUserData", session?.accessToken],
         queryFn: () => fetchGetDBUserData(session?.user?.email),
+        enabled: !!session?.user?.email, // email이 존재할 때만 쿼리 실행
         refetchOnWindowFocus: false,
         // 캐시타임 1시간(3600000ms)
         gcTime: 3600000,

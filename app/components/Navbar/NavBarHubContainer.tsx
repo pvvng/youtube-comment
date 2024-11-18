@@ -1,20 +1,31 @@
 'use client';
 
 import '@/app/css/nav.css';
+
 import { SignInBtn, SignOutBtn } from "../SignItems/SignBtn";
 import { Session } from "next-auth";
 import { useEffect, useState } from "react";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from 'next/navigation';
 import InputContainer from "./InputContainer";
 import MobileToggleButton from "./MobileToggleButton";
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { useQuery } from '@tanstack/react-query';
+import fetchGetDBUserData from '@/@util/functions/fetch/fetchGetDBUserData';
+import useProcessError from '@/@util/hooks/useprocessError';
+import { useDBUserStore } from '@/app/store';
+
+interface PropsType {
+    session : Session|null; 
+};
 
 /** Navbar Hub container */
 export default function NavBarHubContainer(
-    {session} : {session : Session|null}
+    {session} : PropsType
 ){
+
+    const { userdata, setUserdata } = useDBUserStore();
+
     const router = useRouter();
 
     /** 모바일 검색 토클 버튼 클릭 여부 확인 감시 상태 */
@@ -39,7 +50,26 @@ export default function NavBarHubContainer(
         return () => {
             window.removeEventListener('resize', handleResize);
         };
-    },[])
+    },[]);
+
+    const { data, isLoading, isError, error } = useQuery({
+        queryKey: ["dbUserData", session?.user?.email],
+        queryFn: () => fetchGetDBUserData(session),
+        enabled: !!session?.user?.email, // email이 존재할 때만 쿼리 실행
+        refetchOnWindowFocus: false,
+        // 캐시타임 1시간(3600000ms)
+        gcTime: 3600000,
+        staleTime: 3600000,
+    });
+
+    useProcessError(isError, error, "null");
+
+    // zustand store에 userdata 저장
+    useEffect(() => {
+        if (!isLoading && !userdata && data) {
+            setUserdata(data); // 상태 업데이트
+        }
+      }, [isLoading, data, setUserdata]); 
 
     return (
         <>

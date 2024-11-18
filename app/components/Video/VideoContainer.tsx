@@ -10,14 +10,16 @@ import { useMutation } from '@tanstack/react-query';
 import toLocaleString from '@/@util/functions/toLocaleString';
 import dateToString from '@/@util/functions/dateToString';
 import fetchUpdateVideoPopularity from '@/@util/functions/fetch/fetchUpdateVideoPopularity';
+import HeartBtn from '../HeartBtn/HeartBtn';
 
 interface PropsType {
     video : FilteredVideoSnippet & VideoStatisticsType; 
     videoId : string;
 }
 
-export default function VideoContainer({video, videoId} : PropsType){
-
+export default function VideoContainer(
+    {video, videoId} : PropsType
+){
     // video detail page render state
     const { setVideoComponentState } = useVideoRenderStateStore();
 
@@ -33,7 +35,6 @@ export default function VideoContainer({video, videoId} : PropsType){
     useEffect(() => {
         setVideoComponentState(['video', true]);
     },[]);
-
     
     useEffect(() => {
         mutate();
@@ -48,22 +49,36 @@ export default function VideoContainer({video, videoId} : PropsType){
     
     return (
         <div className="w-100 mt-3" style={{margin : 'auto'}}>
-            <div className="w-100" style={{margin : 'auto', maxWidth : '640px'}}>
+            <div 
+                className="w-100" 
+                style={{
+                    margin : 'auto', 
+                    maxWidth : '640px',
+                    position: 'relative'
+                }}
+            >
                 <img 
                     src={video.thumbnails.url} 
                     width="100%" 
                     alt="thumbnail" 
-                    style={{borderRadius : '20px'}}
+                    style={{
+                        borderRadius : '20px', 
+                        position : 'relative'
+                    }}
                 />
-                {/* 비디오 로드 */}
-                {/* <iframe width="100%" height="auto" 
-                    src={`https://www.youtube.com/embed/${videoId}`} 
-                    title="YouTube video player" 
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                    style={{borderRadius : 20}}
-                ></iframe> */}
+                <div style={{
+                    position: 'absolute',
+                    bottom: '10px', 
+                    right: '10px', 
+                    zIndex: 1
+                }}>
+                    <HeartBtn 
+                        id={videoId} 
+                        name={video.title} 
+                        thumbnailUrl={video.thumbnails.url} 
+                        type='video' 
+                    />
+                </div>
             </div>
             <div className="text-center p-3">
                 <h5 className="fw-bold m-0 mt-3 mb-3">

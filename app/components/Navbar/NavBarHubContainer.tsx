@@ -8,11 +8,12 @@ import { useEffect, useState } from "react";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from 'next/navigation';
-import { DBUserdataType } from '@/types/userdata';
-import { useQuery } from '@tanstack/react-query';
 import InputContainer from "./InputContainer";
 import MobileToggleButton from "./MobileToggleButton";
+import { useQuery } from '@tanstack/react-query';
 import fetchGetDBUserData from '@/@util/functions/fetch/fetchGetDBUserData';
+import useProcessError from '@/@util/hooks/useprocessError';
+import { useDBUserStore } from '@/app/store';
 
 interface PropsType {
     session : Session|null; 
@@ -22,6 +23,9 @@ interface PropsType {
 export default function NavBarHubContainer(
     {session} : PropsType
 ){
+
+    const { userdata, setUserdata } = useDBUserStore();
+
     const router = useRouter();
 
     /** 모바일 검색 토클 버튼 클릭 여부 확인 감시 상태 */
@@ -47,6 +51,24 @@ export default function NavBarHubContainer(
             window.removeEventListener('resize', handleResize);
         };
     },[]);
+
+    const { data, isLoading, isError, error } = useQuery({
+        queryKey: ["dbUserData", session?.accessToken],
+        queryFn: () => fetchGetDBUserData(session?.user?.email),
+        refetchOnWindowFocus: false,
+        // 캐시타임 1시간(3600000ms)
+        gcTime: 3600000,
+        staleTime: 3600000,
+    });
+
+    useProcessError(isError, error, "null");
+
+    // zustand store에 userdata 저장
+    useEffect(() => {
+        if (!isLoading && !userdata && data) {
+            setUserdata(data); // 상태 업데이트
+        }
+      }, [isLoading, data, setUserdata]); 
 
     return (
         <>

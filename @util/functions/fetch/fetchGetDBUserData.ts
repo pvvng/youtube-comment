@@ -1,9 +1,9 @@
 import { DBUserdataType } from "@/types/userdata";
 import axios from "axios";
 
-const url = process.env.NEXTAUTH_URL;
-
 /**
+ * React-Query와 함께 사용
+ * 
  * @param userEmail : session의 email
  * @returns db에 저장된 userdata 저장된 데이터가 없으면 insert하므로 항상 값을 가짐
  */
@@ -16,8 +16,8 @@ export default async function fetchGetDBUserData(
         }
 
         let dbUserdataResult = await axios.get(
-            `${url}/api/get/database/user/data`, 
-            { params : userEmail }
+            `/api/get/database/user/data`, 
+            { params : { email : userEmail } }
         );
 
         const userdata : DBUserdataType = dbUserdataResult.data.userdata

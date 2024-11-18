@@ -50,9 +50,11 @@ export default async function handler(
         if (type === "video") {
             let newVideoHeart: UserHeartedType[] = [...dbUserData.videoHeart];
 
-            if (isChecked) {
-                newVideoHeart.push({ id, name, thumbnailUrl });
-            } else {
+            const exists = newVideoHeart.some(e => e.id === id);
+
+            if (!exists && isChecked) {
+                newVideoHeart.push({ id, name, thumbnailUrl }); // 중복이 없으면 추가
+            }else {
                 newVideoHeart = newVideoHeart.filter(e => e.id !== id);
             }
 
@@ -63,7 +65,9 @@ export default async function handler(
         } else if (type === "youtuber") {
             let newYoutuberHeart: UserHeartedType[] = [...dbUserData.youtuberHeart];
 
-            if (isChecked) {
+            const exists = newYoutuberHeart.some(e => e.id === id);
+
+            if (!exists && isChecked) {
                 newYoutuberHeart.push({ id, name, thumbnailUrl });
             } else {
                 newYoutuberHeart = newYoutuberHeart.filter(e => e.id !== id);

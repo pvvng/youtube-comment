@@ -18,8 +18,7 @@ interface CommentArrType {
 }
 
 const FLASK_URL = process.env.NEXT_PUBLIC_FLASK_URL || process.env.FLASK_URL
-const FLASK_API_KEY1 = process.env.FLASK_API_MAIN_KEY;
-const FLASK_API_KEY2 = process.env.FLASK_API_SUB_KEY;
+const FLASK_API_KEY = process.env.FLASK_API_KEY;
 
 const MAX_SIZE_MB = 5; // 5MB 제한
 const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
@@ -45,11 +44,7 @@ export default async function handler(
         return res.status(400).json({ message: "Invalid or missing videoId" });
     }
 
-    if(FLASK_API_KEY1 === undefined){
-        return res.status(400).json({ message : "api key must be required" });
-    }
-    
-    if(FLASK_API_KEY2 === undefined){
+    if(FLASK_API_KEY === undefined){
         return res.status(400).json({ message : "api key must be required" });
     }
 
@@ -58,11 +53,12 @@ export default async function handler(
         return res.status(500).json({ message: "Server configuration error: FLASK_URL is invalid" });
     }
 
-
+    // flask에 전송할 배열 만들기
     const flaskArr = getFlaskArr(commentData);
 
     try {
         const response = await sendDataToFlask(flaskArr, channelId, videoId, res);
+
         return res.status(200).json(response);
     } catch (error) {
         console.error("Error in handler:", error);
@@ -70,6 +66,7 @@ export default async function handler(
         if (axios.isAxiosError(error)) {
             return res.status(500).json({ message: "Error sending data to Flask", error: error.message });
         }
+        
         return res.status(500).json({ message: "An unexpected error occurred" });
     }
 }
@@ -135,7 +132,7 @@ async function sendDataToFlask(
         console.log(`Data size: ${dataSizeInMB} MB`);
     }
 
-    // 데이터를 축소하여 10MB 이하로 만들기
+    // 데이터를 축소하여 5MB 이하로 만들기
     while (dataSize > MAX_SIZE_BYTES) {
         const newData = reduceData(filteredData);
         if (newData.length === filteredData.length) {
@@ -159,7 +156,7 @@ async function sendDataToFlask(
         await axios.post(FLASK_URL, formData, {
             headers : {
                 'Content-Type' : 'multipart/form-data',
-                'YOUTUVIEW-API-KEY' : FLASK_API_KEY1,
+                'YOUTUVIEW-API-KEY' : FLASK_API_KEY,
             },
             timeout: 300000, // 타임아웃 5분
         });

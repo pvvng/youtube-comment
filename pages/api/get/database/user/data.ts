@@ -1,10 +1,6 @@
 import { connectDB } from "@/@util/database";
-import generateRandomName from "@/@util/functions/generateRandomName";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { DBUserdataType } from "@/types/userdata";
-import { Db, ObjectId } from "mongodb";
+import { Db } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession, Session } from "next-auth";
 
 /** userdata db에서 get하거나 없을경우 post 하는 api */
 export default async function handler(

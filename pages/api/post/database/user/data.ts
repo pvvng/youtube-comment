@@ -1,5 +1,5 @@
-import { connectDB } from "@/@util/database";
 import generateRandomName from "@/@util/functions/generateRandomName";
+import { connectDB } from "@/@util/database";
 import { DBUserdataType } from "@/types/userdata";
 import { Db, ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -55,7 +55,7 @@ export default async function handler(
                 return res.status(500).json({ message: "Failed to create new user data", error: insertError });
             }
         } else {
-            return res.status(200).json({ message: "user data already exists" });
+            return res.status(200).json({ userdata : dbUserData });
         }
     } catch (dbError) {
         return res.status(500).json({ message: "Database operation failed", error: dbError });

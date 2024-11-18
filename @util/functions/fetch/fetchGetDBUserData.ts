@@ -1,5 +1,6 @@
 import { DBUserdataType } from "@/types/userdata";
 import axios from "axios";
+import { Session } from "next-auth";
 
 /**
  * React-Query와 함께 사용
@@ -8,20 +9,20 @@ import axios from "axios";
  * @returns db에 저장된 userdata 저장된 데이터가 없으면 insert하므로 항상 값을 가짐
  */
 export default async function fetchGetDBUserData(
-    userEmail : string|undefined|null
+    session : Session | null
 ){
     try {
-        if (!userEmail) {
+        if (!session) {
             throw new Error("Authorization Error: userEmail is required");
         }
 
-        let dbUserdataResult = await axios.get(
-            `/api/get/database/user/data`, 
-            { params : { email : userEmail } }
+        let dbUserdataResult = await axios.post(
+            `/api/post/database/user/data`, session
         );
 
         const userdata : DBUserdataType = dbUserdataResult.data.userdata
 
+        console.log(userdata)
         return userdata;
     }catch(error){
         // error가 AxiosError인지 확인

@@ -1,5 +1,5 @@
 import { CommentDataType } from "@/types/comment";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 
 /** 댓글 데이터 패칭 함수 */
 export async function fetchCommentData(

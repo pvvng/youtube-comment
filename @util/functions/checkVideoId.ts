@@ -13,11 +13,21 @@ export async function checkVideoId(
     // url 검증
     let inputValue :string = inputRef.current?.value || '';
 
-    // URL에서 비디오 ID를 추출하는 정규 표현식
-    const match = inputValue.match(/v=([^&]+)/);
-    const videoId = match ? match[1] : null;
+    // 비디오 ID 추출: v= 형태와 공유 URL 형태를 모두 지원
+    let videoId: string | null = null;
+    
+    // 1. v= 형태의 URL 처리
+    const vMatch = inputValue.match(/v=([^&]+)/);
+    if (vMatch) {
+        videoId = vMatch[1]; // 캡처 그룹 값만 추출
+    } else {
+        // 2. 공유 URL 형태 처리 (https://youtu.be/{videoId}?si=???)
+        const shareMatch = inputValue.match(/youtu\.be\/([^?]+)/);
+        // 캡처 그룹 값만 추출
+        if (shareMatch) videoId = shareMatch[1]; 
+    }
 
-    // 올바르지 않은 url 반환
+    // 올바르지 않은 url은 alert 반환
     if (!videoId){
         alert('제대로 된 비디오 url이 아닙니다.');
     }

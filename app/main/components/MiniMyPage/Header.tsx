@@ -47,7 +47,9 @@ export default function  MiniMyPageHeader(
                         />
                     </div>
                     <div className="col-6 col-sm-7 col-md-8 col-lg-7">
-                        <h5 className="fw-bold mt-2">{session?.user?.name || '사용자'}님</h5>   
+                        <h5 className="mt-2 m-0">
+                            <span className="fw-bold">{session?.user?.name || '사용자'}</span>님
+                        </h5>   
                         <p className="m-0">안녕하세요</p>
                     </div>
                 </div>

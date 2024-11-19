@@ -39,7 +39,6 @@ export default function  MiniMyPageHeader(
                         <img 
                             src={session?.user?.image || "/logo/logo-mask.png"} 
                             width="100%" 
-                            className="border"
                             alt="user-profile" 
                             style={{
                                 maxWidth : 100, 

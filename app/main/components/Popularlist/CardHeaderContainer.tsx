@@ -1,3 +1,6 @@
+import { faFire } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 interface PropsType {
     type: string;
 }
@@ -7,13 +10,19 @@ export default function CardHeaderContainer(
 ){
     return (
         <>
-            <div className="card-header-container text-center" style={{margin : 'auto'}}>
+            <div className="card-header-container" style={{margin : 'auto'}}>
                 <span className="fw-bold m-0">
                     {
                         type === "video" ? 
-                        <span>인기 급상승 영상</span>: 
+                        <span>
+                            <span className="mx-2" style={{color : 'orangered'}}><FontAwesomeIcon icon={faFire} /></span>
+                            인기 급상승 영상
+                        </span>: 
                         type === "youtuber" ? 
-                        <span>인기 급상승 유튜버</span>:
+                        <span>
+                            <span className="mx-2" style={{color : 'orangered'}}><FontAwesomeIcon icon={faFire} /></span>
+                            인기 급상승 유튜버
+                        </span>:
                         <span>upexpected type</span>
                     }
                 </span>

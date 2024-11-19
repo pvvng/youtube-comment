@@ -22,7 +22,6 @@ export default async function fetchGetDBUserData(
 
         const userdata : DBUserdataType = dbUserdataResult.data.userdata
 
-        console.log(userdata)
         return userdata;
     }catch(error){
         // error가 AxiosError인지 확인

@@ -3,6 +3,15 @@ body {
     box-sizing: border-box;
 }
 
+.c-red{
+    color : #ff0000;
+}
+
+
+.bg-red{
+    background-color : #ff0000;
+}
+
 .c-main {
     color : #175fb8;
 }
@@ -23,10 +32,21 @@ body {
 .a-tag {
     text-decoration: none;
     color: black;
-    transition: all 0.3s;
+    cursor: pointer;
 }
 
 .a-tag:hover {
+    color : #ff0000;
+}
+
+.no-bg-main-btn{
+    background-color: transparent;
+    border : none;
+    color : rgb(88, 88, 88);
+    transition: 0.3s;
+}
+
+.no-bg-main-btn:hover{
     color : #175fb8;
 }
 
@@ -60,7 +80,7 @@ body {
 .card-container{
     border: 1px solid #999999;
     padding : 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     @media screen and (max-width : 360px) {
         padding : 10px;
     }
@@ -124,6 +144,15 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden; /* 배경에서 불필요한 스크롤 방지 */
+}
+
+.alert-content {
+    background: white;
+    border-radius: 10px;
+    min-width: 200px;
+    max-height: 80vh; /* 화면 높이의 80%로 제한 */
+    overflow-y: auto; /* 세로 스크롤 허용 */
 }
 
 .card-header-container{
@@ -132,4 +161,13 @@ body {
     color : black;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+}
+
+.alert-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.alert-content::-webkit-scrollbar-thumb {
+    background-color: #dddddd;
+    border-radius: 10px;
 }

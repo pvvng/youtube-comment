@@ -99,15 +99,16 @@ export default function YoutuberProfileContainer(
                             onClick={() => {setInfoClicker([10000, 1, 'visible'])}}
                         >정보</button>
                     </div>
-                    <div className="float-end mb-3">
+
+                    {/* HeartBtn 절대 위치 */}
+                    <div style={{ position: 'absolute', top: 15, right: 15 }}>
                         <HeartBtn 
                             id={youtuber.channelId} 
                             name={youtuber.name} 
                             thumbnailUrl={youtuber.thumbnail.url} 
-                            type='youtuber' 
+                            type="youtuber" 
                         />
                     </div>
-                    <div style={{clear : 'both'}}/>
                 </div>
             </div>
         </div>

@@ -3,6 +3,14 @@ body {
     box-sizing: border-box;
 }
 
+/* recaptch badge css */
+.grecaptcha-badge {
+    z-index: 10000; /* 다른 요소보다 위로 올림 */
+    position: fixed;
+    bottom: 0;
+    right: 0;
+}
+
 .c-red{
     color : #ff0000;
 }

@@ -9,7 +9,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactQueryProvider from "@/@util/providers/ReactQueryProvider";
-import NavbarContainer from './components/Navbar/NavbarContainer';
+import { ReCaptchaProvider } from 'next-recaptcha-v3';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,9 +26,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ReactQueryProvider>
-          {children}
-        </ReactQueryProvider>
+        <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>
+            <ReactQueryProvider>
+                {children}
+            </ReactQueryProvider>
+        </ReCaptchaProvider>
       </body>
     </html>
   );

@@ -2,6 +2,7 @@
 
 import { fetchAnalyzedCommentData } from "@/@util/functions/fetch/fetchAnalyzedCommentData";
 import useProcessError from "@/@util/hooks/useprocessError";
+import useReCaptchaVerify, { CaptchaDataType } from "@/@util/hooks/useReCaptchaVerify";
 import ErrorContainer from "@/app/components/Error/ErrorContainer";
 import { FilteredCommentType } from "@/types/comment";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -18,7 +19,6 @@ interface PropsType{
 export default function FetchFreshCommentContainer(
     {commentData, videoId, channelId, type} : PropsType
 ){
-
     const queryClient = useQueryClient();
 
     const [queryKeyState, setQueryKeyState] = useState<string|boolean>(videoId);
@@ -52,7 +52,7 @@ export default function FetchFreshCommentContainer(
         <div className="w-100 text-center card-container mt-3 mb-3">
             {
                 !data && !isLoading ? 
-                returnHtmlByComponetType(type, setQueryKeyState):
+                <AnalyzingButtonByComponetType type={type} setQueryKeyState={setQueryKeyState} />:
                 isLoading ?
                 <>
                     <div 
@@ -73,20 +73,35 @@ export default function FetchFreshCommentContainer(
     )
 }
 
-function returnHtmlByComponetType(
-    type : string|undefined,
-    setQueryKeyState : Dispatch<SetStateAction<string | boolean>>
+interface CommentTypePropsType {
+    type : string|undefined;
+    setQueryKeyState : Dispatch<SetStateAction<string | boolean>>;
+}
+
+function AnalyzingButtonByComponetType(
+    {type, setQueryKeyState} : CommentTypePropsType
 ){
     const koreaTime = moment().tz('Asia/Seoul').format('YYYY-MM-DD');
     const daysDifference = moment(koreaTime).diff(moment(type), 'days');
+    const { getReCaptchaToken } = useReCaptchaVerify();
+
+    /** 봇인지 검증하고 상태 변경하는 함수 */
+    async function checkIsBot(){
+        let verifyData : CaptchaDataType = await getReCaptchaToken();
+        
+        if(verifyData.success) {
+            setQueryKeyState(true);
+        }
+    }
 
     if(type === undefined){
         return (
             <>
                 <p className="fw-bold">아직 아무도 분석하지 않은 영상이에요!</p>
-                <button className="btn btn-dark" onClick={() => {
-                    setQueryKeyState(true);
-                }}>영상 분석하기</button>
+                <button 
+                    className="btn btn-dark" 
+                    onClick={async () => await checkIsBot()}
+                >영상 분석하기</button>
             </>
         )
     }else if(typeof type === "string"){
@@ -100,9 +115,10 @@ function returnHtmlByComponetType(
                 </p>
                 {
                     daysDifference >= 7 ?
-                    <button className="mt-2 btn btn-dark" onClick={() => {
-                        setQueryKeyState(true);
-                    }}>따끈따끈한 데이터로 변경하기</button>:
+                    <button                     
+                        className="btn btn-dark" 
+                        onClick={async () => await checkIsBot()}
+                    >따끈따끈한 데이터로 변경하기</button>:
                     <p className="m-0">일주일 이내에 분석된 데이터에요.</p>
                 }
             </>

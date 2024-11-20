@@ -24,9 +24,9 @@ export default function FooterContainer(){
                 <p className='mb-5 text-start mx-2'>
                     <Link href="https://github.com/pvvng/youtube-comment" target='_blank' className='af-tag'>깃허브</Link>
                     {' | '}
-                    <Link href="/https://github.com/pvvng/youtube-comment/issues" className='af-tag'>이슈 제보</Link>
+                    <Link href="https://github.com/pvvng/youtube-comment/issues" target='_blank' className='af-tag'>이슈 제보</Link>
                     {' | '}
-                    <Link href="/" className='af-tag'>이거 만든 사람들</Link>
+                    <Link href="/main" className='af-tag'>이거 만든 사람들</Link>
                 </p>
                 <div id='vision' className='mx-2'>
                     <p>© 2024 뿅망치 컴퍼니. All Rights Reserved.</p>

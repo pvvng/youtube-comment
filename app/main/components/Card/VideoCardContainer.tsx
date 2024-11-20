@@ -14,14 +14,14 @@ export default function VideoCardContainer(
         cardData.map((data, i) => {
             return (
                 <div 
-                    className="col-12 col-sm-6 col-lg-3 recent-card-container" 
+                    className="col-12 col-sm-6 col-lg-3 recent-card-container mb-2" 
                     key={data.thumbnailUrl +i}
                     onClick={() => {
                         router.push(`/video/${data.videoId}`);
                     }}
                 >
                     <div 
-                        className="card-container mt-2 mb-1 p-2" 
+                        className="card-container mb-1 p-2" 
                         style={{cursor : 'pointer', border : '1px solid #c7c8c9'}}
                     >
                         <div className="row row-center w-100" style={{margin : 'auto'}}>

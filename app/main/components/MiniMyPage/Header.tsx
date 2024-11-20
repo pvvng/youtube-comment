@@ -37,11 +37,11 @@ export default function  MiniMyPageHeader(
                 }
                 <div className="row row-center" style={{margin : 'auto'}}>
                     <div className="col-4">
-                        <div style={{maxWidth : 60, margin : 'auto'}}>
+                        <div style={{maxWidth : 100, margin : 'auto'}}>
                             <Image 
                                 src={session?.user?.image || "/logo/logo-mask.png"} 
-                                width={50} 
-                                height={50}
+                                width={100} 
+                                height={79}
                                 alt="user-profile" 
                                 layout="responsive"
                                 loading="lazy"

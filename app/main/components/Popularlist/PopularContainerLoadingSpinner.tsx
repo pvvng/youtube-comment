@@ -2,7 +2,7 @@ export default function PopularContainerLoadingSpinner(){
     return(
         <div 
             className="d-flex row-center" 
-            style={{minHeight : 100}}
+            style={{minHeight : 150}}
         >
             <div 
                 className="spinner-border" 

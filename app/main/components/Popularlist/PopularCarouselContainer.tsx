@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from "react";
 import Image from 'next/image';
+import moment from 'moment-timezone';
 
 interface PropsType {
     carouselData : PopularType[];
@@ -25,6 +26,8 @@ export default function PopularCarouselContainer(
     const [carouselState, setCarouselState] = useState(0);
     const [hideCarouselArrowState, setHideCarouselArrowState] = useState(LEFT_LAST);
     const [viewOffset, setViewOffset] = useState(0);
+
+    const koreaTime = moment().tz('Asia/Seoul').format('YYYY년 MM월 DD일');
 
     const dataLength = useMemo(() => carouselData.length, [carouselData]);
     const moveLength = useMemo(() => parseInt((100 / dataLength).toFixed(2)), [dataLength]);
@@ -100,7 +103,7 @@ export default function PopularCarouselContainer(
             className="d-flex row-center" 
             style={{minHeight : 100}}
         >
-            <p className='m-0'>데이터가 없습니다.</p>
+            <p className='m-0'>{koreaTime}에 수집된 데이터가 아직 없습니다.</p>
         </div>
     )
 
@@ -127,11 +130,10 @@ export default function PopularCarouselContainer(
                                 router.push(`/${type}/${cd.dataId}`);
                             }}
                         >
-                            <Image
+                            <img
                                 src={cd.thumnailUrl}
                                 alt={cd.name}
                                 className='thumbnail-container'
-                                fill
                             />
                         </div>
                     </div>

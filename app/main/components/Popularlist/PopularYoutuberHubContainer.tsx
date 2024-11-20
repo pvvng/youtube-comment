@@ -8,7 +8,6 @@ import ErrorContainer from "@/app/components/Error/ErrorContainer";
 
 export default function PopularYoutuberHubContainer(){
 
-
     const { data, isLoading, isError, error } = useQuery({
         queryKey : ['youtuberPopularity'],
         queryFn : () => fetchDBPopularYoutuber(),

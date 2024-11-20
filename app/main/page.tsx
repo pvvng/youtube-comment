@@ -2,7 +2,6 @@ import CardListContainer from "./components/Popularlist/CardListContainer";
 import RecentContainer from "./components/Recent/RecentContainer";
 import MiniMyPageContainer from "./components/MiniMyPage/MiniMyPageContainer";
 import NavbarContainer from "../components/Navbar/NavbarContainer";
-import LoginForm from "./components/CaptchaTest";
 
 export default function Home() {
     

@@ -36,9 +36,8 @@ export default function useReCaptchaVerify(){
 
             // 서버 응답 처리
             if (response.data.success) {
-                console.log("Verification Successful");
-
                 let successData: CaptchaDataType = response.data;
+                
                 return successData;
             } else {
                 console.error("Verification Failed:", response.data.errors);

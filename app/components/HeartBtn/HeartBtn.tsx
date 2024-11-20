@@ -10,6 +10,7 @@ import { getSession } from 'next-auth/react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useDBUserStore } from '@/app/store';
+import useReCaptchaVerify from '@/@util/hooks/useReCaptchaVerify';
 
 interface PropsType extends UserHeartedType {
     type: string;
@@ -23,6 +24,7 @@ export default function HeartBtn(
 
     // userdata 상태 store
     const { userdata, addHeart, removeHeart } = useDBUserStore();
+    const { getReCaptchaToken } = useReCaptchaVerify();
 
     // heart btn 감시 상태
     const [isChecked, setIsChecked] = useState(false);
@@ -52,20 +54,24 @@ export default function HeartBtn(
             return;
         }
 
-        // API 요청
-        await axios.post('/api/post/database/user/heart', {
-            // 상태가 변경될 값을 서버로 보냄
-            id, name, thumbnailUrl, type, userEmail, isChecked: !isChecked 
-        });
+        let verifyData = await getReCaptchaToken();
 
-        // 서버 업데이트가 성공하면 zustand userdata 수정
-        let typeString : "videoHeart" | "youtuberHeart" = 
-        type === "video" ? "videoHeart" : "youtuberHeart";
+        if(verifyData.success){
+            // API 요청
+            await axios.post('/api/post/database/user/heart', {
+                // 상태가 변경될 값을 서버로 보냄
+                id, name, thumbnailUrl, type, userEmail, isChecked: !isChecked 
+            });
 
-        if(isChecked){
-            removeHeart(typeString, id);
-        }else{
-            addHeart(typeString, {id, name, thumbnailUrl});
+            // 서버 업데이트가 성공하면 zustand userdata 수정
+            let typeString : "videoHeart" | "youtuberHeart" = 
+            type === "video" ? "videoHeart" : "youtuberHeart";
+
+            if(isChecked){
+                removeHeart(typeString, id);
+            }else{
+                addHeart(typeString, {id, name, thumbnailUrl});
+            }
         }
     }
 

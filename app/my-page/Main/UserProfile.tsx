@@ -6,7 +6,7 @@ export default function UserProfile({ session }: { session: Session | null }) {
                 <div className="card-container">
                     <div className="col-auto">
                         <img
-                            src={session?.user?.image || "/temp-user.png"}
+                            src={session?.user?.image || "/logo/logo-mask.png"}
                             alt="user-profile"
                             className="rounded-circle"
                             style={{ width: "100px", height: "100px" }}

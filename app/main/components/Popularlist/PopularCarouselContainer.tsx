@@ -5,6 +5,7 @@ import '@/app/css/carousel.css';
 import { PopularType } from "@/types/popular";
 import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from "react";
 
@@ -126,10 +127,11 @@ export default function PopularCarouselContainer(
                                 router.push(`/${type}/${cd.dataId}`);
                             }}
                         >
-                            <img
+                            <Image
                                 src={cd.thumnailUrl}
-                                alt="Thumbnail"
+                                alt={cd.name}
                                 className='thumbnail-container'
+                                fill
                             />
                         </div>
                     </div>

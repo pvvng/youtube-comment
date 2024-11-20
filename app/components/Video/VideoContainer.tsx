@@ -11,6 +11,7 @@ import toLocaleString from '@/@util/functions/toLocaleString';
 import dateToString from '@/@util/functions/dateToString';
 import fetchUpdateVideoPopularity from '@/@util/functions/fetch/fetchUpdateVideoPopularity';
 import HeartBtn from '../HeartBtn/HeartBtn';
+import Image from 'next/image';
 
 interface PropsType {
     video : FilteredVideoSnippet & VideoStatisticsType; 
@@ -57,10 +58,12 @@ export default function VideoContainer(
                     position: 'relative'
                 }}
             >
-                <img 
+                <Image
                     src={video.thumbnails.url} 
-                    width="100%" 
-                    alt="thumbnail" 
+                    width={640} 
+                    height={640}
+                    alt={video.title} 
+                    layout='responsive'
                     style={{
                         borderRadius : '20px', 
                         position : 'relative'

@@ -9,6 +9,7 @@ import YoutuberInfoContainer from "./YoutuberInfoContainer";
 import fetchUpdateYoutuberPopularity from "@/@util/functions/fetch/fetchUpdateYoutuberPopularity";
 import fetchPostDBYoutuberData from "@/@util/functions/fetch/fetchPostDBYoutuberData";
 import HeartBtn from "../HeartBtn/HeartBtn";
+import Image from "next/image";
 
 export default function YoutuberProfileContainer(
     {youtuber} : {youtuber : YoutuberDataType}
@@ -60,12 +61,17 @@ export default function YoutuberProfileContainer(
             >
                 <div className="col-sm-3 col-12 text-center mb-sm-0 mb-3">
                     {/* 프로필 사진 */}
-                    <img 
-                        src={youtuber.thumbnail.url} 
-                        alt={youtuber.name} 
-                        width="100%" 
-                        style={{borderRadius : '50%', maxWidth : '180px'}}
-                    />
+                    <div style={{margin : 'auto', maxWidth : 180}}>
+                        <Image 
+                            src={youtuber.thumbnail.url} 
+                            alt={youtuber.name} 
+                            width={180}
+                            height={180}
+                            layout="responsive"
+                            priority
+                            style={{borderRadius : '50%'}}
+                        />
+                    </div>
                 </div>
                 <div className="col-sm-9 col-12">
                     {/* 유튜버 이름 */}

@@ -4,6 +4,7 @@ import { faPowerOff, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function  MiniMyPageHeader(
@@ -35,18 +36,22 @@ export default function  MiniMyPageHeader(
                     </div>
                 }
                 <div className="row row-center" style={{margin : 'auto'}}>
-                    <div className="col-6 col-sm-5 col-md-4 col-lg-5">
-                        <img 
-                            src={session?.user?.image || "/logo/logo-mask.png"} 
-                            width="100%" 
-                            alt="user-profile" 
-                            style={{
-                                maxWidth : 100, 
-                                borderRadius : 12
-                            }}
-                        />
+                    <div className="col-6 col-md-4 col-lg-5">
+                        <div style={{maxWidth : 100, margin : 'auto'}}>
+                            <Image 
+                                src={session?.user?.image || "/logo/logo-mask.png"} 
+                                width={74} 
+                                height={57}
+                                alt="user-profile" 
+                                layout="responsive"
+                                loading="lazy"
+                                style={{
+                                    borderRadius : 12
+                                }}
+                            />
+                        </div>
                     </div>
-                    <div className="col-6 col-sm-7 col-md-8 col-lg-7">
+                    <div className="col-6 col-md-8 col-lg-7">
                         <h5 className="mt-2 m-0">
                             <span className="fw-bold">{session?.user?.name || '사용자'}</span>님
                         </h5>   

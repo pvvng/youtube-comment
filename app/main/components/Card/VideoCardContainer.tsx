@@ -2,6 +2,7 @@
 
 import '@/app/css/recent.css';
 import { VideoCardType } from '@/app/main/components/Popularlist/CardListContainer';
+import Image from 'next/image';
 import { useRouter } from "next/navigation";
 
 export default function VideoCardContainer(
@@ -26,12 +27,17 @@ export default function VideoCardContainer(
                         <div className="row row-center w-100" style={{margin : 'auto'}}>
                             {/* 썸네일 */}
                             <div className="col-6 col-sm-12">
-                                <img 
-                                    src={data.thumbnailUrl} 
-                                    alt={data.videoTitle} 
-                                    width="100%" 
-                                    style={{borderRadius : '10px'}}
-                                />
+                                <div style={{margin : 'auto', width : '100%'}}>
+                                    <Image
+                                        src={data.thumbnailUrl} 
+                                        alt={data.videoTitle} 
+                                        width={170}
+                                        height={95} 
+                                        layout='responsive'
+                                        loading='lazy'
+                                        style={{borderRadius : '10px'}}
+                                    />
+                                </div>
                             </div>
                             <div className="col-6 col-sm-12 text-container">
                                 <h6 className="m-0 mt-sm-2 mb-sm-2 fw-bold">

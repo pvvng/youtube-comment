@@ -13,6 +13,10 @@ const withPWA = nextPWA({
 
 const nextConfig = {
     reactStrictMode: true,
+    // 이미지 도메인 추가
+    images: {
+        domains: ['i.ytimg.com', 'yt3.ggpht.com', 'lh3.googleusercontent.com'], 
+    },
     webpack(config, { dev, isServer }) {
         if (!dev && !isServer) {
             // 프로덕션 모드에서만 소스 맵을 생성

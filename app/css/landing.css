@@ -1,3 +1,60 @@
+/* letter */
+/* From Uiverse.io by 0xnihilism */
+.letter-card {
+    width: 100%;
+    min-height: 300px;
+    padding: 20px;
+    background: #fff;
+    border: 6px solid #000;
+    box-shadow: 12px 12px 0 #000;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.letter-card:hover {
+    transform: translate(-5px, -5px);
+    box-shadow: 17px 17px 0 #000;
+}
+
+.card__title {
+    font-size: 32px;
+    font-weight: 900;
+    color: #000;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.card__title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0%;
+    width: 100%;
+    height: 3px;
+    background-color: #000;
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+}
+
+.letter-card:hover .card__title::after {
+    transform: translateX(0);
+}
+
+.card__content {
+    font-size: 16px;
+    line-height: 1.4;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+/* input */
+
 /* From Uiverse.io by 0xnihilism */
 .input__container {
     position: relative;
@@ -130,3 +187,27 @@
         margin-top: 18px;
     }
 }
+
+/* go-main */
+
+/* From Uiverse.io by andrew-demchenk0 */ 
+.go-home-button {
+    --brand-color : #175fb8;
+
+    height: 40px;
+    background-color: var(--brand-color);
+    box-shadow: 6px 6px black;
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    border: 5px solid black;
+    margin-bottom: 2rem;
+    margin-top: 3rem;
+}
+
+.go-home-button:active {
+    box-shadow: 0px 0px black;
+    transform: translate(3px, 3px);
+}
+  

@@ -1,7 +1,5 @@
 import 'animate.css';
-import '@/app/css//landing/landingInput.css';
-import '@/app/css//landing/landingLetter.css';
-import '@/app/css//landing/landingGoMainBtn.css';
+import '@/app/css/landing.css';
 import LadingSearchButton from './components/Landing/LandingSearchButton';
 import ContentContainer from './components/Landing/Content/ContentContainer';
 import GoMainBtn from './components/Landing/Content/GoMainBtn';

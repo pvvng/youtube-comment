@@ -190,9 +190,9 @@
 
 /* go-main */
 
-/* From Uiverse.io by andrew-demchenk0 */ 
+/* From Uiverse.io by andrew-demchenk0 */
 .go-home-button {
-    --brand-color : #175fb8;
+    --brand-color: #175fb8;
 
     height: 40px;
     background-color: var(--brand-color);
@@ -210,4 +210,3 @@
     box-shadow: 0px 0px black;
     transform: translate(3px, 3px);
 }
-  

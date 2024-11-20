@@ -36,7 +36,6 @@ body {
     background-color: white;
 }
 
-
 .a-tag {
     text-decoration: none;
     color: black;
@@ -102,6 +101,11 @@ body {
 
 .refresh-btn:hover {
     transform: rotate(180deg);
+}
+
+.large-logo-container{
+    margin : auto;
+    max-width: 360px;
 }
 
 .tooltip {

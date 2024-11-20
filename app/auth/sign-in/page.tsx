@@ -1,11 +1,9 @@
-// 'use client';
-
 import '@/app/css/sign.css';
 
 import { Suspense } from 'react';
 import { GoogleSignInBtn, LoginAnotherAccountBtn } from "@/app/components/SignItems/SignBtn";
 import GoToMainBtn from './component/GoToMainBtn';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 const BACKGROUND_STYE = {
     width: '100%',
@@ -19,12 +17,12 @@ export default function SignInPage() {
         <div style={{ ...BACKGROUND_STYE}}>
             <div className="text-center" style={{margin : 'auto'}}>
                 <div className='large-logo-container mb-3'>
-                    <Image 
-                        src='/logo/logo-full.png' 
+                    <Image
+                        src="/logo/logo-full.png"
+                        alt="YoutuView LOGO"
                         width={360}
                         height={360}
                         layout='responsive'
-                        alt='YoutuView Logo'
                         priority
                     />
                 </div>

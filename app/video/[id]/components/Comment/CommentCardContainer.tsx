@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { FilteredCommentType } from "@/types/comment";
 import dateToString from "@/@util/functions/dateToString";
-import Image from "next/image";
+import Image from 'next/legacy/image';
 
 export function CommentCardContainer(
     { cd : commentData, videoId }: { cd: FilteredCommentType, videoId: string }

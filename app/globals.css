@@ -9,6 +9,7 @@ body {
     position: fixed;
     bottom: 0;
     right: 0;
+    visibility: hidden;
 }
 
 .c-red{
@@ -34,6 +35,16 @@ body {
 
 .bg-white{
     background-color: white;
+}
+
+.af-tag {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.af-tag:hover {
+    color : #175fb8;
 }
 
 .a-tag {
@@ -105,6 +116,7 @@ body {
 
 .large-logo-container{
     margin : auto;
+    width: 100%;
     max-width: 360px;
 }
 

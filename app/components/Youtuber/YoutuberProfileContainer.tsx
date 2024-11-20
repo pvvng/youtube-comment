@@ -9,7 +9,7 @@ import YoutuberInfoContainer from "./YoutuberInfoContainer";
 import fetchUpdateYoutuberPopularity from "@/@util/functions/fetch/fetchUpdateYoutuberPopularity";
 import fetchPostDBYoutuberData from "@/@util/functions/fetch/fetchPostDBYoutuberData";
 import HeartBtn from "../HeartBtn/HeartBtn";
-import Image from "next/image";
+import Image from 'next/legacy/image';
 
 export default function YoutuberProfileContainer(
     {youtuber} : {youtuber : YoutuberDataType}

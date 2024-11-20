@@ -10,12 +10,13 @@ import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactQueryProvider from "@/@util/providers/ReactQueryProvider";
 import { ReCaptchaProvider } from 'next-recaptcha-v3';
+import FooterContainer from './components/Footer/FooterContainer';
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "유튜뷰 YoutuView",
-    description: "궁금한 유튜브 영상을 자유롭게 분석하세요!",
+    description: "궁금했던 유튜브 영상, 이제 자유롭게 분석하세요!",
 };
 
 export default function RootLayout({
@@ -77,6 +78,7 @@ export default function RootLayout({
                 <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>
                     <ReactQueryProvider>
                         {children}
+                        <FooterContainer />
                     </ReactQueryProvider>
                 </ReCaptchaProvider>
             </body>

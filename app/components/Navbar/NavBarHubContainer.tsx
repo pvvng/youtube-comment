@@ -14,7 +14,7 @@ import { useQuery } from '@tanstack/react-query';
 import fetchGetDBUserData from '@/@util/functions/fetch/fetchGetDBUserData';
 import useProcessError from '@/@util/hooks/useprocessError';
 import { useDBUserStore } from '@/app/store';
-import Image from 'next/image';
+import Image from 'next/legacy/image';
 
 interface PropsType {
     session : Session|null; 
@@ -101,6 +101,7 @@ export default function NavBarHubContainer(
                                     alt='logo'
                                     layout='responsive'
                                     priority
+                                    style={{cursor : 'pointer'}}
                                     onClick={() => {
                                         router.push('/main');
                                     }}

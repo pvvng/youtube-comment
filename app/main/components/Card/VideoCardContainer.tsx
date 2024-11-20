@@ -2,8 +2,8 @@
 
 import '@/app/css/recent.css';
 import { VideoCardType } from '@/app/main/components/Popularlist/CardListContainer';
-import Image from 'next/image';
 import { useRouter } from "next/navigation";
+import Image from 'next/legacy/image';
 
 export default function VideoCardContainer(
     {cardData} : {cardData : VideoCardType[]}

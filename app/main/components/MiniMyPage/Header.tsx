@@ -4,8 +4,8 @@ import { faPowerOff, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Image from 'next/legacy/image';
 
 export default function  MiniMyPageHeader(
     {session} : {session : Session | null}
@@ -36,12 +36,12 @@ export default function  MiniMyPageHeader(
                     </div>
                 }
                 <div className="row row-center" style={{margin : 'auto'}}>
-                    <div className="col-6 col-md-4 col-lg-5">
-                        <div style={{maxWidth : 100, margin : 'auto'}}>
+                    <div className="col-4">
+                        <div style={{maxWidth : 60, margin : 'auto'}}>
                             <Image 
                                 src={session?.user?.image || "/logo/logo-mask.png"} 
-                                width={74} 
-                                height={57}
+                                width={50} 
+                                height={50}
                                 alt="user-profile" 
                                 layout="responsive"
                                 loading="lazy"
@@ -51,7 +51,7 @@ export default function  MiniMyPageHeader(
                             />
                         </div>
                     </div>
-                    <div className="col-6 col-md-8 col-lg-7">
+                    <div className="col-8">
                         <h5 className="mt-2 m-0">
                             <span className="fw-bold">{session?.user?.name || '사용자'}</span>님
                         </h5>   

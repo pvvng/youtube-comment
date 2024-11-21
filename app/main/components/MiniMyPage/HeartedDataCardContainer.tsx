@@ -1,3 +1,5 @@
+import '@/app/css/skeleton.css';
+
 import HeartBtn from '@/app/components/HeartBtn/HeartBtn';
 import { UserHeartedType } from '@/types/userdata';
 import { useRouter } from "next/navigation";
@@ -14,8 +16,21 @@ export default function RenderHeartedDataCard(
 ) {
     const router = useRouter();
 
-    if (!heartedDataState) return <p>로딩중입니다.</p>;
-    if (heartedDataState.length === 0) return <p>{noDataString}</p>;
+    const skeletonArr = new Array(4).fill(0);
+
+    // 로딩 중일때 skeleton ui 등장
+    if (!heartedDataState) return (
+        skeletonArr.map((_, i) => { 
+            return <div key={i} className='heart-skeleton' />
+        })
+    );
+
+    // 찜한 데이터가 없을 때
+    if (heartedDataState.length === 0) return (
+        <div className='d-flex row-center' style={{height : 100}}>
+            <p className='m-0'>{noDataString}</p>
+        </div>
+    );
 
     return (
         heartedDataState.map((v, i) => {

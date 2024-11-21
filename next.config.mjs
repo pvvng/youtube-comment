@@ -15,7 +15,23 @@ const nextConfig = {
     reactStrictMode: false,
     // 이미지 도메인 추가
     images: {
-        domains: ['i.ytimg.com', 'yt3.ggpht.com', 'lh3.googleusercontent.com'], 
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 'i.ytimg.com',
+                pathname: '/**', // 모든 경로 허용
+            },
+            {
+                protocol: 'https',
+                hostname: 'yt3.ggpht.com',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'lh3.googleusercontent.com',
+                pathname: '/**',
+            },
+        ],    
     },
     webpack(config, { dev, isServer }) {
         if (!dev && !isServer) {

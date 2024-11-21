@@ -15,7 +15,6 @@ export default function RecentContainer(){
         let getRecent = localStorage.getItem('recent');
         if(getRecent){
             let parsed = JSON.parse(getRecent);
-            console.log('a')
             setRecentArr(parsed.reverse());
         }
     },[]);

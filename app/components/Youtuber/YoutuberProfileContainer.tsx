@@ -15,7 +15,11 @@ export default function YoutuberProfileContainer(
     {youtuber} : {youtuber : YoutuberDataType}
 ){ 
     // 정보 알림창 띄우거나 죽이는 state
-    const [infoClicker, setInfoClicker] = useState<[number, number, 'visible' | 'hidden']>([0, -10000, 'hidden']);
+    const [infoClicker, setInfoClicker] = 
+    useState<[number, number, 'visible' | 'hidden']>([0, -10000, 'hidden']);
+    // 로딩 중 skeleton ui 로드를 위한 감시 상태 
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
+
     // video detail page render state
     const { setVideoComponentState } = useVideoRenderStateStore();
 
@@ -61,7 +65,14 @@ export default function YoutuberProfileContainer(
             >
                 <div className="col-sm-3 col-12 text-center mb-sm-0 mb-3">
                     {/* 프로필 사진 */}
-                    <div style={{margin : 'auto', maxWidth : 180}}>
+                    <div style={{margin : 'auto', maxWidth : 180, position: 'relative'}}>
+                        {/* Skeleton UI */}
+                        {
+                            !isImageLoaded &&
+                            <div className="skeleton-container" style={{borderRadius : "50%"}}>
+                                <div className="video-skeleton" style={{borderRadius : "50%"}} />
+                            </div>
+                        }
                         <Image 
                             src={youtuber.thumbnail.url} 
                             alt={youtuber.name} 
@@ -70,6 +81,7 @@ export default function YoutuberProfileContainer(
                             layout="responsive"
                             priority
                             style={{borderRadius : '50%'}}
+                            onLoadingComplete={() => setIsImageLoaded(true)}
                         />
                     </div>
                 </div>

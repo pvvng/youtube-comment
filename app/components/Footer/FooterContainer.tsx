@@ -29,12 +29,13 @@ export default function FooterContainer(){
                     <Link href="/main" className='af-tag'>이거 만든 사람들</Link>
                 </p>
                 <div id='vision' className='mx-2'>
+                    <Link href="/privacy-policy">개인정보 보호 정책(Privacy Policy)</Link>
                     <p>© 2024 뿅망치 컴퍼니. All Rights Reserved.</p>
                     <p className='text-secondary' style={{fontSize : 12}}>
                         This site is protected by reCAPTCHA and the Google
-                        {' '}<a href="https://policies.google.com/privacy">Privacy Policy</a> 
+                        {' '}<Link href="https://policies.google.com/privacy">Privacy Policy</Link> 
                         {' '}and
-                        {' '}<a href="https://policies.google.com/terms">Terms of Service</a> 
+                        {' '}<Link href="https://policies.google.com/terms">Terms of Service</Link> 
                         {' '}apply.
                     </p>
                 </div>

@@ -1,11 +1,13 @@
 'use client';
 
-import '@/app/css/video.css'
+import '@/app/css/video.css';
+import '@/app/css/skeleton.css';
+
 import { FilteredVideoSnippet, VideoStatisticsType } from "@/types/video";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faCommentDots, faSeedling } from '@fortawesome/free-solid-svg-icons'
 import { useVideoRenderStateStore } from '@/app/store';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import toLocaleString from '@/@util/functions/toLocaleString';
 import dateToString from '@/@util/functions/dateToString';
@@ -23,6 +25,9 @@ export default function VideoContainer(
 ){
     // video detail page render state
     const { setVideoComponentState } = useVideoRenderStateStore();
+
+    // 로딩 중 skeleton ui 로드를 위한 감시 상태 
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
 
     const { mutate } = useMutation(
         { 
@@ -58,6 +63,13 @@ export default function VideoContainer(
                     position: 'relative'
                 }}
             >
+                {/* Skeleton UI */}
+                {
+                    !isImageLoaded &&
+                    <div className="skeleton-container" style={{borderRadius : 20}}>
+                        <div className="video-skeleton" style={{borderRadius : 20}} />
+                    </div>
+                }
                 <Image
                     src={video.thumbnails.url} 
                     width={640} 
@@ -68,6 +80,7 @@ export default function VideoContainer(
                         borderRadius : '20px', 
                         position : 'relative'
                     }}
+                    onLoadingComplete={() => setIsImageLoaded(true)}
                 />
                 <div style={{
                     position: 'absolute',

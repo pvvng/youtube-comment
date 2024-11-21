@@ -12,12 +12,13 @@ export default function RecentContainer(){
     const [recentArr, setRecentArr] = useState<VideoCardType[]>([]);
 
     useEffect(() => {
-        let getRecent = localStorage.getItem('recent')
+        let getRecent = localStorage.getItem('recent');
         if(getRecent){
             let parsed = JSON.parse(getRecent);
+            console.log('a')
             setRecentArr(parsed.reverse());
         }
-    },[])
+    },[]);
 
     return(
         <div className="border mt-3" style={{borderRadius : '10px'}}>

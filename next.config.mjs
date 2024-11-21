@@ -12,7 +12,7 @@ const withPWA = nextPWA({
 });
 
 const nextConfig = {
-    reactStrictMode: true,
+    reactStrictMode: false,
     // 이미지 도메인 추가
     images: {
         domains: ['i.ytimg.com', 'yt3.ggpht.com', 'lh3.googleusercontent.com'], 

@@ -1,17 +1,18 @@
+import '@/app/css/loading.css';
+
 export default function PopularContainerLoadingSpinner(){
+    const arr = new Array(5).fill(0);
     return(
-        <div 
-            className="d-flex row-center" 
-            style={{minHeight : 150}}
-        >
-            <div 
-                className="spinner-border" 
-                role="status"
-            >
-                <span className="visually-hidden">
-                    Loading...
-                </span>
-            </div>
-        </div>
+        <section className="loader">
+            {
+                arr.map((_, i) => 
+                    <div 
+                        key={i} 
+                        style={{ '--i': 0 } as React.CSSProperties} 
+                        className="slider"
+                    />
+                )
+            }
+        </section>
     )
 }

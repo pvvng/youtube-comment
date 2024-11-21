@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import AnalyzingButtonByComponetType from "./AnalyzingButtonByComponetType";
 import useProcessError from "@/@util/hooks/useprocessError";
 import ErrorContainer from "@/app/components/Error/ErrorContainer";
+import SideLoadingSpinner from "@/app/components/Loading/SideLodaingContainer";
 
 const WAITING_MENT = `영상 분석은 네트워크 환경과 댓글 수에 따라 5분 정도 소요될 수 있습니다.`
 const CHECKING_BOT = '봇인지 확인 중 입니다.'
@@ -72,14 +73,7 @@ export default function FetchFreshCommentContainer(
 function FreshDataLoadingSpinner({text} : {text : string}){
     return (
         <>
-            <div 
-                className="spinner-border" 
-                role="status"
-            >
-                <span className="visually-hidden">
-                    Loading...
-                </span>
-            </div>
+            <SideLoadingSpinner />
             <p className="fw-bold m-0 mt-2 fw-bold">
                 {text}
             </p>

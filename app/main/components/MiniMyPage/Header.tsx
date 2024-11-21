@@ -37,19 +37,13 @@ export default function  MiniMyPageHeader(
                 }
                 <div className="row row-center" style={{margin : 'auto'}}>
                     <div className="col-4">
-                        <div style={{maxWidth : 100, margin : 'auto'}}>
-                            <Image 
-                                src={session?.user?.image || "/logo/logo-mask.png"} 
-                                width={100} 
-                                height={100}
-                                alt="user-profile" 
-                                layout="responsive"
-                                loading="lazy"
-                                style={{
-                                    borderRadius : 12
-                                }}
-                            />
-                        </div>
+                        <img
+                            src={session?.user?.image || "/logo/logo-mask.png"} 
+                            alt="user-profile" 
+                            width="100%"
+                            loading="lazy"
+                            style={{borderRadius : 12}}
+                        />
                     </div>
                     <div className="col-8">
                         <h5 className="mt-2 m-0">

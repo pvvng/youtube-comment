@@ -13,7 +13,7 @@ import { useDBUserStore } from '@/app/store';
 import useReCaptchaVerify from '@/@util/hooks/useReCaptchaVerify';
 
 interface PropsType extends UserHeartedType {
-    type: string;
+    type: "video" | "youtuber";
 }
 
 const CONFIRM_TEXT = `로그인 후 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?`;
@@ -21,7 +21,6 @@ const CONFIRM_TEXT = `로그인 후 이용 가능합니다.\n로그인 페이지
 export default function HeartBtn(
     { id, name, thumbnailUrl, type }: PropsType
 ){
-
     // userdata 상태 store
     const { userdata, addHeart, removeHeart } = useDBUserStore();
     const { getReCaptchaToken } = useReCaptchaVerify();
@@ -34,8 +33,21 @@ export default function HeartBtn(
 
     const router = useRouter();
 
-    async function updateUserHeartData(){
+    /** 타입 검증 후 userdata에 사용 가능한 타입 문자열 반환 함수 */
+    function checkHeartType(){
+        let typeString : "videoHeart" | "youtuberHeart" | undefined; 
 
+        if(type === "video"){
+            typeString = "videoHeart";
+        }else if (type === "youtuber"){
+            typeString = "youtuberHeart";
+        }
+
+        return typeString;
+    }
+
+    /** userdata db에 업데이트하고 성공하면 store에 업데이트하는 함수 */
+    async function updateUserHeartData(){
         const session = await getSession();
 
         if (!session) {
@@ -57,20 +69,26 @@ export default function HeartBtn(
         let verifyData = await getReCaptchaToken();
 
         if(verifyData.success){
+
+            if(type !== "video" && type !== "youtuber") return;
+
             // API 요청
-            await axios.post('/api/post/database/user/heart', {
+            let result = await axios.post('/api/post/database/user/heart', {
                 // 상태가 변경될 값을 서버로 보냄
                 id, name, thumbnailUrl, type, userEmail, isChecked: !isChecked 
             });
 
-            // 서버 업데이트가 성공하면 zustand userdata 수정
-            let typeString : "videoHeart" | "youtuberHeart" = 
-            type === "video" ? "videoHeart" : "youtuberHeart";
+            if(result.status === 200){
+                // 서버 업데이트가 성공하면 zustand userdata 수정
+                const typeString = checkHeartType();
 
-            if(isChecked){
-                removeHeart(typeString, id);
-            }else{
-                addHeart(typeString, {id, name, thumbnailUrl});
+                if(!typeString) return;
+
+                if(isChecked){
+                    removeHeart(typeString, id);
+                }else{
+                    addHeart(typeString, {id, name, thumbnailUrl});
+                }
             }
         }
     }
@@ -95,11 +113,11 @@ export default function HeartBtn(
     // zustand store의 변경에 따라 heart button 상태 토글
     useEffect(() => {
         if (userdata) {
-            const exists = userdata[
-                type === "video" ? 
-                "videoHeart" : 
-                "youtuberHeart"
-            ].some(v => v.id === id);
+            const typeString = checkHeartType();
+
+            if(!typeString) return;
+
+            const exists = userdata[typeString].some(v => v.id === id);
 
             // exists 값으로 isChecked 설정
             setIsChecked(exists); 

@@ -41,7 +41,7 @@ export default function  MiniMyPageHeader(
                             <Image 
                                 src={session?.user?.image || "/logo/logo-mask.png"} 
                                 width={100} 
-                                height={79}
+                                height={100}
                                 alt="user-profile" 
                                 layout="responsive"
                                 loading="lazy"

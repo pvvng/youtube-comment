@@ -76,8 +76,8 @@ export default function FormContainer() {
     }
 
     return (
-        <div className="form-container">
-            <h1 className="form-title">Send Feedback</h1>
+        <div className="form-container mt-5">
+            <h1 className="form-title m-0 mt-2 mb-2">Send Feedback</h1>
             <textarea
                 ref={messageRef}
                 className="form-textarea"

@@ -1,3 +1,36 @@
+/* profile */
+/* From Uiverse.io by Sashank02 */
+.profile-card {
+    padding: 20px;
+    width: 100%;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 5px 5px 6px #dadada,
+        -5px -5px 6px #f6f6f6;
+    transition: 0.4s;
+    margin : auto;
+}
+
+.profile-card-title {
+    color: #2e54a7;
+}
+
+.profile-card-image {
+    background-color: #f1f5f9;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.profile-card-body {
+    color: rgb(31, 31, 31);
+}
+
+.profile-footer {
+    color: #636363;
+}
+
+/* form */
+
 .form-container {
     background-color: white;
     border: 1px solid #e2e8f0;
@@ -8,7 +41,8 @@
     padding: 0.5rem;
     font-size: 0.875rem;
     margin: auto;
-    max-width: 24rem;
+    box-shadow: 5px 5px 6px #dadada,
+    -5px -5px 6px #f6f6f6;
 }
 
 .form-title {
@@ -33,7 +67,7 @@
 }
 
 .form-textarea:focus {
-    border-color: #475569;
+    border-color: white;
 }
 
 .form-buttons {
@@ -78,6 +112,7 @@
     border-radius: 0.5rem;
     padding: 0.5rem;
     transition: all 0.3s;
+    font-size: 1.3rem;
     cursor: pointer;
 }
 
@@ -91,6 +126,6 @@
     color: white;
 }
 
-input[type="radio"]:checked + i {
+input[type="radio"]:checked+i {
     color: #175fb8;
 }

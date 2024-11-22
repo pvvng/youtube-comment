@@ -3,8 +3,6 @@ import LadingSearchButton from './components/Landing/LandingSearchButton';
 import ContentContainer from './components/Landing/Content/ContentContainer';
 import GoMainBtn from './components/Landing/Content/GoMainBtn';
 import Image from 'next/legacy/image';
-import RadioContainer from './components/Landing/Content/RadioContainer';
-import InfiniteTextCarousel from './components/Landing/Content/InfiniteCarousel';
 
 export default function Home() {
     

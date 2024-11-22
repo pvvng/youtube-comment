@@ -1,4 +1,6 @@
 import { connectDB } from "@/@util/database";
+import { sanitizeValue } from "@/@util/functions/preventNoSQLAttack";
+import { getClientIp, rateLimiter } from "@/@util/functions/rateLimit";
 import { DBUserdataType, UserHeartedType } from "@/types/userdata";
 import { Db } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -15,20 +17,48 @@ interface BodyType {
 export default async function handler(
     req: NextApiRequest, res: NextApiResponse
 ) {
+
+    // rate limiting
+    const clientIp = getClientIp(req); // 클라이언트 IP 추출
+
+    try {
+        // Rate Limiting 적용
+        await rateLimiter.consume(clientIp);
+    } catch (rateLimiterRes) {
+        return res.status(429).json({ message: "Too many requests. Please try again later." });
+    }
+
+
     if (req.method !== "POST") {
         return res.status(405).json({ message: "Method Not Allowed" });
     }
 
     // 입력 값 확인
-    const { id, name, thumbnailUrl, type, userEmail, isChecked }: BodyType = req.body;
+    let { id, name, thumbnailUrl, type, userEmail, isChecked }: BodyType = req.body;
 
+    try {
+        id = sanitizeValue(id);
+        name = sanitizeValue(name);
+        thumbnailUrl = sanitizeValue(thumbnailUrl);
+        userEmail = sanitizeValue(userEmail);
 
-    if(type !== "video" && type !== "youtuber"){
-        return res.status(405).json({ message : "Not Validate Type" });
-    }
+        if (type !== "video" && type !== "youtuber") {
+            return res.status(400).json({ message: "Invalid type" });
+        }
 
-    if (!userEmail) {
-        return res.status(400).json({ message: "User email is required" });
+        if (typeof isChecked !== "boolean") {
+            return res.status(400).json({ message: "Invalid checked value" });
+        }
+
+        if (typeof id !== "string" || typeof name !== "string" || typeof thumbnailUrl !== "string") {
+            return res.status(400).json({ message: "Invalid input type" });
+        }
+        
+        if (typeof userEmail !== "string" || typeof isChecked !== "boolean") {
+            return res.status(400).json({ message: "Invalid input" });
+        }
+    } catch (error) {
+        return res.status(400).json({ message: "Invalid input data", error });
     }
 
     let db: Db;
@@ -41,6 +71,7 @@ export default async function handler(
     }
 
     let dbUserData: DBUserdataType | null;
+    
     try {
         dbUserData = await db.collection<DBUserdataType>('userdata').findOne({ email: userEmail });
     } catch (error) {

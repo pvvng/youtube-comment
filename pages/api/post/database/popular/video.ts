@@ -12,10 +12,18 @@ export default async function handler(
         return res.status(405).json({ message: "Method Not Allowed" });
     }
 
-    const { videoId, title, thumnailUrl } :PostDataType = req.body;
+    let { videoId, title, thumnailUrl } :PostDataType = req.body;
+
+    try {
+        if (!videoId || !title || !thumnailUrl) {
+            return res.status(400).json({ message: "Missing or invalid input data" });
+        }
+    } catch (error) {
+        return res.status(400).json({ message: "Invalid input data" });
+    }
 
     const koreaTime = moment().tz('Asia/Seoul').format('YYYY-MM-DD');
-    
+
     let db: Db;
 
     try {

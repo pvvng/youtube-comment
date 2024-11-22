@@ -5,7 +5,6 @@ import { Db, ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Session } from "next-auth";
 import { getClientIp, rateLimiter } from "@/@util/functions/rateLimit";
-import { sanitizeValue } from "@/@util/functions/preventNoSQLAttack";
 
 interface UserdataType {
     name?: string | null;
@@ -54,20 +53,12 @@ export default async function handler(
         const dbUserData = await db.collection('userdata')
         .findOne({ email: userdata.email });
 
-        const checkingUserdata : UserdataType = {
-            name : userdata.name,
-            email : userdata.email,
-            image : userdata.image
-        }
-
-        const checkedUserData = checkUserdataValidation(checkingUserdata);
-
         // 새로운 유저 데이터 준비
         const newUserData : DBUserdataType = {
             _id: new ObjectId(),
-            name: checkedUserData.sanitizedName,
-            email: checkedUserData.sanitizedEmail,
-            image: checkedUserData.sanitizedImage,
+            name: userdata.name || generateRandomName(6),
+            email: userdata.email,
+            image: userdata.image || null,
             youtuberHeart: [],
             videoHeart: [],
         };
@@ -86,24 +77,4 @@ export default async function handler(
     } catch (dbError) {
         return res.status(500).json({ message: "Database operation failed", error: dbError });
     }
-}
-
-function checkUserdataValidation(userdata: UserdataType): {
-    sanitizedName: string;
-    sanitizedEmail: string;
-    sanitizedImage: string | null;
-} {
-    const username = userdata.name || generateRandomName(6);
-    const userEmail = userdata.email;
-    const userImage = userdata.image || null;
-
-    const sanitizedName = sanitizeValue(username);
-    const sanitizedEmail = sanitizeValue(userEmail);
-
-    let sanitizedImage = userImage;
-    if (userImage) {
-        sanitizedImage = sanitizeValue(userImage);
-    }
-
-    return { sanitizedName, sanitizedEmail, sanitizedImage };
 }

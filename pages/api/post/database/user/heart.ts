@@ -1,5 +1,4 @@
 import { connectDB } from "@/@util/database";
-import { sanitizeValue } from "@/@util/functions/preventNoSQLAttack";
 import { getClientIp, rateLimiter } from "@/@util/functions/rateLimit";
 import { DBUserdataType, UserHeartedType } from "@/types/userdata";
 import { Db } from "mongodb";
@@ -37,11 +36,6 @@ export default async function handler(
     let { id, name, thumbnailUrl, type, userEmail, isChecked }: BodyType = req.body;
 
     try {
-        id = sanitizeValue(id);
-        name = sanitizeValue(name);
-        thumbnailUrl = sanitizeValue(thumbnailUrl);
-        userEmail = sanitizeValue(userEmail);
-
         if (type !== "video" && type !== "youtuber") {
             return res.status(400).json({ message: "Invalid type" });
         }
@@ -51,11 +45,11 @@ export default async function handler(
         }
 
         if (typeof id !== "string" || typeof name !== "string" || typeof thumbnailUrl !== "string") {
-            return res.status(400).json({ message: "Invalid input type" });
+            return res.status(400).json({ message: "Invalid value type" });
         }
         
         if (typeof userEmail !== "string" || typeof isChecked !== "boolean") {
-            return res.status(400).json({ message: "Invalid input" });
+            return res.status(400).json({ message: "Invalid value" });
         }
     } catch (error) {
         return res.status(400).json({ message: "Invalid input data", error });
@@ -79,6 +73,8 @@ export default async function handler(
         return res.status(500).json({ message: "Failed to retrieve user data", error });
     }
 
+    console.log(userEmail)
+    console.log(dbUserData)
     if (!dbUserData) {
         return res.status(404).json({ message: "User data not found" });
     }

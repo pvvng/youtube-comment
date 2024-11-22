@@ -10,10 +10,11 @@ export default function FooterContainer(){
                     <Link href="/main">
                         <Image 
                             src="/logo/font-full.png" 
-                            width={120}
-                            height={43}
+                            width={100}
+                            height={36}
                             layout="responsive"
                             alt="YotuView LOGO"
+                            priority
                         />
                     </Link>
                 </div>
@@ -26,7 +27,7 @@ export default function FooterContainer(){
                     {' | '}
                     <Link href="https://github.com/pvvng/youtube-comment/issues" target='_blank' className='af-tag'>이슈 제보</Link>
                     {' | '}
-                    <Link href="/main" className='af-tag'>이거 만든 사람들</Link>
+                    <Link href="/contact" className='af-tag'>이거 만든 사람들</Link>
                 </p>
                 <div id='vision' className='mx-2'>
                     <Link href="/privacy-policy">개인정보 보호 정책(Privacy Policy)</Link>

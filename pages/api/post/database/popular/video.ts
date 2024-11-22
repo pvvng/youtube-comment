@@ -15,6 +15,7 @@ export default async function handler(
     const { videoId, title, thumnailUrl } :PostDataType = req.body;
 
     const koreaTime = moment().tz('Asia/Seoul').format('YYYY-MM-DD');
+    
     let db: Db;
 
     try {

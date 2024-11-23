@@ -73,8 +73,6 @@ export default async function handler(
         return res.status(500).json({ message: "Failed to retrieve user data", error });
     }
 
-    console.log(userEmail)
-    console.log(dbUserData)
     if (!dbUserData) {
         return res.status(404).json({ message: "User data not found" });
     }

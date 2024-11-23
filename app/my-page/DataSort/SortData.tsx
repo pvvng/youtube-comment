@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import fetchYoutuberProfileData from '@/@util/functions/fetch/fetchYoutuberProfileData';
+import HeartBtn from '@/app/components/HeartBtn/HeartBtn';
 
 interface Youtuber {
     channelId: string;
@@ -18,7 +19,7 @@ interface SortDataProps {
 export default function SortData({ youtuber } : SortDataProps){
 
     const router = useRouter();
-
+    console.log(youtuber);
     const formatDate = (dateString: string): string => {
         const date = new Date(dateString);
         const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: '2-digit', day: '2-digit' };
@@ -51,10 +52,36 @@ export default function SortData({ youtuber } : SortDataProps){
                                 <h6 className="m-0 fw-bold">{item.title}</h6>
                                 <p className="m-0">구독일자: {formatDate(item.publishedAt)}</p>
                             </div>
+                            <div style={{ marginLeft: 'auto' }}>
+                                <HeartBtn
+                                    id={item.channelId}
+                                    name={item.title}
+                                    thumbnailUrl={item.thumbnails}
+                                    type="youtuber"
+
+                                />
+                            </div>
                         </div>
                     </div>
                 ))}
             </div>
         </>
+
+
     );
 };
+
+
+
+// const youtuberData: YoutuberDataType = item as YoutuberDataType;
+
+// interface BodyType {
+//     id: string;
+//     name: string;
+//     thumbnailUrl: string;
+//     type: 'youtuber' | 'video';
+//     userEmail: string;
+//     isChecked: boolean;
+// }
+
+//여기서 type가 youtuber인지 확인하고 만약 맞다면 name이 같은 것들을 검색하고 그것들을 sortdata중 상단에 올린다.

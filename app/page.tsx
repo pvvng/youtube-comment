@@ -1,4 +1,5 @@
 import '@/app/css/landing.css';
+
 import LadingSearchButton from './components/Landing/LandingSearchButton';
 import ContentContainer from './components/Landing/Content/ContentContainer';
 import GoMainBtn from './components/Landing/Content/GoMainBtn';

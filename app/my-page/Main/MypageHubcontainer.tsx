@@ -12,15 +12,13 @@ import Subscriptions from './Subscriptions';
 import '@/app/css/mypage.css';
 import HearteYoutuber from '../components/HearteYoutuber';
 import Heartevideo from '../components/HearteVideo';
+import useProcessError from '@/@util/hooks/useprocessError';
 
 export default function MyPageHub() {
 
     const { userdata } = useDBUserStore();
     
     const [selectedOptions, setSelectedOptions] = useState<boolean[]>([false, false, false]);
-
-
-    console.log('갱심됨')
 
     /**마이페이지 분석 페이지 선택 함수 */
     const handleOptionSelect = (index: number) => {
@@ -30,7 +28,6 @@ export default function MyPageHub() {
             return newOptions;
         });
     };
-   
 
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ["subscription"],
@@ -40,25 +37,20 @@ export default function MyPageHub() {
         gcTime: 3600000,
         staleTime: 3600000,
     });
+
+    useProcessError(isError, error, "mc");
+
     if (isLoading) return <LoadingContianer height={300} />;
 
-    if (!data || data.length === 0)
+    if (!data || data.length === 0){
         return <ErrorContainer errorMessage="구독한 유튜버가 없습니다." />;
-
-   console.log(data);
-   
+    }
 
     const Heartnumber = [data.length, userdata?.youtuberHeart.length ?? 0,  userdata?.videoHeart.length ?? 0];
-    
-    
 
-
-    console.log(selectedOptions);
-  
-
-    if (!userdata || userdata.youtuberHeart.length === 0)
+    if (!userdata || userdata.youtuberHeart.length === 0){
         return <ErrorContainer errorMessage="구독한 유튜버가 없습니다." />;
-
+    }
 
     return (
         <>

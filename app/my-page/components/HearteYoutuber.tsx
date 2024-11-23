@@ -9,8 +9,6 @@ export default function HearteYoutuber(){
 
     const router = useRouter();
     const { userdata } = useDBUserStore();
-   
-    console.log(userdata?.youtuberHeart);
 
     return (
         <>

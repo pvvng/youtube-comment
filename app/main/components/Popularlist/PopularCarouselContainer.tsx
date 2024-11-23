@@ -7,7 +7,6 @@ import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from "react";
-import Image from 'next/image';
 import moment from 'moment-timezone';
 
 interface PropsType {

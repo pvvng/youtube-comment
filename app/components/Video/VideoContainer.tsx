@@ -76,10 +76,7 @@ export default function VideoContainer(
                     height={362}
                     alt={video.title} 
                     layout='responsive'
-                    style={{
-                        borderRadius : '20px', 
-                        position : 'relative'
-                    }}
+                    style={{borderRadius : '20px'}}
                     onLoadingComplete={() => setIsImageLoaded(true)}
                 />
                 <div style={{

@@ -1,4 +1,3 @@
-import 'animate.css';
 import '@/app/css//landing/landingInput.css';
 import '@/app/css//landing/landingLetter.css';
 import '@/app/css//landing/landingGoMainBtn.css';

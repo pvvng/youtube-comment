@@ -12,8 +12,16 @@ export default async function handler(
         return res.status(405).json({ message: "Method Not Allowed" });
     }
 
-    const { youtuberName, thumnailUrl, channelId }: PopularPostDataType = req.body;
+    let { youtuberName, thumnailUrl, channelId }: PopularPostDataType = req.body;
 
+    try{
+        if (!youtuberName || !thumnailUrl || !channelId) {
+            return res.status(400).json({ message: "Missing or invalid input data" });
+        }
+    } catch (error) {
+        return res.status(400).json({ message: "Invalid input data" });
+    }
+    
     const koreaTime = moment().tz('Asia/Seoul').format('YYYY-MM-DD');
     let db: Db;
 

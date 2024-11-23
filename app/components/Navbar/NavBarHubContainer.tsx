@@ -14,6 +14,7 @@ import { useQuery } from '@tanstack/react-query';
 import fetchGetDBUserData from '@/@util/functions/fetch/fetchGetDBUserData';
 import useProcessError from '@/@util/hooks/useprocessError';
 import { useDBUserStore } from '@/app/store';
+import Image from 'next/legacy/image';
 
 interface PropsType {
     session : Session|null; 
@@ -92,15 +93,20 @@ export default function NavBarHubContainer(
                             }}>
                                 <FontAwesomeIcon icon={faArrowLeft} />
                             </button>:
-                            <img
-                                src="/logo/font-ko.png" 
-                                width= "100px"
-                                height="auto"
-                                alt='logo'
-                                onClick={() => {
-                                    router.push('/main');
-                                }}
-                            />
+                            <div style={{margin : 'auto', width : 100}}>
+                                <Image
+                                    src="/logo/font-ko.png" 
+                                    width= {100}
+                                    height={45}
+                                    alt='logo'
+                                    layout='responsive'
+                                    priority
+                                    style={{cursor : 'pointer'}}
+                                    onClick={() => {
+                                        router.push('/main');
+                                    }}
+                                />
+                            </div>
                         }
                     </div>
                     <div className="col-9 col-md-8">

@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import PopularCarouselContainer from "../../../main/components/Popularlist/PopularCarouselContainer";
 import useProcessError from "@/@util/hooks/useprocessError";
 import fetchDBPopularVideo from "@/@util/functions/fetch/fetchDBPopularVideo";
-import PopularContainerLoadingSpinner from "../../../main/components/Popularlist/PopularContainerLoadingSpinner";
 import CardHeaderContainer from "../../../main/components/Popularlist/CardHeaderContainer";
 import ErrorContainer from "@/app/components/Error/ErrorContainer";
+import SideLoadingSpinner from "@/app/components/Loading/SideLodaingContainer";
 
 export default function PopularVideoHubContainer(){
 
@@ -26,7 +26,7 @@ export default function PopularVideoHubContainer(){
             <CardHeaderContainer type="video" />
             {
                 !data || isLoading ?
-                <PopularContainerLoadingSpinner />:
+                <SideLoadingSpinner />:
                 <PopularCarouselContainer carouselData={data} type="video" />
             }
             <div style={{clear : 'both'}} />

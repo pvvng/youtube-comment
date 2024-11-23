@@ -6,6 +6,7 @@
 
 .recent-card-container{
     transition: all 0.5s;
+    z-index: 0;
 }
 
 .recent-card-container:hover{

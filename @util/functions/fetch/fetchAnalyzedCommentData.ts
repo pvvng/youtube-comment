@@ -8,7 +8,7 @@ import axios from "axios";
 */
 export async function fetchAnalyzedCommentData(
     commentData : FilteredCommentType[], videoId :string, channelId :string
-){
+){  
     try{
         const response = await axios.post('/api/post/analyze', {
             commentData: commentData,

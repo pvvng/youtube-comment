@@ -55,7 +55,7 @@ const LetterContent = [
     }, 
     {
         id : 2, 
-        title: '구글 계정과 연동', 
+        title: '구글 계정 연동', 
         description :'구글 아이디로 로그인하여 구독한 유튜버에 대한 분석을 진행할 수 있습니다.',
         icon : faGoogle
     }

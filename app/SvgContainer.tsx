@@ -15,7 +15,6 @@ export function HeartButtonSVG(){
     return(
         <svg
             viewBox="0 0 16 16"
-            style={{marginTop : 4}}
             className="bi bi-heart-fill"
             height="25"
             width="25"

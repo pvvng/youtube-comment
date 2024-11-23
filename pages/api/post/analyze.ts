@@ -1,5 +1,6 @@
 import updateDBYAnalyzedDataYoutuberCollection from "@/@util/functions/fetch/updateDBAnalyzedDataYoutuberCollection";
 import updateDBYoutuberCollection from "@/@util/functions/fetch/updateDBYoutuberCollection";
+import { getClientIp, rateLimiter } from "@/@util/functions/rateLimit";
 import { cleanUpText } from "@/@util/functions/wordAPI/cleanUpText";
 import { FilteredCommentType } from "@/types/comment";
 import { AnalyzedCommentData } from "@/types/word";
@@ -26,6 +27,16 @@ const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 export default async function handler(
     req : NextApiRequest, res : NextApiResponse
 ){
+    // rate limiting
+    const clientIp = getClientIp(req); // 클라이언트 IP 추출
+
+    try {
+        // Rate Limiting 적용
+        await rateLimiter.consume(clientIp);
+    } catch (rateLimiterRes) {
+        return res.status(429).json({ message: "Too many requests. Please try again later." });
+    }
+
     if(req.method !== "POST") {
         return res.status(405).json({message : "Not Allowed Method"});
     }

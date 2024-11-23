@@ -2,12 +2,11 @@ import { useQuery } from "@tanstack/react-query";
 import PopularCarouselContainer from "../../../main/components/Popularlist/PopularCarouselContainer";
 import fetchDBPopularYoutuber from "@/@util/functions/fetch/fetchDBPopularYoutuber";
 import useProcessError from "@/@util/hooks/useprocessError";
-import PopularContainerLoadingSpinner from "../../../main/components/Popularlist/PopularContainerLoadingSpinner";
 import CardHeaderContainer from "../../../main/components/Popularlist/CardHeaderContainer";
 import ErrorContainer from "@/app/components/Error/ErrorContainer";
+import SideLoadingSpinner from "@/app/components/Loading/SideLodaingContainer";
 
 export default function PopularYoutuberHubContainer(){
-
 
     const { data, isLoading, isError, error } = useQuery({
         queryKey : ['youtuberPopularity'],
@@ -26,7 +25,7 @@ export default function PopularYoutuberHubContainer(){
             <CardHeaderContainer type="youtuber" />
             {
                 !data || isLoading ?
-                <PopularContainerLoadingSpinner />:
+                <SideLoadingSpinner />:
                 <PopularCarouselContainer carouselData={data} type="youtuber" />
             }
             <div style={{clear : 'both'}} />

@@ -1,0 +1,28 @@
+{
+    "theme_color":"#ffffff",
+    "background_color":"#ffffff",
+    "icons":[
+        {
+            "purpose":"any maskable",
+            "sizes":"192x192",
+            "src":"icon192_maskable.png",
+            "type":"image/png"
+        },
+        {
+            "purpose":"any maskable",
+            "sizes":"512x512",
+            "src":"icon512_maskable.png",
+            "type":"image/png"
+        }
+    ],
+    "orientation":"any",
+    "display":"standalone",
+    "dir":"auto",
+    "lang":"ko-KR",
+    "start_url":"/",
+    "scope":"/",
+    "short_name":"유튜뷰",
+    "name":"유튜뷰 YoutuView",
+    "description":"궁금한 유튜브 영상을 자유롭게 분석하세요!",
+    "id":"YoutuView-web"
+}

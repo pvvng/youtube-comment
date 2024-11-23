@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { FilteredCommentType } from "@/types/comment";
 import dateToString from "@/@util/functions/dateToString";
+import Image from 'next/legacy/image';
 
 export function CommentCardContainer(
     { cd : commentData, videoId }: { cd: FilteredCommentType, videoId: string }
@@ -43,12 +44,17 @@ export function CommentCardContainer(
         <div className="card-container p-2 mb-2">
             <div className="row row-center w-100" style={{ margin: 'auto' }}>
                 <div className="col-12 col-sm-2 col-lg-1">
-                    <img
-                        src={commentData.autohorProfileImageUrl}
-                        width="100%"
-                        alt={commentData.authorDisplayName}
-                        style={{ borderRadius: '50%', maxWidth: '50px' }}
-                    />
+                    <div style={{margin : 'auto', maxWidth : 50}}>
+                        <Image
+                            src={commentData.autohorProfileImageUrl}
+                            alt={commentData.authorDisplayName}
+                            width={50}
+                            height={50}
+                            layout="responsive"
+                            loading="lazy"
+                            style={{ borderRadius: '50%' }}
+                        />
+                    </div>
                     <p className="m-sm-0 fw-bold d-sm-none text-start">
                         {commentData.authorDisplayName}
                     </p>

@@ -27,11 +27,8 @@ export default function YoutuberDetailHubContainer(
     if(data === undefined || isLoading) { 
         return <LoadingContianer height={'calc(100vh - 100px)'} />
     }else if (data === null){
-        return (
-            <p className="text-center">저장된 데이터가 없습니다.</p>
-        )
+        return <ErrorContainer errorMessage="데이터가 존재하지 않습니다." />
     }
-
 
     const { youtuber, extra } = data;
     const { keyword, sentiment, popularity } = extra;
@@ -42,7 +39,7 @@ export default function YoutuberDetailHubContainer(
             <hr />
             {
                 !sentiment && !keyword ?
-                <ErrorContainer errorMessage="분석된 데이터가 존재하지 않습니다."  />:
+                <ErrorContainer errorMessage="분석된 데이터가 존재하지 않습니다." />:
                 <>
                     <YoutuberDetailSentimentContainer sentiment={sentiment} youtuberName={youtuber.name} />
                     <YoutuberDetailKeywordContainer keyword={keyword} youtuberName={youtuber.name} />   

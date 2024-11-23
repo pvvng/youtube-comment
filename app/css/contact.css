@@ -1,0 +1,131 @@
+/* profile */
+/* From Uiverse.io by Sashank02 */
+.profile-card {
+    padding: 20px;
+    width: 100%;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 5px 5px 6px #dadada,
+        -5px -5px 6px #f6f6f6;
+    transition: 0.4s;
+    margin : auto;
+}
+
+.profile-card-title {
+    color: #2e54a7;
+}
+
+.profile-card-image {
+    background-color: #f1f5f9;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.profile-card-body {
+    color: rgb(31, 31, 31);
+}
+
+.profile-footer {
+    color: #636363;
+}
+
+/* form */
+
+.form-container {
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    margin: auto;
+    box-shadow: 5px 5px 6px #dadada,
+    -5px -5px 6px #f6f6f6;
+}
+
+.form-title {
+    grid-column: span 6;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.form-textarea {
+    grid-column: span 6;
+    background-color: #f1f5f9;
+    color: #475569;
+    height: 12rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    resize: none;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.form-textarea:focus {
+    border-color: white;
+}
+
+.form-buttons {
+    display: flex;
+    align-items: center;
+    grid-column: span 6;
+}
+
+.icon-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.icon-button:focus-within {
+    background-color: #175fb8;
+    color: white;
+}
+
+.icon-space {
+    margin-left: 4px;
+}
+
+.spacer {
+    flex: 1;
+}
+
+.submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    transition: all 0.3s;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #175fb8;
+    color: white;
+}
+
+.submit-button:focus {
+    background-color: #175fb8;
+    color: white;
+}
+
+input[type="radio"]:checked+i {
+    color: #175fb8;
+}

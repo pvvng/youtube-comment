@@ -15,6 +15,8 @@ export default async function handler(
     const youtuberData: YoutuberDataType = req.body;
     const channelId = youtuberData.channelId;
 
+    checkYoutuberData(youtuberData, res);
+
     let db: Db;
 
     try {
@@ -60,5 +62,52 @@ export default async function handler(
     } catch (error) {
         console.error("데이터 처리 중 에러 발생:", error);
         return res.status(500).json({ message: 'An error occurred while processing data' });
+    }
+}
+
+function checkYoutuberData(
+    youtuberData : YoutuberDataType, 
+    res : NextApiResponse
+){
+    let { 
+        thumbnail, customUrl, videoCount, 
+        channelId, name, description, 
+        subscriber, totalview 
+    } = youtuberData;
+
+    try {
+        // 입력 데이터 정리 및 검증
+        if (typeof thumbnail.url !== "string"){
+            return res.status(400).json({ message: "Invalid type" });
+        }
+        if(typeof thumbnail.width !== "number"){
+            return res.status(400).json({ message: "Invalid type" });
+        }
+        if(typeof thumbnail.height !== "number"){
+            return res.status(400).json({ message: "Invalid type" });
+        }
+        if(typeof customUrl !== "string"){
+            return res.status(400).json({ message: "Invalid type" });
+        }
+        if(typeof videoCount !== "string"){
+            return res.status(400).json({ message: "Invalid type" });
+        }
+        if(typeof channelId !== "string"){
+            return res.status(400).json({ message: "Invalid type" });
+        }
+        if(typeof name !== "string"){
+            return res.status(400).json({ message: "Invalid type" });
+        }
+        if(typeof description !== "string"){
+            return res.status(400).json({ message: "Invalid type" });
+        }
+        if(typeof subscriber !== "string"){
+            return res.status(400).json({ message: "Invalid type" });
+        }
+        if(typeof totalview !== "string"){
+            return res.status(400).json({ message: "Invalid type" });
+        }
+    } catch (error) {
+        return res.status(400).json({ message: "Invalid input data" });
     }
 }

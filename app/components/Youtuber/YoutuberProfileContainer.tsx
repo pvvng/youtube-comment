@@ -9,12 +9,17 @@ import YoutuberInfoContainer from "./YoutuberInfoContainer";
 import fetchUpdateYoutuberPopularity from "@/@util/functions/fetch/fetchUpdateYoutuberPopularity";
 import fetchPostDBYoutuberData from "@/@util/functions/fetch/fetchPostDBYoutuberData";
 import HeartBtn from "../HeartBtn/HeartBtn";
+import Image from 'next/legacy/image';
 
 export default function YoutuberProfileContainer(
     {youtuber} : {youtuber : YoutuberDataType}
 ){ 
     // 정보 알림창 띄우거나 죽이는 state
-    const [infoClicker, setInfoClicker] = useState<[number, number, 'visible' | 'hidden']>([0, -10000, 'hidden']);
+    const [infoClicker, setInfoClicker] = 
+    useState<[number, number, 'visible' | 'hidden']>([0, -10000, 'hidden']);
+    // 로딩 중 skeleton ui 로드를 위한 감시 상태 
+    const [isImageLoaded, setIsImageLoaded] = useState(false);
+
     // video detail page render state
     const { setVideoComponentState } = useVideoRenderStateStore();
 
@@ -60,12 +65,25 @@ export default function YoutuberProfileContainer(
             >
                 <div className="col-sm-3 col-12 text-center mb-sm-0 mb-3">
                     {/* 프로필 사진 */}
-                    <img 
-                        src={youtuber.thumbnail.url} 
-                        alt={youtuber.name} 
-                        width="100%" 
-                        style={{borderRadius : '50%', maxWidth : '180px'}}
-                    />
+                    <div style={{margin : 'auto', maxWidth : 180, position: 'relative'}}>
+                        {/* Skeleton UI */}
+                        {
+                            !isImageLoaded &&
+                            <div className="skeleton-container" style={{borderRadius : "50%"}}>
+                                <div className="video-skeleton" style={{borderRadius : "50%"}} />
+                            </div>
+                        }
+                        <Image 
+                            src={youtuber.thumbnail.url} 
+                            alt={youtuber.name} 
+                            width={180}
+                            height={180}
+                            layout="responsive"
+                            priority
+                            style={{borderRadius : '50%'}}
+                            onLoadingComplete={() => setIsImageLoaded(true)}
+                        />
+                    </div>
                 </div>
                 <div className="col-sm-9 col-12">
                     {/* 유튜버 이름 */}
@@ -99,15 +117,16 @@ export default function YoutuberProfileContainer(
                             onClick={() => {setInfoClicker([10000, 1, 'visible'])}}
                         >정보</button>
                     </div>
-                    <div className="float-end mb-3">
+
+                    {/* HeartBtn 절대 위치 */}
+                    <div style={{ position: 'absolute', top: 15, right: 15 }}>
                         <HeartBtn 
                             id={youtuber.channelId} 
                             name={youtuber.name} 
                             thumbnailUrl={youtuber.thumbnail.url} 
-                            type='youtuber' 
+                            type="youtuber" 
                         />
                     </div>
-                    <div style={{clear : 'both'}}/>
                 </div>
             </div>
         </div>

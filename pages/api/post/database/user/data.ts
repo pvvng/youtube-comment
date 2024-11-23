@@ -4,12 +4,29 @@ import { DBUserdataType } from "@/types/userdata";
 import { Db, ObjectId } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Session } from "next-auth";
+import { getClientIp, rateLimiter } from "@/@util/functions/rateLimit";
+
+interface UserdataType {
+    name?: string | null;
+    email: string;
+    image?: string | null;
+}
 
 /** userdata db에 존재하는지 확인하는 api 존재하지 않으면 insert */
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
+    // rate limiting
+    const clientIp = getClientIp(req); // 클라이언트 IP 추출
+
+    try {
+        // Rate Limiting 적용
+        await rateLimiter.consume(clientIp);
+    } catch (rateLimiterRes) {
+        return res.status(429).json({ message: "Too many requests. Please try again later." });
+    }
+
     if (req.method !== "POST") {
         return res.status(405).json({ message: "Method Not Allowed" });
     }

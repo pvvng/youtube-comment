@@ -76,6 +76,7 @@ export default function RootLayout({
                 <link rel="apple-touch-startup-image" media="screen and (device-width: 744px) and (device-height: 1133px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="splash_screens/8.3__iPad_Mini_portrait.png"/>
                 <meta name="apple-mobile-web-app-capable" content="yes" />
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+                <meta name="google-site-verification" content="JBdVYDDSjbAEZ4ybo1VQ-ZfeHeIovnIxKB4gmNeN9YQ"/>
             </head>
             <body className={inter.className}>
                 <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>

@@ -7,7 +7,7 @@ export default function ErrorContainer(
             <p className="m-0 fw-bold mt-3">
                 {errorMessage} 
                 <br className="m-0" />
-                에러가 발생했어요.
+               
             </p>
         </div>
     )

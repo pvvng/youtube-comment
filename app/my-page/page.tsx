@@ -19,8 +19,9 @@ export default async function MyPag(props: PropsType) {
     return (
         <>
             <NavbarContainer />
-            <div className="p-2 container">
+            <div className="container">
                 <UserProfile session={session} />
+                <hr />
                <MyPageHub/>
             </div>
         </>

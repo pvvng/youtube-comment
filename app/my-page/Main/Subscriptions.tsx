@@ -8,7 +8,7 @@ import SortDropdown from "../DataSort/SortDropdown";
 import SortData from "../DataSort/SortData";
 import ErrorContainer from "@/app/components/Error/ErrorContainer";
 import LoadingContianer from "@/app/components/Loading/LoadingContainer";
-
+import { useDBUserStore } from "@/app/store";
 
 // 지금 page.tsx에서 클라이언트 컴포넌트로 실행되는데 변경 부탁드리겠습니다.
 
@@ -46,6 +46,10 @@ interface DataProps {
     setSortOption(option);
   };
 
+ 
+
+  const { userdata } = useDBUserStore();
+
   /** 입력된 드롭 다운에 따라 구독 유투버를 정렬하는 함수 */
   const sortItems = (data: any[], sortOption: string) => {
     switch (sortOption) {
@@ -57,15 +61,21 @@ interface DataProps {
         });
       case "이름 순":
         return [...data].sort((a, b) => a.title.localeCompare(b.title, "ko"));
+
+      case "찜":
+        return data.filter(video => 
+          userdata?.youtuberHeart.some(Heart => video.channelId === Heart.id)
+      ) || [];
       case "기본":
       default:
         return data;
     }
   };
-
  
+
   if (!youtuber || youtuber.length === 0)
     return <ErrorContainer errorMessage="구독한 유튜버가 없습니다." />;
+
 
   const sortedData = sortItems(youtuber, sortOption);
 

@@ -19,6 +19,9 @@ export default function MyPageHub() {
     
     const [selectedOptions, setSelectedOptions] = useState<boolean[]>([false, false, false]);
 
+
+    console.log('갱심됨')
+
     /**마이페이지 분석 페이지 선택 함수 */
     const handleOptionSelect = (index: number) => {
         setSelectedOptions(prevOptions => {
@@ -47,7 +50,8 @@ export default function MyPageHub() {
 
     const Heartnumber = [data.length, userdata?.youtuberHeart.length ?? 0,  userdata?.videoHeart.length ?? 0];
     
-   
+    
+
 
     console.log(selectedOptions);
   
@@ -61,7 +65,7 @@ export default function MyPageHub() {
             <Listcountainer Heartnumber={Heartnumber}  onOptionSelect={handleOptionSelect} />
 
             {!selectedOptions[0] && !selectedOptions[1] && !selectedOptions[2] &&
-            <ErrorContainer errorMessage="회원님의 정보를 확인해보세요!" />}
+            <ErrorContainer errorMessage="회원님의 추가 정보를 확인해보세요!" />}
 
            { selectedOptions[0] &&<Subscriptions youtuber={data} />}
            { selectedOptions[1] && <HearteYoutuber/>}

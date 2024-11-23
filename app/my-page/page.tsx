@@ -1,7 +1,8 @@
 import { getServerSession, Session } from "next-auth"
-import MyPage from "./Main/MySubscriptionscontainer";
+import MyPage from "./Main/Subscriptions";
 import UserProfile from "./Main/UserProfile";
 import NavbarContainer from "../components/Navbar/NavbarContainer";
+import MyPageHub from "./Main/MypageHubcontainer";
 
 const url = process.env.NEXTAUTH_URL;
 
@@ -18,9 +19,10 @@ export default async function MyPag(props: PropsType) {
     return (
         <>
             <NavbarContainer />
-            <div className="p-2 container">
+            <div className="container">
                 <UserProfile session={session} />
-                <MyPage />
+                <hr />
+               <MyPageHub/>
             </div>
         </>
     );

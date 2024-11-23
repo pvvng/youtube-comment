@@ -29,6 +29,7 @@ export default function SortDropdown(
                 <option value="기본">기본</option>
                 <option value="구독 일자 순">구독 일자 순</option>
                 <option value="이름 순">이름 순</option>
+                <option value="찜">구독 & 찜한 유투버</option>
             </select>
         </div>
     );

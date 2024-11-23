@@ -82,7 +82,7 @@ export default function FormContainer() {
                 ref={messageRef}
                 className="form-textarea"
                 name="message"
-                placeholder="유튜브에 대한 메시지를 남겨주세요!"
+                placeholder="유튜뷰에 대한 메시지를 남겨주세요!"
                 maxLength={100}
                 required
             />

@@ -3,17 +3,21 @@ import '@/app/css/skeleton.css';
 import HeartBtn from '@/app/components/HeartBtn/HeartBtn';
 import { UserHeartedType } from '@/types/userdata';
 import { useRouter } from "next/navigation";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeartCircleXmark } from '@fortawesome/free-solid-svg-icons';
 
 interface CardPropsType {
     type: "video" | "youtuber";
     heartedDataState: UserHeartedType[] | undefined;
-    noDataString: string;
     randomNumberSet: Set<number>;
 }
 
 export default function RenderHeartedDataCard(
-    { type, heartedDataState, noDataString, randomNumberSet }: CardPropsType
+    { type, heartedDataState, randomNumberSet }: CardPropsType
 ) {
+
+    const stringToType = type === "video" ? "동영상이" : "유튜버가";
+
     const router = useRouter();
 
     const skeletonArr = new Array(4).fill(0);
@@ -27,8 +31,11 @@ export default function RenderHeartedDataCard(
 
     // 찜한 데이터가 없을 때
     if (heartedDataState.length === 0) return (
-        <div className='d-flex row-center' style={{height : 100}}>
-            <p className='m-0'>{noDataString}</p>
+        <div style={{height : 25}}>
+            <p className='m-0 c-dark'>
+                <FontAwesomeIcon style={{fontSize : 24}} icon={faHeartCircleXmark} />
+                <span className='mx-2' style={{color : 'black'}}>찜한 {stringToType} 없어요</span>
+            </p> 
         </div>
     );
 

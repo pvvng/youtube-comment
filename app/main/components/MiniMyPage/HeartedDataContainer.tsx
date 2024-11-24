@@ -16,7 +16,6 @@ export default function HeartedDataContainer(
 ) {
     // string
     const renderString = type === "video" ? "동영상" : "유튜버";
-    const NO_HEARTED_DATA = `찜한 ${renderString}${type === "video" ? "이" : "가"} 없어요.`
 
     // zustand userdata
     const { userdata } = useDBUserStore();
@@ -58,7 +57,6 @@ export default function HeartedDataContainer(
             <RenderHeartedDataCard
                 type={type}
                 heartedDataState={heartedDataState}
-                noDataString={NO_HEARTED_DATA}
                 randomNumberSet={randomNumberSetState}
             />
             <div style={{clear : 'both'}} />

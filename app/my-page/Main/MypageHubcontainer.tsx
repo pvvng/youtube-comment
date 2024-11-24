@@ -48,8 +48,8 @@ export default function MyPageHub() {
 
     const Heartnumber = [data.length, userdata?.youtuberHeart.length ?? 0,  userdata?.videoHeart.length ?? 0];
 
-    if (!userdata || userdata.youtuberHeart.length === 0){
-        return <ErrorContainer errorMessage="구독한 유튜버가 없습니다." />;
+    if (!userdata){
+        return <ErrorContainer errorMessage="회원 정보를 확인할 수 없습니다." />;
     }
 
     return (

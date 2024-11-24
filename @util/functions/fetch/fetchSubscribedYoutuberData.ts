@@ -7,8 +7,9 @@ import axios from "axios";
  */
 export default async function fetchSubscribedYoutuberData(){
     try{
-        let resultGetSubscription = await axios.get('/api/get/subscribe');
-        const subscription : SubScibedYoutuberType[] = resultGetSubscription.data 
+        const resultGetSubscription = await axios.get('/api/get/subscribe');
+        const subscription : SubScibedYoutuberType[] = resultGetSubscription.data;
+
         return subscription;
     }catch(error){
         // error가 AxiosError인지 확인

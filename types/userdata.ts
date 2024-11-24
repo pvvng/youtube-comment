@@ -5,6 +5,7 @@ export interface DBUserdataType {
     name: string;
     email: string;
     image: string | null;
+    refreshToken : string | null;
     youtuberHeart: UserHeartedType[];
     videoHeart: UserHeartedType[];
 }

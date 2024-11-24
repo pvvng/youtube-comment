@@ -1,8 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { getServerSession } from "next-auth";
+import { getServerSession, Session } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]";
 import axios, { AxiosResponse } from "axios";
 import { RawSubscribedYoutuberType, SubScibedYoutuberType } from "@/types/youtuber";
+import { isTokenExpired, refreshAccessToken, tokenInfo } from "@/@util/functions/fetch/fetchRefreshAccessToken";
+import { Db } from "mongodb";
+import { connectDB } from "@/@util/database";
+import { DBUserdataType } from "@/types/userdata";
+import { decrypt } from "@/@util/functions/cryptoValue";
 
 // api url
 const URL = 'https://www.googleapis.com/youtube/v3/subscriptions';
@@ -23,12 +28,64 @@ export default async function handler(
     req : NextApiRequest, res : NextApiResponse
 ){
     // 메소드 검증
-    if(req.method !== "GET") return res.status(405).json({message : "Not Allowed Method"})
+    if(req.method !== "GET") return res.status(405).json({message : "Not Allowed Method"});
 
-    const session = await getServerSession(req, res, authOptions);
+    // 세션 불러오기
+    const session :Session | null = await getServerSession(req, res, authOptions);
 
-    if (!session || !session.accessToken) {
-        return res.status(400).json({ message: "Session or accessToken not found" });
+    if (!session) {
+        return res.status(400).json({ message: "Session not found" });
+    }
+
+    // 사용자 이메일 저장
+    let userEmail = session.user?.email;
+
+    if(!userEmail){
+        return res.status(400).json({ message : "User Email required" })
+    }
+
+    // 리프레시 토큰 초기화
+    let refreshToken :string|null = null;
+
+    // 데이터베이스 연결 처리
+    let db: Db;
+    try {
+        db = (await connectDB).db('youtube');
+    } catch (error) {
+        return res.status(500).json({ message: "Database connection failed", error });
+    }
+    try{
+        const dbUserData = await db.collection<DBUserdataType>('userdata').findOne({ email : userEmail });
+
+        // 리프레시 토큰 저장
+        refreshToken = dbUserData?.refreshToken || null;
+    }catch (dbError) {
+        return res.status(500).json({ message: "Database operation failed", error: dbError });
+    }
+
+    if(!refreshToken){
+        return res.status(401).json({ message : "리프레시 토큰이 확인되지 않습니다. 다시 로그인해주세요." });
+    }
+
+    // session.expires를 활용하여 tokenInfo 초기화
+    const sessionExpires = Math.floor(new Date(session.expires).getTime() / 1000); // 초 단위 타임스탬프
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    // 토큰 저장
+    try {
+        tokenInfo.refreshToken = refreshToken ? decrypt(refreshToken) : null;
+    } catch (error) {
+        console.error("Failed to decrypt refresh token:", error);
+        return res.status(500).json({ message: "Invalid refresh token. Please log in again." });
+    }
+
+    // 토큰 초기화
+    tokenInfo.accessToken = session.accessToken || null;
+    tokenInfo.tokenCreatedAt = currentTime;
+    tokenInfo.expiresIn = sessionExpires - currentTime;
+
+    if (!tokenInfo.accessToken || !tokenInfo.refreshToken) {
+        return res.status(400).json({ message: "Access or Refresh Token is missing." });
     }
 
     // 전체 구독 목록 저장용 배열
@@ -36,6 +93,25 @@ export default async function handler(
     let nextPageToken: string | undefined = '';
 
     try {
+        // Access Token 만료 확인 및 갱신 처리
+        try {
+            if (isTokenExpired()) {
+                console.log("Access Token expired, refreshing...");
+                await refreshAccessToken(); 
+            }
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                if (error.message.includes("Unauthorized")) {
+                    return res.status(401).json({ message: error.message });
+                }
+                return res.status(500).json({ message: "Failed to refresh access token.", error: error.message });
+            }
+        
+            // 예상치 못한 에러 타입 처리
+            console.error("Unknown error:", error);
+            return res.status(500).json({ message: "An unknown error occurred." });
+        }
+
         // 반복적으로 요청을 보내 모든 구독 목록을 가져옴
         while (nextPageToken !== undefined) {
             const response: AxiosResponse<{ 
@@ -43,7 +119,7 @@ export default async function handler(
                 nextPageToken?: string 
             }> = await axios.get(URL, {
                 headers: {
-                    Authorization: `Bearer ${session.accessToken}`,  // accessToken 사용
+                    Authorization: `Bearer ${tokenInfo.accessToken}`,  // accessToken 사용
                 },
                 params: {
                     part: 'snippet',
@@ -60,6 +136,10 @@ export default async function handler(
             rawSubscriptions = [...rawSubscriptions, ...data.items];  
             // 다음 페이지가 없으면 undefined로 설정
             nextPageToken = data.nextPageToken || undefined;  
+
+            if (!nextPageToken) {
+                break; // 무한 루프 방지
+            }
         }
 
         // 필요한 데이터만 매핑

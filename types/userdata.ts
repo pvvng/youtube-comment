@@ -10,6 +10,16 @@ export interface DBUserdataType {
     videoHeart: UserHeartedType[];
 }
 
+export interface ClientUserdataType {
+    _id: ObjectId;
+    name: string;
+    email: string;
+    image: string | null;
+    youtuberHeart: UserHeartedType[];
+    videoHeart: UserHeartedType[];
+}
+
+
 export interface UserHeartedType {
     id : string;
     name : string;

@@ -1,4 +1,4 @@
-import { DBUserdataType } from "@/types/userdata";
+import { ClientUserdataType } from "@/types/userdata";
 import axios from "axios";
 import { Session } from "next-auth";
 
@@ -20,7 +20,7 @@ export default async function fetchGetDBUserData(
             `/api/post/database/user/data`, session
         );
 
-        const userdata : DBUserdataType = dbUserdataResult.data.userdata
+        const userdata : ClientUserdataType = dbUserdataResult.data.userdata
 
         return userdata;
     }catch(error){

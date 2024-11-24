@@ -8,12 +8,6 @@ import { getClientIp, rateLimiter } from "@/@util/functions/rateLimit";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { encrypt } from "@/@util/functions/cryptoValue";
 
-interface UserdataType {
-    name?: string | null;
-    email: string;
-    image?: string | null;
-}
-
 /** userdata db에 존재하는지 확인하는 api 존재하지 않으면 insert */
 export default async function handler(
     req: NextApiRequest,
@@ -77,7 +71,7 @@ export default async function handler(
 
     try {
         const dbUserData = await db.collection<DBUserdataType>('userdata')
-            .findOne({ email: userEmail });
+        .findOne({ email: userEmail });
 
         // 새로운 유저 데이터 준비
         const newUserData: DBUserdataType = {
@@ -94,7 +88,11 @@ export default async function handler(
             // 유저 데이터가 존재하지 않으면 새로 삽입
             try {
                 await db.collection('userdata').insertOne(newUserData);
-                return res.status(201).json({ userdata: newUserData });
+
+                const { refreshToken, ...clientUserdata } = newUserData;
+
+                // `refreshToken`을 제외한 나머지 프로퍼티 분리
+                return res.status(201).json({ userdata: clientUserdata });
             } catch (insertError) {
                 return res.status(500).json({
                     message: "Failed to create new user data",
@@ -111,12 +109,19 @@ export default async function handler(
                         { $set: { refreshToken: encryptedToken } }
                     );
                     // 업데이트된 데이터를 반환
-                    const updatedUserData = await db
-                        .collection<DBUserdataType>('userdata')
-                        .findOne({ email: userEmail });
+                    const updatedUserData = await db.collection<DBUserdataType>('userdata')
+                    .findOne({ email: userEmail });
+
+                    if (!updatedUserData) {
+                        return res.status(404).json({ message: "User data not found" });
+                    }
+                    
+                    // `refreshToken`을 제외한 나머지 프로퍼티 분리
+                    const { refreshToken, ...clientUserdata } = updatedUserData;
+
                     return res.status(200).json({
                         message: "User refresh token updated",
-                        userdata: updatedUserData,
+                        userdata: clientUserdata,
                     });
                 } catch (updateError) {
                     return res.status(500).json({
@@ -126,8 +131,11 @@ export default async function handler(
                 }
             }
 
+            // `refreshToken`을 제외한 나머지 프로퍼티 분리
+            const { refreshToken, ...clientUserdata } = dbUserData;
+
             // refreshToken 업데이트 필요 없는 경우 기존 데이터 반환
-            return res.status(200).json({ userdata: dbUserData });
+            return res.status(200).json({ userdata: clientUserdata });
         }
     } catch (dbError) {
         return res.status(500).json({ message: "Database operation failed", error: dbError });

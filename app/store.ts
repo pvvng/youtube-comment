@@ -1,4 +1,4 @@
-import { DBUserdataType, UserHeartedType } from "@/types/userdata";
+import { ClientUserdataType, UserHeartedType } from "@/types/userdata";
 import { RefObject } from "react";
 import { create } from "zustand"
 
@@ -82,8 +82,8 @@ export const useVideoRenderStateStore = create<VideoRenderState>((set) => ({
 
 
 interface DBUserStore {
-    userdata: DBUserdataType | undefined; // 초기값으로 undefined
-    setUserdata: (data: DBUserdataType) => void; // userdata 설정
+    userdata: ClientUserdataType | undefined; // 초기값으로 undefined
+    setUserdata: (data: ClientUserdataType) => void; // userdata 설정
     clearUserdata: () => void; // userdata 초기화
     addHeart: (type: "videoHeart" | "youtuberHeart", heartData: UserHeartedType) => void; // heart 추가 함수
     removeHeart: (type: "videoHeart" | "youtuberHeart", id: string) => void; // heart 삭제 함수

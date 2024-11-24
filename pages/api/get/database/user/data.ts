@@ -1,4 +1,5 @@
 import { connectDB } from "@/@util/database";
+import { DBUserdataType } from "@/types/userdata";
 import { Db } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 
@@ -28,9 +29,15 @@ export default async function handler(
 
     try {
         // 이메일로 기존 유저 데이터 검색
-        const dbUserData = await db.collection('userdata').findOne({ email: userEmail });
+        const dbUserData = await db.collection<DBUserdataType>('userdata').findOne({ email: userEmail });
 
-        return res.status(200).json({ userdata: dbUserData });
+        if (!dbUserData) {
+            return res.status(404).json({ message: "User data not found" });
+        }
+
+        const { refreshToken, ...clientUserdata } = dbUserData;
+
+        return res.status(200).json({ userdata: clientUserdata });
     } catch (dbError) {
         return res.status(500).json({ message: "Database operation failed", error: dbError });
     }

@@ -44,7 +44,7 @@ export function CommentCardContainer(
         <div className="card-container p-2 mb-2">
             <div className="row row-center w-100" style={{ margin: 'auto' }}>
                 <div className="col-12 col-sm-2 col-lg-1">
-                    <div style={{margin : 'auto', maxWidth : 50}}>
+                    <div style={{marginRight : 'auto', maxWidth : 50}}>
                         <Image
                             src={commentData.autohorProfileImageUrl}
                             alt={commentData.authorDisplayName}
@@ -65,14 +65,14 @@ export function CommentCardContainer(
                             <p className="m-sm-0 fw-bold d-sm-block d-none">{commentData.authorDisplayName}</p>
                             {
                                 textArr.map((line, index) => (
-                                    <p className="m-sm-0" key={index}>
+                                    <p className="m-0" key={index}>
                                         {convertTextWithTimestamps(line)}
                                     </p>
                                 ))
                             }
                         </div>
                         <div className="col-12 col-lg-4 px-sm-2 px-0 text-sm-start text-end">
-                            <p className="m-0">{dateToString(commentData.publishedAt)}</p>
+                            <p className="m-0 mt-3 mt-sm-0">{dateToString(commentData.publishedAt)}</p>
                             <p className="m-0">
                                 <span style={{color : '#ff0000'}}>
                                     <FontAwesomeIcon icon={faHeart} />

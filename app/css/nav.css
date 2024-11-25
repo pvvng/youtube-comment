@@ -1,8 +1,6 @@
 /* nav */
 .nav-wrapper {
-    position: sticky;
-    top : 0;
-    z-index: calc(1000 * 1000);
+    z-index: 0;
     background: white;
 }
 

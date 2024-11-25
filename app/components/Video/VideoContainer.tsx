@@ -6,7 +6,6 @@ import '@/app/css/skeleton.css';
 import { FilteredVideoSnippet, VideoStatisticsType } from "@/types/video";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faCommentDots, faSeedling } from '@fortawesome/free-solid-svg-icons'
-import { useVideoRenderStateStore } from '@/app/store';
 import { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import toLocaleString from '@/@util/functions/toLocaleString';
@@ -23,9 +22,6 @@ interface PropsType {
 export default function VideoContainer(
     {video, videoId} : PropsType
 ){
-    // video detail page render state
-    const { setVideoComponentState } = useVideoRenderStateStore();
-
     // 로딩 중 skeleton ui 로드를 위한 감시 상태 
     const [isImageLoaded, setIsImageLoaded] = useState(false);
 
@@ -38,10 +34,6 @@ export default function VideoContainer(
         }
     );
 
-    useEffect(() => {
-        setVideoComponentState(['video', true]);
-    },[]);
-    
     useEffect(() => {
         mutate();
     }, [mutate, video]);
@@ -76,6 +68,7 @@ export default function VideoContainer(
                     height={362}
                     alt={video.title} 
                     layout='responsive'
+                    priority
                     style={{borderRadius : '20px'}}
                     onLoadingComplete={() => setIsImageLoaded(true)}
                 />

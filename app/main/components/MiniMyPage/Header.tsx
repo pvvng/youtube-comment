@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Session } from "next-auth";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Image from 'next/legacy/image';
 
 export default function  MiniMyPageHeader(
     {session} : {session : Session | null}

@@ -69,7 +69,7 @@ export const authOptions: NextAuthOptions = {
             if (account && user) {
                 token.accessToken = account.access_token;
                 token.accessTokenExpires = account.expires_at || 0 * 1000;
-                // token.accessTokenExpires = Date.now() - 1000; // 이미 만료된 시간 (테스트)
+                // token.accessTokenExpires = Date.now() - 1000; // 이미 만료된 시간 (테스트1)
                 token.refreshToken = account.refresh_token || token.refreshToken; // 기존 값 유지
                 return token;
             }
@@ -77,22 +77,23 @@ export const authOptions: NextAuthOptions = {
             const nowTime = Date.now();
             const accessTokenExpires = token.accessTokenExpires as number;
             const TEN_MINUTES_AGO_IN_MS = 60 * 10 * 1000; // 10분 전
-            // const TEN_SECONDS_AGO_IN_MS = 10 * 1000; // 10초 전(테스트)
+            // const TEN_SECONDS_AGO_IN_MS = 10 * 1000; // 10초 전(테스트2)
 
             // 만료 10 분전에 토큰을 갱신해준다.
             const shouldRefreshTime = accessTokenExpires - nowTime - TEN_MINUTES_AGO_IN_MS;
 
             if (shouldRefreshTime > 0) {
-                console.log(`access token expires remain : ${Math.floor(shouldRefreshTime / 60000)} minute`);
-                // console.log("preToken : ", token.accessToken);
+                if(process.env.NODE_ENV === "development"){
+                    console.log(`access token expires remain : ${Math.floor(shouldRefreshTime / 60000)} minute`);
+                }
                 return token;
             }
 
-            console.log("not enough remain time refresh access token...")
+            if(process.env.NODE_ENV === "development"){
+                console.log("not enough remain time refresh access token...")
+            }
 
             let newToken = await refreshAccessToken(token);
-
-            // console.log("newAccesToken : ", newToken.accessToken);
 
             return newToken;
         },

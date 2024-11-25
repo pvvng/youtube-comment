@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { OVERLAY_Z_INDEX } from "./YoutuberProfileContainer";
 
 interface PropsType {
     name: string;
@@ -23,7 +24,7 @@ export default function YoutuberInfoContainer(
             }}
             onClick={(e) => {
                 let target = e.target as HTMLElement;
-                if (target.id === 'overlay') setInfoClicker([0, -10000, 'hidden']);
+                if (target.id === 'overlay') setInfoClicker([0, -OVERLAY_Z_INDEX, 'hidden']);
             }}
         >
             <div className="alert-content">
@@ -46,7 +47,7 @@ export default function YoutuberInfoContainer(
                     ))}
                     <button
                         className="mt-3 btn btn-dark float-end"
-                        onClick={() => setInfoClicker([0, -10000, 'hidden'])}
+                        onClick={() => setInfoClicker([0, -OVERLAY_Z_INDEX, 'hidden'])}
                     >
                         닫기
                     </button>

@@ -35,9 +35,7 @@ export default async function handler(
             return res.status(404).json({ message: "User data not found" });
         }
 
-        const { refreshToken, ...clientUserdata } = dbUserData;
-
-        return res.status(200).json({ userdata: clientUserdata });
+        return res.status(200).json({ userdata: dbUserData });
     } catch (dbError) {
         return res.status(500).json({ message: "Database operation failed", error: dbError });
     }

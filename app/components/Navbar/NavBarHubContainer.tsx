@@ -73,18 +73,9 @@ export default function NavBarHubContainer(
       }, [isLoading, data, setUserdata]); 
 
     return (
-        <>
-            <div 
-                className='p-2 row-center' 
-                style={{
-                    minHeight : 83, 
-                    display : 'flex',
-                    // background : '#1763b8',
-                    borderBottomLeftRadius : 10,
-                    borderBottomRightRadius : 10,
-                }}
-            >
-                <div className="row row-center w-100" style={{margin : 'auto'}}>
+        <div className='nav-wrapper'>
+            <div className='p-2 row-center nav-container'>
+                <div className="row row-center w-100 m-auto">
                     <div className="col-3 col-md-2 text-center">
                         {
                             isMobileBtnClick ?
@@ -93,7 +84,7 @@ export default function NavBarHubContainer(
                             }}>
                                 <FontAwesomeIcon icon={faArrowLeft} />
                             </button>:
-                            <div style={{margin : 'auto', width : 100}}>
+                            <div className='nav-logo-container m-auto'>
                                 <Image
                                     src="/logo/font-ko.png" 
                                     width= {100}
@@ -133,6 +124,6 @@ export default function NavBarHubContainer(
                 </div>
             </div>
             <hr className="m-0" />
-        </>
+        </div>
     )
 }

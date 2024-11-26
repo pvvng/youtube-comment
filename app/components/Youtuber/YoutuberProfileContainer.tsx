@@ -2,7 +2,6 @@
 
 import { YoutuberDataType } from "@/types/youtuber";
 import { useEffect, useState } from "react";
-import { useVideoRenderStateStore } from "../../store";
 import { useMutation } from "@tanstack/react-query";
 import toLocaleString from "@/@util/functions/toLocaleString";
 import YoutuberInfoContainer from "./YoutuberInfoContainer";
@@ -11,17 +10,16 @@ import fetchPostDBYoutuberData from "@/@util/functions/fetch/fetchPostDBYoutuber
 import HeartBtn from "../HeartBtn/HeartBtn";
 import Image from 'next/legacy/image';
 
+export const OVERLAY_Z_INDEX = 10000;
+
 export default function YoutuberProfileContainer(
     {youtuber} : {youtuber : YoutuberDataType}
 ){ 
     // 정보 알림창 띄우거나 죽이는 state
     const [infoClicker, setInfoClicker] = 
-    useState<[number, number, 'visible' | 'hidden']>([0, -10000, 'hidden']);
+    useState<[number, number, 'visible' | 'hidden']>([0, -OVERLAY_Z_INDEX, 'hidden']);
     // 로딩 중 skeleton ui 로드를 위한 감시 상태 
     const [isImageLoaded, setIsImageLoaded] = useState(false);
-
-    // video detail page render state
-    const { setVideoComponentState } = useVideoRenderStateStore();
 
     const { mutate: mutateYoutuberPopularity } = useMutation(
         { 
@@ -40,10 +38,6 @@ export default function YoutuberProfileContainer(
             },
         }
     );
-
-    useEffect(() => {
-        setVideoComponentState(['youtuber', true]);
-    },[]);
 
     useEffect(() => {
         mutateYoutuberPopularity();

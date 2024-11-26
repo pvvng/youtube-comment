@@ -5,20 +5,9 @@ export interface DBUserdataType {
     name: string;
     email: string;
     image: string | null;
-    refreshToken : string | null;
     youtuberHeart: UserHeartedType[];
     videoHeart: UserHeartedType[];
 }
-
-export interface ClientUserdataType {
-    _id: ObjectId;
-    name: string;
-    email: string;
-    image: string | null;
-    youtuberHeart: UserHeartedType[];
-    videoHeart: UserHeartedType[];
-}
-
 
 export interface UserHeartedType {
     id : string;

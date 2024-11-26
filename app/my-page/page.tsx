@@ -3,6 +3,7 @@ import MyPage from "./Main/Subscriptions";
 import UserProfile from "./Main/UserProfile";
 import NavbarContainer from "../components/Navbar/NavbarContainer";
 import MyPageHub from "./Main/MypageHubcontainer";
+import Card from "./components/card";
 
 const url = process.env.NEXTAUTH_URL;
 
@@ -20,9 +21,10 @@ export default async function MyPag(props: PropsType) {
         <>
             <NavbarContainer />
             <div className="container">
-                <UserProfile session={session} />
+              
+                {/* <UserProfile session={session} /> */}
                 <hr />
-               <MyPageHub/>
+               <MyPageHub session={session}/>
             </div>
         </>
     );

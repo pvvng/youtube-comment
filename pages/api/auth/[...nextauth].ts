@@ -12,7 +12,7 @@ export const authOptions = {
                     scope: "openid email profile https://www.googleapis.com/auth/youtube.readonly",
                     redirect_uri: `${process.env.NEXTAUTH_URL}/api/auth/callback/google`,
                     access_type: "offline", // Refresh Token 요청
-                    // prompt: "consent", // 항상 새 Refresh Token 요청
+                    prompt: "consent", // 항상 새 Refresh Token 요청
                 }
             }
         })

@@ -10,22 +10,36 @@ import { useDBUserStore } from "@/app/store";
 import { useState } from 'react';
 import Subscriptions from './Subscriptions';
 import '@/app/css/mypage.css';
+
 import HearteYoutuber from '../components/HearteYoutuber';
 import Heartevideo from '../components/HearteVideo';
 import useProcessError from '@/@util/hooks/useprocessError';
 
-export default function MyPageHub() {
+
+import { Session } from "next-auth";
+import Card from '../components/card';
+
+export default function MyPageHub({ session }: { session: Session | null }) {
 
     const { userdata } = useDBUserStore();
     
-    const [selectedOptions, setSelectedOptions] = useState<boolean[]>([false, false, false]);
+    
+
+   
+
+    const [selectedOptions, setSelectedOptions] = useState<boolean[]>([true, false, false]);
 
     /**마이페이지 분석 페이지 선택 함수 */
     const handleOptionSelect = (index: number) => {
         setSelectedOptions(prevOptions => {
-            const newOptions = [false, false, false];
-            newOptions[index] = !prevOptions[index]; // 현재 선택된 옵션의 상태를 토글
-            return newOptions;
+            // 현재 선택된 옵션이 true인 경우 그대로 두고, false인 경우에만 상태를 변경
+            if (prevOptions[index]) {
+                return prevOptions; // 현재 선택된 옵션이 true면 상태를 변경하지 않음
+            } else {
+                const newOptions = [false, false, false]; // 모든 옵션을 false로 초기화
+                newOptions[index] = true; // 클릭한 옵션만 true로 설정
+                return newOptions;
+            }
         });
     };
 
@@ -54,14 +68,16 @@ export default function MyPageHub() {
 
     return (
         <>
+        
+            <Card session={session}  Heartnumber={Heartnumber}></Card>
+        
             <Listcountainer Heartnumber={Heartnumber}  onOptionSelect={handleOptionSelect} />
 
-            {!selectedOptions[0] && !selectedOptions[1] && !selectedOptions[2] &&
-            <ErrorContainer errorMessage="회원님의 추가 정보를 확인해보세요!" />}
-
+            
            { selectedOptions[0] &&<Subscriptions youtuber={data} />}
            { selectedOptions[1] && <HearteYoutuber/>}
            { selectedOptions[2] && <Heartevideo/>}
+      
         </>
     )
 }

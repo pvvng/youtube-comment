@@ -8,7 +8,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import AppProvider from './AppProvider';
+import ReactQueryProvider from "@/@util/providers/ReactQueryProvider";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
+import { ReactNode } from "react";
+import FooterContainer from "./components/Footer/FooterContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -78,7 +81,12 @@ export default function RootLayout({
                 <meta name="google-site-verification" content="JBdVYDDSjbAEZ4ybo1VQ-ZfeHeIovnIxKB4gmNeN9YQ"/>
             </head>
             <body className={inter.className}>
-                <AppProvider children={children} />
+                <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>
+                    <ReactQueryProvider>
+                            {children}
+                        <FooterContainer />
+                    </ReactQueryProvider>
+                </ReCaptchaProvider>
             </body>
         </html>
     );

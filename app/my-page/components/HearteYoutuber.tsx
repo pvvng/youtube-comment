@@ -14,8 +14,7 @@ export default function HearteYoutuber() {
     return (
         <>
             <div
-                className="p-2 custom-scrollbar card-container mt-2"
-                style={{ maxHeight: "400px", overflowY: 'scroll', marginBottom: "20px" }}
+                className="p-2 custom-scrollbar mypage-card-container mt-2"
             >   
                 <div className="row align-items w-100" style={{ margin: 'auto' }}>
                     <h5 className="mb-0 fw-medium"

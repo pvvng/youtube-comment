@@ -29,8 +29,7 @@ export default function Subscriptions({ youtuber }: DataProps) {
 
     return (
         <div
-            className="p-2 custom-scrollbar card-container mt-2"
-            style={{ maxHeight: "400px", marginBottom: "20px", overflowY: "scroll" }}
+            className="p-2 custom-scrollbar mypage-card-container mt-2"
         >
             <Header youtuberCount={youtuber.length} onSortChange={setSortOption} />
             <SortData youtuber={sortedData} />
@@ -47,7 +46,7 @@ function Header({
 }) {
     return (
         <div style={{ position: "relative" }}>
-            <div className="row mb-3 align-items">
+            <div className="row mb-3 align-items m-auto">
                 <div className="col d-flex justify-content-start">
                     <h5
                         className="mb-3 mt-1 fw-medium"

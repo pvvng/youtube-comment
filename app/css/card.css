@@ -7,7 +7,7 @@
     /* 최소 너비 설정 */
 }
 
-.card-container {
+.mypage-card-container {
     max-height: 400px;
     overflow-y: auto;
     margin-bottom: 20px;

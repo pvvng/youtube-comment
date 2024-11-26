@@ -14,7 +14,7 @@ export default function Heartevideo() {
     const router = useRouter();
 
     return (
-        <div className="p-2 custom-scrollbar card-container mt-2" style={{ overflowY: 'scroll' }}>
+        <div className="p-2 custom-scrollbar mypage-card-container mt-2">
             <div className="row align-items w-100" style={{ margin: "auto" }}>
                 <h5 
                     className="mb-0 fw-medium"

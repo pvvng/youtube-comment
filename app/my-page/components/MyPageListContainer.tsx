@@ -1,16 +1,27 @@
-import React, { useState } from 'react';
+'use client'
 
-const MyNewComponent: React.FC = () => {
-    const [selectedOption, setSelectedOption] = useState<number | null>(null);
-    const HeartnumbList: number[] = [5, 3, 8]; // 예시 데이터
+interface ListcountainerProps {
+    Heartnumber: number[]; // Heartnumber 배열의 타입
+    onOptionSelect: (index: number) => void;
+}
 
-    const onOptionSelect = (index: number) => {
-        setSelectedOption(index);
-    };
+/** map 으로 변경 */
+const LIST_ITEM_ARR = [
+    "구독목록 살펴보기",
+    "찜한 유투버 살펴보기",
+    "찜한 영상 살펴보기",
+    // "분석한 영상 살펴보기"
+]
+
+export default function Listcountainer({ Heartnumber, onOptionSelect } : ListcountainerProps) {
+   
+    const HeartnumbList = Heartnumber;
 
     return (
-        <div className="mt-4">
+            <div className="mt-4">
             <ul className="list-group list-group-horizontal">
+                {
+                }
                 <li className="list-group-item d-flex justify-content-between align-items-center"
                     onClick={() => onOptionSelect(0)}>
                     구독목록 살펴보기
@@ -27,14 +38,7 @@ const MyNewComponent: React.FC = () => {
                     <span className="badge bg-primary rounded-pill ms-2">{HeartnumbList[2]}</span>
                 </li>
             </ul>
-            <hr />
-            {selectedOption !== null && (
-                <div className="mt-0"> {/* 마진을 0으로 설정하여 붙어있게 함 */}
-                    <p>선택한 옵션: {selectedOption === 0 ? '구독목록' : selectedOption === 1 ? '유투버' : '영상'}</p>
-                </div>
-            )}
         </div>
-    );
-};
+    )
 
-export default MyNewComponent;
+}

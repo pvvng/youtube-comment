@@ -1,31 +1,24 @@
 'use client'
 
-import Listcountainer from '../components/listContainer';
-import TestSubscriptions from './Subscriptions';
-import fetchSubscribedYoutuberData from "@/@util/functions/fetch/fetchSubscribedYoutuberData";
-import { useQuery } from "@tanstack/react-query";
-import LoadingContianer from "@/app/components/Loading/LoadingContainer";
-import ErrorContainer from "@/app/components/Error/ErrorContainer";
-import { useDBUserStore } from "@/app/store";
-import { useState } from 'react';
-import Subscriptions from './Subscriptions';
 import '@/app/css/mypage.css';
 
+import { useDBUserStore } from "@/app/store";
+import { useState } from 'react';
+import { useQuery } from "@tanstack/react-query";
+import { Session } from "next-auth";
+import Listcountainer from '../components/MyPageListContainer';
+import fetchSubscribedYoutuberData from "@/@util/functions/fetch/fetchSubscribedYoutuberData";
+import LoadingContianer from "@/app/components/Loading/LoadingContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
+import Subscriptions from './MyPageSubscriptions';
 import HearteYoutuber from '../components/HearteYoutuber';
 import Heartevideo from '../components/HearteVideo';
 import useProcessError from '@/@util/hooks/useprocessError';
-
-
-import { Session } from "next-auth";
-import Card from '../components/card';
+import Card from '../components/MyPageCardContainer';
 
 export default function MyPageHub({ session }: { session: Session | null }) {
 
     const { userdata } = useDBUserStore();
-    
-    
-
-   
 
     const [selectedOptions, setSelectedOptions] = useState<boolean[]>([true, false, false]);
 
@@ -56,24 +49,16 @@ export default function MyPageHub({ session }: { session: Session | null }) {
 
     if (isLoading) return <LoadingContianer height={300} />;
 
-    if (!data || data.length === 0){
-        return <ErrorContainer errorMessage="구독한 유튜버가 없습니다." />;
-    }
+    if (!data || data.length === 0) return <ErrorContainer errorMessage="구독한 유튜버가 없습니다." />;
 
     const Heartnumber = [data.length, userdata?.youtuberHeart.length ?? 0,  userdata?.videoHeart.length ?? 0];
 
-    if (!userdata){
-        return <ErrorContainer errorMessage="회원 정보를 확인할 수 없습니다." />;
-    }
+    if (!userdata) return <ErrorContainer errorMessage="회원 정보를 확인할 수 없습니다." />;
 
     return (
         <>
-        
-            <Card session={session}  Heartnumber={Heartnumber}></Card>
-        
+            <Card session={session}  Heartnumber={Heartnumber} />
             <Listcountainer Heartnumber={Heartnumber}  onOptionSelect={handleOptionSelect} />
-
-            
            { selectedOptions[0] &&<Subscriptions youtuber={data} />}
            { selectedOptions[1] && <HearteYoutuber/>}
            { selectedOptions[2] && <Heartevideo/>}

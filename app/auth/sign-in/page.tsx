@@ -15,7 +15,7 @@ const BACKGROUND_STYE = {
 export default function SignInPage() {
     return (
         <div style={{ ...BACKGROUND_STYE}}>
-            <div className="text-center" style={{margin : 'auto'}}>
+            <div className="text-center m-auto">
                 <div className='large-logo-container mb-3'>
                     <Image
                         src="/logo/logo-full.png"

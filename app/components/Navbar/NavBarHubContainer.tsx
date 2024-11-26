@@ -8,12 +8,12 @@ import { useEffect, useState } from "react";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import { useDBUserStore } from '@/app/store';
 import InputContainer from "./InputContainer";
 import MobileToggleButton from "./MobileToggleButton";
-import { useQuery } from '@tanstack/react-query';
 import fetchGetDBUserData from '@/@util/functions/fetch/fetchGetDBUserData';
 import useProcessError from '@/@util/hooks/useprocessError';
-import { useDBUserStore } from '@/app/store';
 import Image from 'next/legacy/image';
 
 interface PropsType {

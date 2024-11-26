@@ -1,14 +1,15 @@
 'use client'
 
 import { useRouter } from 'next/navigation';
-import fetchYoutuberProfileData from '@/@util/functions/fetch/fetchYoutuberProfileData';
 import { useDBUserStore } from "@/app/store";
 import HeartBtn from '@/app/components/HeartBtn/HeartBtn';
+import fetchYoutuberProfileData from '@/@util/functions/fetch/fetchYoutuberProfileData';
 
 export default function HearteYoutuber() {
 
-    const router = useRouter();
     const { userdata } = useDBUserStore();
+
+    const router = useRouter();
 
     return (
         <>
@@ -16,7 +17,7 @@ export default function HearteYoutuber() {
                 className="p-2 custom-scrollbar card-container mt-2"
                 style={{ maxHeight: "400px", overflowY: 'scroll', marginBottom: "20px" }}
             >   
-                <div className="row row-center w-100" style={{ margin: 'auto' }}>
+                <div className="row align-items w-100" style={{ margin: 'auto' }}>
                     <h5 className="mb-0 fw-medium"
                         style={{ fontSize: '1.25rem', lineHeight: '1.75rem', color: 'rgba(0, 0, 0, 1)' }}>
                         찜한 유투버: {userdata?.youtuberHeart.length}</h5>
@@ -38,17 +39,13 @@ export default function HearteYoutuber() {
                                         }}
                                     />
                                 </div>
-                                <div>
-                                    <h6 className="m-0 fw-bold">{item.name}</h6>
-                                </div>
+                                <h6 className="m-0 fw-bold">{item.name}</h6>
                                 <div style={{ marginLeft: 'auto' }}>
                                     <HeartBtn
                                         id={item.id}
                                         name={item.name}
                                         thumbnailUrl={item.thumbnailUrl}
-
                                         type="youtuber"
-
                                     />
                                 </div>
                             </div>

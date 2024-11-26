@@ -1,7 +1,7 @@
 import { connectDB } from "@/@util/database";
 import { DBYoutuberDataType } from "@/pages/api/get/database/youtuber/data";
 import { AnalyzedCommentData, PosType, SentimentType } from "@/types/word";
-import { Db, ObjectId } from "mongodb";
+import { Db } from "mongodb";
 
 /**
  * 분석한 데이터 db에 업데이트하는 함수

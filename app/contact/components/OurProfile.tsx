@@ -33,7 +33,7 @@ export default function OurProfile(props : DeveloperDataType) {
                         })
                     }
                     <div className="mt-3">
-                        <Link href={github} className="icon-item">
+                        <Link href={github} className="icon-item" target="_blank">
                             <Image src={"/developer-image/github-icon.png"} width={30} height={30} alt="github" />
                         </Link>{' '}
                     </div>

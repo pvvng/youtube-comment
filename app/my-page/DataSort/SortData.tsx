@@ -26,10 +26,12 @@ export default function SortData({ youtuber } : SortDataProps){
         return date.toLocaleDateString('ko-KR', options);
     };
 
+    //구독한 유투버 라인에 div를 생성해서 공간을 할당으로 나눠야할 것 같다. 
     return (
         <>
-            <div className="row row-center w-100" style={{margin : 'auto'}}>
-                <h5>구독한 유튜버 수: {youtuber.length}</h5>
+            <div className="row row-center w-100"  style={{ margin: 'auto', position: 'relative' }}>
+                {/* <h5>구독한 유튜버 수: {youtuber.length}</h5> */}
+                
                 {youtuber.map((item, index) => (
                     <div className="col-12 col-md-6 mb-3" key={index}>
                         <div

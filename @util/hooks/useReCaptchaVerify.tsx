@@ -41,6 +41,7 @@ export default function useReCaptchaVerify(){
                 return successData;
             } else {
                 console.error("Verification Failed:", response.data.errors);
+                alert("캡챠 인증에 실패했습니다.");
 
                 return ERROR_DATA;
             }

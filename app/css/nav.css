@@ -1,3 +1,21 @@
+/* nav */
+.nav-wrapper {
+    z-index: 0;
+    background: white;
+}
+
+.nav-container {
+    display: flex;
+    min-height: 83px;
+}
+
+.nav-logo-container{
+    width: 100px;
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~ */
+/* input */
+
 .input-container{
     width: 100%;
     display: flex;

@@ -1,6 +1,5 @@
 import NavbarContainer from "@/app/components/Navbar/NavbarContainer";
 import MainContainer from "./components/Main/MainContainer";
-import SideBarContainer from "./components/Main/SideBarContainer";
 
 interface PropsType {
     params : {id : string};
@@ -15,7 +14,6 @@ export default function VideoDetail(props :PropsType){
         <>
             <NavbarContainer />
             <div style={{position : 'relative'}}>
-                <SideBarContainer />
                 <MainContainer videoId={videoId} />
             </div>
         </>

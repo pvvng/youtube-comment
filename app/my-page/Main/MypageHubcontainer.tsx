@@ -1,31 +1,38 @@
 'use client'
 
-import Listcountainer from '../components/listContainer';
-import TestSubscriptions from './Subscriptions';
-import fetchSubscribedYoutuberData from "@/@util/functions/fetch/fetchSubscribedYoutuberData";
-import { useQuery } from "@tanstack/react-query";
-import LoadingContianer from "@/app/components/Loading/LoadingContainer";
-import ErrorContainer from "@/app/components/Error/ErrorContainer";
+import '@/app/css/mypage.css';
+
 import { useDBUserStore } from "@/app/store";
 import { useState } from 'react';
-import Subscriptions from './Subscriptions';
-import '@/app/css/mypage.css';
+import { useQuery } from "@tanstack/react-query";
+import { Session } from "next-auth";
+import Listcountainer from '../components/MyPageListContainer';
+import fetchSubscribedYoutuberData from "@/@util/functions/fetch/fetchSubscribedYoutuberData";
+import LoadingContianer from "@/app/components/Loading/LoadingContainer";
+import ErrorContainer from "@/app/components/Error/ErrorContainer";
+import Subscriptions from './MyPageSubscriptions';
 import HearteYoutuber from '../components/HearteYoutuber';
 import Heartevideo from '../components/HearteVideo';
 import useProcessError from '@/@util/hooks/useprocessError';
+import Card from '../components/MyPageCardContainer';
 
-export default function MyPageHub() {
+export default function MyPageHub({ session }: { session: Session | null }) {
 
     const { userdata } = useDBUserStore();
-    
-    const [selectedOptions, setSelectedOptions] = useState<boolean[]>([false, false, false]);
+
+    const [selectedOptions, setSelectedOptions] = useState<boolean[]>([true, false, false]);
 
     /**마이페이지 분석 페이지 선택 함수 */
     const handleOptionSelect = (index: number) => {
         setSelectedOptions(prevOptions => {
-            const newOptions = [false, false, false];
-            newOptions[index] = !prevOptions[index]; // 현재 선택된 옵션의 상태를 토글
-            return newOptions;
+            // 현재 선택된 옵션이 true인 경우 그대로 두고, false인 경우에만 상태를 변경
+            if (prevOptions[index]) {
+                return prevOptions; // 현재 선택된 옵션이 true면 상태를 변경하지 않음
+            } else {
+                const newOptions = [false, false, false]; // 모든 옵션을 false로 초기화
+                newOptions[index] = true; // 클릭한 옵션만 true로 설정
+                return newOptions;
+            }
         });
     };
 
@@ -42,26 +49,20 @@ export default function MyPageHub() {
 
     if (isLoading) return <LoadingContianer height={300} />;
 
-    if (!data || data.length === 0){
-        return <ErrorContainer errorMessage="구독한 유튜버가 없습니다." />;
-    }
+    if (!data || data.length === 0) return <ErrorContainer errorMessage="구독한 유튜버가 없습니다." />;
 
     const Heartnumber = [data.length, userdata?.youtuberHeart.length ?? 0,  userdata?.videoHeart.length ?? 0];
 
-    if (!userdata){
-        return <ErrorContainer errorMessage="회원 정보를 확인할 수 없습니다." />;
-    }
+    if (!userdata) return <ErrorContainer errorMessage="회원 정보를 확인할 수 없습니다." />;
 
     return (
         <>
+            <Card session={session}  Heartnumber={Heartnumber} />
             <Listcountainer Heartnumber={Heartnumber}  onOptionSelect={handleOptionSelect} />
-
-            {!selectedOptions[0] && !selectedOptions[1] && !selectedOptions[2] &&
-            <ErrorContainer errorMessage="회원님의 추가 정보를 확인해보세요!" />}
-
            { selectedOptions[0] &&<Subscriptions youtuber={data} />}
            { selectedOptions[1] && <HearteYoutuber/>}
            { selectedOptions[2] && <Heartevideo/>}
+      
         </>
     )
 }

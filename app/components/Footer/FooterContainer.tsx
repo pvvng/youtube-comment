@@ -5,7 +5,7 @@ export default function FooterContainer(){
     return (
         <>
             <hr className="m-0" />
-            <div className="bg-white container container pt-4 pb-2 text-end" style={{margin : 'auto'}}>
+            <div className="bg-white container pt-4 pb-2 text-end" style={{margin : 'auto'}}>
                 <div className='mb-3' style={{maxWidth: 140}}>
                     <Link href="/main">
                         <Image 

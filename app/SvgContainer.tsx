@@ -1,6 +1,6 @@
 /** google logo svg */
-export function GoogleLogoSvg(){
-    return(
+export function GoogleLogoSvg() {
+    return (
         <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" viewBox="0 0 256 262">
             <path fill="#4285F4" d="M255.878 133.451c0-10.734-.871-18.567-2.756-26.69H130.55v48.448h71.947c-1.45 12.04-9.283 30.172-26.69 42.356l-.244 1.622 38.755 30.023 2.685.268c24.659-22.774 38.875-56.282 38.875-96.027"></path>
             <path fill="#34A853" d="M130.55 261.1c35.248 0 64.839-11.605 86.453-31.622l-41.196-31.913c-11.024 7.688-25.82 13.055-45.257 13.055-34.523 0-63.824-22.773-74.269-54.25l-1.531.13-40.298 31.187-.527 1.465C35.393 231.798 79.49 261.1 130.55 261.1"></path>
@@ -11,8 +11,8 @@ export function GoogleLogoSvg(){
 }
 
 /** heart button svg */
-export function HeartButtonSVG(){
-    return(
+export function HeartButtonSVG() {
+    return (
         <svg
             viewBox="0 0 16 16"
             className="bi bi-heart-fill"
@@ -24,6 +24,15 @@ export function HeartButtonSVG(){
                 d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
                 fillRule="evenodd"
             ></path>
+        </svg>
+    )
+}
+
+/**sort button svg */
+export function SortButton() {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" className="arrow">
+            <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
         </svg>
     )
 }

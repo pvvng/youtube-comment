@@ -3,13 +3,10 @@
 import { fetchVideoData } from "@/@util/functions/fetch/fetchVideoData";
 import { useUpdateRecentVideoLocalStorage } from "@/@util/hooks/useUpdateRecentVideoLocalStorage";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useRef } from "react";
-import { useScrollStore } from "@/app/store";
 import VideoContainer from "@/app/components/Video/VideoContainer";
 import YoutuberProfileContainer from "@/app/components/Youtuber/YoutuberProfileContainer";
 import CommentContainer from "../Comment/CommentContainer";
 import useProcessError from "@/@util/hooks/useprocessError";
-import useCheckCachedData from "@/@util/hooks/useCheckCachedData";
 import LoadingContianer from "@/app/components/Loading/LoadingContainer";
 import ErrorContainer from "@/app/components/Error/ErrorContainer";
 
@@ -17,17 +14,6 @@ import ErrorContainer from "@/app/components/Error/ErrorContainer";
 export default function MainContainer(
     {videoId} : {videoId : string}
 ){
-    // 사이드바 스크롤을 위한 설정
-    const videoContainerRef = useRef(null);
-    const { setSectionRef } = useScrollStore();
-
-    useCheckCachedData(videoId);
-
-    // 사이드바 설정 위한 설정
-    useEffect(() => {
-        setSectionRef('video', videoContainerRef);
-    }, [setSectionRef]);
-
     // Video Data 불러오기
     const { data, isLoading, isError, error } = useQuery({
         queryKey : ['videoData', videoId],
@@ -54,7 +40,7 @@ export default function MainContainer(
     const { youtuber, video } = data;
 
     return(
-        <div ref={videoContainerRef} id="video" className="container-md">
+        <div id="video" className="container-md">
             <YoutuberProfileContainer youtuber={youtuber} />
             <hr />
             <VideoContainer video={video} videoId={videoId} />

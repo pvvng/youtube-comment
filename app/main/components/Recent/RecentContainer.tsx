@@ -1,11 +1,12 @@
 'use client';
 
 import '@/app/css/recent.css';
+
 import { VideoCardType } from '../Popularlist/CardListContainer';
 import { useEffect, useState } from "react";
-import VideoCardContainer from '@/app/main/components/Card/VideoCardContainer';
 import { faClockRotateLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import VideoCardContainer from '@/app/main/components/Card/VideoCardContainer';
 
 export default function RecentContainer(){
 

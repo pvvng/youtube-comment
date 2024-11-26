@@ -1,0 +1,170 @@
+.card {
+    width: 100%;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 3rem;
+    min-width: 300px;
+    /* 최소 너비 설정 */
+}
+
+.mypage-card-container {
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 0.5rem;
+    /* p-2에 해당하는 패딩 */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* 옅은 테두리 */
+    border-radius: 8px;
+    /* 카드 모서리 둥글게 */
+    background-color: #ffffff;
+    /* 카드 배경색 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* 부드러운 그림자 */
+}
+
+.infos {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    grid-gap: 1rem;
+    gap: 1rem;
+}
+
+.image-container {
+    height: 9rem;
+    width: 9rem;
+    border-radius: 0.5rem;
+    background-color: rgb(118, 36, 194);
+    background: linear-gradient(to bottom right, rgb(118, 36, 194), rgb(185, 128, 240));
+
+}
+
+@media (max-width: 768px) {
+    .image-container {
+        width: 80%;
+        /* 원하는 비율로 조정 */
+        height: auto;
+        /* 비율 유지 */
+        max-width: 9rem;
+        /* 최대 너비 설정 */
+    }
+
+    .user-image {
+        width: 100%;
+        /* 이미지가 컨테이너에 맞게 조정 */
+        height: auto;
+        /* 비율 유지 */
+        object-fit: cover;
+        /* 이미지 비율 유지 및 뭉개짐 방지 */
+    }
+}
+
+.info {
+    height: 7rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.name {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 1);
+    /* 텍스트 색상 변경 */
+
+    margin-bottom: 0.5rem;
+    /* 아래쪽 마진 추가 */
+}
+
+.function {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: rgba(156, 163, 175, 1);
+
+    margin-bottom: 1rem;
+    /* 아래쪽 마진 추가 */
+}
+
+.stats {
+    width: 98%;
+    border-radius: 0.5rem;
+    background-color: rgba(240, 240, 240, 1);
+    /* 통계 배경색 변경 */
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: rgba(0, 0, 0, 1);
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.state-value {
+    font-weight: 700;
+    color: rgb(118, 36, 194);
+}
+
+.name {
+    font-size: 1.5rem;
+    /* 이름 크기 증가 */
+    font-weight: bold;
+    /* 굵게 */
+    color: #333;
+    /* 어두운 색상 */
+
+    margin: 0;
+}
+
+.function {
+    font-size: 1.2rem;
+    /* 이메일 크기 증가 */
+    color: #666;
+    /* 회색 색상 */
+    margin: 0;
+}
+
+.video-item {
+    display: flex;
+    align-items: start;
+    padding: 1rem;
+    /* p-3에 해당하는 패딩 */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    /* 옅은 테두리 */
+    border-radius: 10px;
+    /* 둥근 모서리 */
+    background-color: #f8f9fa;
+    /* 비디오 항목 배경색 */
+    transition: box-shadow 0.2s;
+    /* 호버 효과를 위한 전환 */
+}
+
+.video-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* 호버 시 그림자 효과 */
+}
+
+.video-thumbnail {
+    width: 120px;
+    height: 80px;
+    border-radius: 10px;
+    /* 둥근 직사각형 */
+    cursor: pointer;
+    /* 클릭 가능함을 나타내는 커서 */
+}
+
+.video-title {
+    margin: 0;
+    /* 기본 마진 제거 */
+    font-weight: bold;
+    /* 굵은 글씨 */
+}

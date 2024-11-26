@@ -6,7 +6,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession, Session } from "next-auth";
 import { getClientIp, rateLimiter } from "@/@util/functions/rateLimit";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { encrypt } from "@/@util/functions/cryptoValue";
 
 /** userdata db에 존재하는지 확인하는 api 존재하지 않으면 insert */
 export default async function handler(
@@ -43,18 +42,6 @@ export default async function handler(
         return res.status(400).json({ message: "User Email required." });
     }
 
-    let refreshToken = session.refreshToken;
-
-    // refresh token 이 할당되지 않은 경우
-    let encryptedToken: string | null = null;
-
-    // refreshToken이 없는 경우 처리
-    if (!refreshToken) {
-        console.warn("Refresh token is undefined. Skipping encryption.");
-    } else {
-        encryptedToken = encrypt(refreshToken);
-    }
-
     let db: Db;
 
     try {
@@ -79,7 +66,6 @@ export default async function handler(
             name: userdata.name || generateRandomName(6),
             email: userEmail,
             image: userdata.image || null,
-            refreshToken: encryptedToken,
             youtuberHeart: [],
             videoHeart: [],
         };
@@ -89,10 +75,7 @@ export default async function handler(
             try {
                 await db.collection('userdata').insertOne(newUserData);
 
-                const { refreshToken, ...clientUserdata } = newUserData;
-
-                // `refreshToken`을 제외한 나머지 프로퍼티 분리
-                return res.status(201).json({ userdata: clientUserdata });
+                return res.status(201).json({ userdata: newUserData });
             } catch (insertError) {
                 return res.status(500).json({
                     message: "Failed to create new user data",
@@ -101,41 +84,7 @@ export default async function handler(
             }
         } else {
             // 유저 데이터가 존재하는 경우
-            if (!dbUserData.refreshToken && encryptedToken) {
-                // 기존 refreshToken이 null이고, 새 encryptedToken이 존재하면 업데이트
-                try {
-                    await db.collection('userdata').updateOne(
-                        { email: userEmail },
-                        { $set: { refreshToken: encryptedToken } }
-                    );
-                    // 업데이트된 데이터를 반환
-                    const updatedUserData = await db.collection<DBUserdataType>('userdata')
-                    .findOne({ email: userEmail });
-
-                    if (!updatedUserData) {
-                        return res.status(404).json({ message: "User data not found" });
-                    }
-                    
-                    // `refreshToken`을 제외한 나머지 프로퍼티 분리
-                    const { refreshToken, ...clientUserdata } = updatedUserData;
-
-                    return res.status(200).json({
-                        message: "User refresh token updated",
-                        userdata: clientUserdata,
-                    });
-                } catch (updateError) {
-                    return res.status(500).json({
-                        message: "Failed to update user refresh token",
-                        error: updateError,
-                    });
-                }
-            }
-
-            // `refreshToken`을 제외한 나머지 프로퍼티 분리
-            const { refreshToken, ...clientUserdata } = dbUserData;
-
-            // refreshToken 업데이트 필요 없는 경우 기존 데이터 반환
-            return res.status(200).json({ userdata: clientUserdata });
+            return res.status(200).json({ userdata: dbUserData });
         }
     } catch (dbError) {
         return res.status(500).json({ message: "Database operation failed", error: dbError });

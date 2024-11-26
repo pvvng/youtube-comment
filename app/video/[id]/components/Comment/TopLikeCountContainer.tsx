@@ -1,11 +1,10 @@
 'use client'
 
 import '@/app/css/video.css';
+
 import { FilteredCommentType } from "@/types/comment";
 import { useEffect, useRef, useState } from "react";
 import { CommentCardContainer } from './CommentCardContainer';
-import { useScrollStore, useVideoRenderStateStore } from '@/app/store';
-
 
 export default function TopLikeContainer(
     {commentData, videoId} : {commentData : FilteredCommentType[], videoId : string}
@@ -15,16 +14,8 @@ export default function TopLikeContainer(
     const [loadMore, setLoadMore] = useState(false);
     const observerRef = useRef<HTMLDivElement | null>(null);
 
-    // 사이드바 스크롤을 위한 설정
-    const commentContainerRef = useRef(null);
-    const { setSectionRef } = useScrollStore();
-    
-    // video detail page render state
-    const { setVideoComponentState } = useVideoRenderStateStore();
-
     // Intersection Observer (한무 스크롤) 설정
     useEffect(() => {
-        setVideoComponentState(['comment', true]);
 
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
@@ -50,17 +41,8 @@ export default function TopLikeContainer(
         }
     },[loadMore])
 
-    useEffect(() => {
-        setSectionRef('comment', commentContainerRef);
-    }, [setSectionRef]);
-
-    // 처음에 10개의 데이터를 로드
-    useEffect(() => {
-        setVisibleData(commentData.slice(0, 10));
-    }, [setSectionRef]);
-
     return (
-        <div ref={commentContainerRef} id='comment' className="p-2 custom-scrollbar card-container mt-2">
+        <div id='comment' className="p-2 custom-scrollbar card-container mt-2">
             {visibleData.map((cd, i) => (
                 <div key={cd.publishedAt.toString() + i}>
                     <CommentCardContainer cd={cd} videoId={videoId} />

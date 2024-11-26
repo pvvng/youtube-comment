@@ -2,8 +2,6 @@
 
 import { BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis, Bar, Cell, Rectangle } from "recharts";
 import FeelGrapthCustomTooltip from "../CustomToolTip/FeelGrapthCustomTooltip";
-import { useEffect, useRef } from "react";
-import { useScrollStore, useVideoRenderStateStore } from "@/app/store";
 
 const BAR_COLORS = {
     positive: '#6699FF',
@@ -17,22 +15,6 @@ interface FeelGrapthContainerPropsType extends PropsType {
 
 export default function FeelGraphContainer({ feelData, type }: FeelGrapthContainerPropsType) {
 
-    // 사이드바 스크롤을 위한 설정
-    const sentimentContainerRef = useRef(null);
-    const setSectionRef = useScrollStore((state) => state.setSectionRef);
-
-    // video detail page render state
-    const { setVideoComponentState } = useVideoRenderStateStore();
-
-    useEffect(() => {
-        setVideoComponentState(['sentiment', true]);
-    },[])
-
-    // 사이드바 설정 위한 설정
-    useEffect(() => {
-        setSectionRef('sentiment', sentimentContainerRef);
-    }, [setSectionRef]);
-
     // 평균 낼 전체값 구하기
     let total = feelData.positive + feelData.negative + feelData.neutral;
 
@@ -43,7 +25,7 @@ export default function FeelGraphContainer({ feelData, type }: FeelGrapthContain
     ];
 
     return (
-        <div ref={sentimentContainerRef} id="sentiment" className='card-container mt-3'>
+        <div id="sentiment" className='card-container mt-3'>
             <p className='fw-bold'>
                 {
                     type === "video" ?

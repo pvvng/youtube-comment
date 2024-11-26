@@ -1,12 +1,12 @@
+import '@/app/css/card.css';
+
 import React from 'react';
 import { Session } from "next-auth";
-import '@/app/css/card.css';
 
 interface ListcountainerProps {
     Heartnumber: number[]; // Heartnumber 배열의 타입
     session: Session | null; // 세션을 props로 받음
 }
-
 
 const Card = ({ Heartnumber, session }: ListcountainerProps) => {
     const HeartnumbList = Heartnumber;

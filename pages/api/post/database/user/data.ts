@@ -6,7 +6,6 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession, Session } from "next-auth";
 import { getClientIp, rateLimiter } from "@/@util/functions/rateLimit";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import { encrypt } from "@/@util/functions/cryptoValue";
 
 /** userdata db에 존재하는지 확인하는 api 존재하지 않으면 insert */
 export default async function handler(

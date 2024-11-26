@@ -1,6 +1,7 @@
 'use client'
 
 import '@/app/css/sign.css';
+
 import { signIn, signOut } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { GoogleLogoSvg } from '@/app/SvgContainer';

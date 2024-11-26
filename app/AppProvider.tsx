@@ -2,8 +2,8 @@
 
 import ReactQueryProvider from "@/@util/providers/ReactQueryProvider";
 import { ReCaptchaProvider } from "next-recaptcha-v3";
-import FooterContainer from "./components/Footer/FooterContainer";
 import { ReactNode } from "react";
+import FooterContainer from "./components/Footer/FooterContainer";
 
 export default function AppProvider({children} : {children : ReactNode}){
     return(

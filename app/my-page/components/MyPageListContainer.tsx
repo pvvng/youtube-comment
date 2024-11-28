@@ -1,44 +1,50 @@
 'use client'
 
-interface ListcountainerProps {
-    Heartnumber: number[]; // Heartnumber 배열의 타입
-    onOptionSelect: (index: number) => void;
+import { useMyPageListStore } from "@/app/store";
+
+interface PropsType {
+    heartList: {
+        length: number;
+        name: string;
+    }[]; // Heartnumber 배열의 타입
 }
 
-/** map 으로 변경 */
-const LIST_ITEM_ARR = [
-    "구독목록 살펴보기",
-    "찜한 유투버 살펴보기",
-    "찜한 영상 살펴보기",
-    // "분석한 영상 살펴보기"
-]
+export default function MyPageListContainer({ heartList } : PropsType) {
 
-export default function Listcountainer({ Heartnumber, onOptionSelect } : ListcountainerProps) {
-   
-    const HeartnumbList = Heartnumber;
+    const { selectedOption, updateSelectedOption } = useMyPageListStore();
 
     return (
+        <>
             <div className="mt-4">
-            <ul className="list-group list-group-horizontal">
-                {
-                }
-                <li className="list-group-item d-flex justify-content-between align-items-center"
-                    onClick={() => onOptionSelect(0)}>
-                    구독목록 살펴보기
-                    <span className="badge bg-primary rounded-pill ms-2">{HeartnumbList[0]}</span>
-                </li>
-                <li className="list-group-item d-flex justify-content-between align-items-center"
-                    onClick={() => onOptionSelect(1)}>
-                    찜한 유투버 살펴보기
-                    <span className="badge bg-primary rounded-pill ms-2">{HeartnumbList[1]}</span>
-                </li>
-                <li className="list-group-item d-flex justify-content-between align-items-center"
-                    onClick={() => onOptionSelect(2)}>
-                    찜한 영상 살펴보기
-                    <span className="badge bg-primary rounded-pill ms-2">{HeartnumbList[2]}</span>
-                </li>
-            </ul>
-        </div>
+                <div className="list-item-container row row-center w-100">
+                    {
+                        heartList.map((v, i) => 
+                            <div 
+                                key={v.name} 
+                                className="fw-bold col-4 position-relative p-2 pt-4 border rounded-top text-hide"
+                                style={{
+                                    transition : 'all 0.3s',
+                                    backgroundColor: selectedOption[i] ? '#175fb8' : 'white',
+                                    color: selectedOption[i] ? 'white' : 'black',
+                                }}
+                                onClick={() => updateSelectedOption(i)}
+                            >
+                                {v.name}
+                                <span 
+                                    className="badge list-badge m-1"
+                                    style={{
+                                        borderRadius : '9999px',
+                                        backgroundColor: selectedOption[i] ? 'white' : '#175fb8',
+                                        color: selectedOption[i] ? 'black' : 'white',
+                                    }}
+                                >{v.length}</span>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
+            <div style={{clear : 'both'}} />
+        </>
     )
 
 }

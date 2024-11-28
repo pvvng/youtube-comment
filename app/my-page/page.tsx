@@ -1,6 +1,6 @@
 import { getServerSession, Session } from "next-auth"
 import NavbarContainer from "../components/Navbar/NavbarContainer";
-import MyPageHub from "./Main/MypageHubcontainer";
+import MyPageHubContainer from "./components/MyPageHubContainer";
 
 export default async function MyPage() {
 
@@ -9,8 +9,8 @@ export default async function MyPage() {
     return (
         <>
             <NavbarContainer />
-            <div className="container">
-               <MyPageHub session={session}/>
+            <div className="container-md">
+               <MyPageHubContainer session={session}/>
             </div>
         </>
     );

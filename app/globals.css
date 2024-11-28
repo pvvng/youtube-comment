@@ -196,11 +196,23 @@ body {
     border-radius: 10px;
 }
 
-.list-group-item{
-    cursor: pointer;
-    transition: all 0.5s;
-    background-color: #f0f0f0 !important;
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+/* 커스텀 스크롤바 */
+
+.custom-scrollbar {
+    width: 100%;
+    background : white;
+    min-height: 300px; /* 최소 높이 고정 */
+    height: 400px;
+    overflow-y: scroll;
 }
-.list-group-item:hover{
-    background-color: white !important;
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #dddddd;
+    border-radius: 10px;
 }

@@ -1,6 +1,19 @@
 import { DBUserdataType, UserHeartedType } from "@/types/userdata";
 import { create } from "zustand"
 
+interface MyPageListStore {
+    selectedOption: boolean[];
+    updateSelectedOption: (index: number) => void;
+}
+
+export const useMyPageListStore = create<MyPageListStore>((set) => ({
+    selectedOption: [true, false, false],
+    updateSelectedOption: (index) =>
+      set((state) => ({
+        selectedOption: state.selectedOption.map((_, i) => i === index),
+      })),
+  }));
+
 interface DBUserStore {
     userdata: DBUserdataType | undefined; // 초기값으로 undefined
     setUserdata: (data: DBUserdataType) => void; // userdata 설정

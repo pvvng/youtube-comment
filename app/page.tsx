@@ -15,7 +15,7 @@ export default function Home() {
                         src="/logo/logo-full.png"
                         alt="YoutuView LOGO"
                         width={360}
-                        height={360}
+                        height={280}
                         layout='responsive'
                         priority
                     />

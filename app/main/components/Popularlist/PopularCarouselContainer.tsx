@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from "react";
 import moment from 'moment-timezone';
 import Image from 'next/image';
+import CarouselImageContainer from './CarouselImageContainer';
 
 interface PropsType {
     carouselData: PopularType[];
@@ -142,6 +143,8 @@ export default function PopularCarouselContainer(
         }
     }, [carouselState, hideCarouselArrowState, dataLength, viewOffset]);
 
+
+
     if (dataLength === 0) return (
         <div
             className="d-flex row-center"
@@ -164,27 +167,9 @@ export default function PopularCarouselContainer(
                     transition: 'all 1s',
                 }}
             >
-                {carouselData.map((cd, i) => (
-                    <div
-                        key={cd.dataId + i}
-                        className="float-start text-center"
-                        style={{ width: moveLength + '%', padding: '0 8px' }}
-                    >
-                        <div
-                            className="image-square-container border"
-                            data-id={cd.dataId}
-                        >
-                            <Image
-                                fill
-                                sizes="100px"
-                                priority
-                                src={cd.thumnailUrl}
-                                alt={cd.name}
-                                className="thumbnail-container"
-                            />
-                        </div>
-                    </div>
-                ))}
+                {carouselData.map(cardData => 
+                    <CarouselImageContainer key={cardData._id + cardData.dataId} cardData={cardData} moveLength={moveLength} />
+                )}
                 <div style={{ clear: 'both' }} />
             </div>
             <span

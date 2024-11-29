@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { Thumbnail } from "./video";
 
 interface Thumbnails {
@@ -13,12 +14,12 @@ export interface YoutuberSnippetType {
     publishedAt: string;
     thumbnails: Thumbnails;
     localized: {
-      title: string;
-      description: string;
+        title: string;
+        description: string;
     };
     country: string;
 }
-  
+
 export interface YoutuberStatisticsType {
     viewCount: string;
     subscriberCount: string;
@@ -34,38 +35,58 @@ export interface YoutuberDataType {
     subscriber: string,
     totalview: string,
     videoCount: string,
-    channelId : string,
+    channelId: string,
 }
 
 export interface RawSubscribedYoutuberType {
-    kind : string;
-    etag : string;
-    id : string;
-    snippet : SubScibedYoutuberSnippetType;
+    kind: string;
+    etag: string;
+    id: string;
+    snippet: SubScibedYoutuberSnippetType;
 }
 
 export interface SubScibedYoutuberSnippetType {
-    publishedAt : string;
-    title : string;
-    description : string;
-    resourceId : {
-        kind : string;
+    publishedAt: string;
+    title: string;
+    description: string;
+    resourceId: {
+        kind: string;
         // 유튜버 아이디
-        channelId : string;
+        channelId: string;
     };
     // 사용자 아이디
-    channelId : string;
-    thumbnails : {
-        default : { url : string };
-        medium ?: { url : string };
-        high ?: { url : string };
+    channelId: string;
+    thumbnails: {
+        default: { url: string };
+        medium?: { url: string };
+        high?: { url: string };
     };
 }
 
 export interface SubScibedYoutuberType {
-    publishedAt : string;
-    title : string;
-    description : string;
-    channelId : string;
-    thumbnails : string;
+    publishedAt: string;
+    title: string;
+    description: string;
+    channelId: string;
+    thumbnails: string;
+}
+
+interface TopYoutuberInnerType {
+    name: string;
+    customUrl: string;
+    description: string;
+    thumbnail: Thumbnail;
+    subscriber: string;
+    totalview: string;
+    videoCount: string;
+    channelId: string;
+}
+
+export interface TopYoutuberData {
+    _id: ObjectId;
+    channelId: string;
+    extra : {
+        popularity : number;
+    }
+    youtuber: TopYoutuberInnerType;
 }

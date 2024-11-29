@@ -5,6 +5,7 @@ import ContentContainer from './components/Landing/Content/ContentContainer';
 import GoMainBtn from './components/Landing/Content/GoMainBtn';
 import Image from 'next/legacy/image';
 import FooterContainer from './components/Footer/FooterContainer';
+import PopularCardContainer from './components/Landing/Content/PopularCard';
 
 export default function Home() {
     
@@ -26,6 +27,7 @@ export default function Home() {
                 </div>
                 <GoMainBtn />
                 <ContentContainer />
+                <PopularCardContainer />
             </div>
             <FooterContainer />
         </>

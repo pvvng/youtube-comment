@@ -3,7 +3,7 @@
 import '@/app/css/mypage.css';
 
 import { useDBUserStore, useMyPageListStore } from "@/app/store";
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useQuery } from "@tanstack/react-query";
 import { Session } from "next-auth";
 import { useRouter } from 'next/navigation';
@@ -58,17 +58,6 @@ export default function MyPageHubContainer(
         { length: userdata?.youtuberHeart.length || 0, name: "찜한 유튜버" },
         { length: userdata?.videoHeart.length || 0, name: "찜한 영상" }
     ];
-
-    const cardYoutuberData: MyPageCardDataType[] = youtuber?.map(v => {
-        return {
-            id: v.channelId,
-            name: v.title,
-            thumbnailUrl: v.thumbnails,
-            publisedAt: v.publishedAt
-        }
-    }) || [];
-    const cardHeartedVideoData: MyPageCardDataType[] = userdata?.videoHeart || [];
-    const cardHeartedYoutuberData: MyPageCardDataType[] = userdata?.youtuberHeart || [];
 
     const cardDataArr : CardDataArrType[] = [
         { type: "youtuber", data: youtuber?.map(v => {

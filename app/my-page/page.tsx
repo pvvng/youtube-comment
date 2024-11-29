@@ -1,22 +1,16 @@
 import { getServerSession, Session } from "next-auth"
 import NavbarContainer from "../components/Navbar/NavbarContainer";
-import MyPageHub from "./Main/MypageHubcontainer";
+import MyPageHubContainer from "./components/MyPageHubContainer";
 
-const url = process.env.NEXTAUTH_URL;
-
-interface PropsType {
-    params: { id: string };
-}
-
-export default async function MyPag(props: PropsType) {
+export default async function MyPage() {
 
     const session: Session | null = await getServerSession();
 
     return (
         <>
             <NavbarContainer />
-            <div className="container">
-               <MyPageHub session={session}/>
+            <div className="container-md">
+               <MyPageHubContainer session={session}/>
             </div>
         </>
     );

@@ -34,7 +34,7 @@ export default function VideoCardContainer(
                                         width={170}
                                         height={95} 
                                         layout='responsive'
-                                        loading='lazy'
+                                        priority
                                         style={{borderRadius : '10px'}}
                                     />
                                 </div>

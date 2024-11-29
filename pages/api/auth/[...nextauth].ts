@@ -60,9 +60,9 @@ export const authOptions: NextAuthOptions = {
     },
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
-        async redirect({ baseUrl }) {
-            return `${baseUrl}/main`; // 로그인 후 /main으로 리디렉션
-        },
+        // async redirect({ baseUrl }) {
+        //     return `${baseUrl}/main`; // 로그인 후 /main으로 리디렉션
+        // },
         async jwt({ token, account, user }) {
             if (account && user) {
                 token.accessToken = account.access_token;

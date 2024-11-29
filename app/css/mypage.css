@@ -19,3 +19,26 @@
 .hoverEffect:hover {
     background-color: rgba(0, 0, 0, 0.1); /* 호버 시 배경색 변경 */
 }
+
+.list-item-container {
+    max-width: 330px;
+    transition: all 0.3s;
+    margin: auto;
+    float: left;
+    cursor: pointer;
+}
+
+.list-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.mypage-card-wrapper {
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.mypage-card-wrapper:hover {
+    scale : 0.98;
+}

@@ -1,14 +1,9 @@
-.card {
-    width: 100%;
-    border-radius: 1rem;
-    background-color: rgba(255, 255, 255, 1);
-    padding: 3rem;
-    min-width: 300px;
-    /* 최소 너비 설정 */
+.box-shadowing {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .mypage-card-container {
-    max-height: 400px;
+    min-height: 400px;
     overflow-y: auto;
     margin-bottom: 20px;
     padding: 0.5rem;
@@ -111,7 +106,6 @@
 
 .state-value {
     font-weight: 700;
-    color: rgb(118, 36, 194);
 }
 
 .name {

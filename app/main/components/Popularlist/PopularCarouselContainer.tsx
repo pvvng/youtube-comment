@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from "react";
 import moment from 'moment-timezone';
-import Image from 'next/image';
 import CarouselImageContainer from './CarouselImageContainer';
 
 interface PropsType {

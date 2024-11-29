@@ -5,7 +5,7 @@ import ContentContainer from './components/Landing/Content/ContentContainer';
 import GoMainBtn from './components/Landing/Content/GoMainBtn';
 import Image from 'next/legacy/image';
 import FooterContainer from './components/Footer/FooterContainer';
-import PopularCardContainer from './components/Landing/Content/PopularCard';
+import PopularCardContainer from './components/Landing/Content/PopularCardContainer';
 
 export default function Home() {
     

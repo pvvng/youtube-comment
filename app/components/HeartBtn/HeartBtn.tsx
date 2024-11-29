@@ -7,7 +7,7 @@ import useReCaptchaVerify from '@/@util/hooks/useReCaptchaVerify';
 import { HeartButtonSVG } from '@/app/SvgContainer';
 import { UserHeartedType } from '@/types/userdata';
 import { useEffect, useState } from 'react';
-import { getSession } from 'next-auth/react';
+import { getSession, signIn } from 'next-auth/react';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useDBUserStore } from '@/app/store';
@@ -16,7 +16,7 @@ interface PropsType extends UserHeartedType {
     type: "video" | "youtuber";
 }
 
-const CONFIRM_TEXT = `로그인 후 이용 가능합니다.\n로그인 페이지로 이동하시겠습니까?`;
+const CONFIRM_TEXT = `로그인 후 이용 가능합니다.\n로그인하시겠습니까?`;
 
 export default function HeartBtn(
     { id, name, thumbnailUrl, type }: PropsType
@@ -53,7 +53,7 @@ export default function HeartBtn(
         if (!session) {
             let isConfirmed = confirm(CONFIRM_TEXT);
 
-            if(isConfirmed) router.push(`/auth/sign-in`);
+            if(isConfirmed) signIn();
             
             return;
         }
@@ -72,22 +72,35 @@ export default function HeartBtn(
 
             if(type !== "video" && type !== "youtuber") return;
 
-            // API 요청
-            let result = await axios.post('/api/post/database/user/heart', {
-                // 상태가 변경될 값을 서버로 보냄
-                id, name, thumbnailUrl, type, userEmail, isChecked: !isChecked 
-            });
-
-            if(result.status === 200){
-                // 서버 업데이트가 성공하면 zustand userdata 수정
-                const typeString = checkHeartType();
-
-                if(!typeString) return;
-
-                if(isChecked){
-                    removeHeart(typeString, id);
-                }else{
-                    addHeart(typeString, {id, name, thumbnailUrl});
+            try {
+                let result = await axios.post('/api/post/database/user/heart', {
+                    // 상태가 변경될 값을 서버로 보냄
+                    id, name, thumbnailUrl, type, userEmail, isChecked: !isChecked 
+                });
+            
+                if (result.status === 200) {
+                    // 서버 업데이트가 성공하면 zustand userdata 수정
+                    const typeString = checkHeartType();
+            
+                    if (!typeString) return;
+            
+                    if (isChecked) {
+                        removeHeart(typeString, id);
+                    } else {
+                        addHeart(typeString, { id, name, thumbnailUrl });
+                    }
+                } else {
+                    alert(result.data.message);
+                }
+            } catch (error) {
+                // 실패한 경우
+                console.error(error);
+            
+                // AxiosError를 안전하게 처리
+                if (axios.isAxiosError(error)) {
+                    alert(error.response?.data?.message || "서버 오류가 발생했습니다.");
+                } else {
+                    alert("알 수 없는 오류가 발생했습니다.");
                 }
             }
         }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import NavbarContainer from "../components/Navbar/NavbarContainer";
+import FooterContainer from "../components/Footer/FooterContainer";
 
 export default function PrivacyPolicyPage(){
     return(
@@ -103,6 +104,7 @@ export default function PrivacyPolicyPage(){
                     <p>개인정보 보호 정책은 변경될 수 있으며, 중요한 변경 사항은 웹사이트 공지사항을 통해 사용자에게 알릴 것입니다.</p>
                 </div>
             </div>
+            <FooterContainer />
         </>
     )
 }

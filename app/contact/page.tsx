@@ -4,6 +4,7 @@ import NavbarContainer from "../components/Navbar/NavbarContainer";
 import FormContainer from './components/FormContainer';
 import OurProfile from './components/OurProfile';
 import { josData, kimsData } from '@/@util/developerProfileData';
+import FooterContainer from '../components/Footer/FooterContainer';
 
 export default function ContactPage() {
     return (
@@ -22,6 +23,7 @@ export default function ContactPage() {
                     </div>
                 </div>
             </div>
+            <FooterContainer />
         </>
     )
 }

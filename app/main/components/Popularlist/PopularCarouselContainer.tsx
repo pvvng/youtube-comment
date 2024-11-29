@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from "react";
 import moment from 'moment-timezone';
+import Image from 'next/image';
 
 interface PropsType {
     carouselData : PopularType[];
@@ -129,7 +130,10 @@ export default function PopularCarouselContainer(
                                 router.push(`/${type}/${cd.dataId}`);
                             }}
                         >
-                            <img
+                            <Image
+                                fill
+                                sizes='100px'
+                                priority
                                 src={cd.thumnailUrl}
                                 alt={cd.name}
                                 className='thumbnail-container'

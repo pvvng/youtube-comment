@@ -10,7 +10,14 @@ export default function OurProfile(props : DeveloperDataType) {
         <div className="profile-card mt-3 mt-md-0">
             <div className="profile-card-image">
                 <div className="m-auto" style={{maxWidth : 280}}>
-                    <Image src={profile} width={280} height={280} layout="responsive" alt="YoutuView LOGO" priority />
+                    <Image 
+                        src={profile} 
+                        width={280} 
+                        height={280} 
+                        layout="responsive" 
+                        alt="YoutuView LOGO" 
+                        priority 
+                    />
                 </div>
             </div>
             <div className="container">

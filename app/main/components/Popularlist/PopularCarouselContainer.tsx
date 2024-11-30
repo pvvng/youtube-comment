@@ -108,6 +108,48 @@ export default function PopularCarouselContainer(
         document.addEventListener('mouseup', handleMouseUp);
     };
 
+    const handleTouchEvents = (e: React.TouchEvent<HTMLDivElement>) => {
+        let isDragging = false;
+        const startX = e.touches[0].clientX; // 터치 시작 지점
+    
+        const handleTouchMove = (moveEvent: TouchEvent) => {
+            const endX = moveEvent.touches[0].clientX; // 현재 터치 위치
+            const distance = startX - endX;
+    
+            if (Math.abs(distance) > 5) {
+                isDragging = true; // 드래그 중인 것으로 간주
+            }
+    
+            if (distance > 50) { // 오른쪽으로 스와이프
+                moveRight();
+                document.removeEventListener('touchmove', handleTouchMove);
+            } else if (distance < -50) { // 왼쪽으로 스와이프
+                moveLeft();
+                document.removeEventListener('touchmove', handleTouchMove);
+            }
+        };
+    
+        const handleTouchEnd = (endEvent: TouchEvent) => {
+            document.removeEventListener('touchmove', handleTouchMove);
+            document.removeEventListener('touchend', handleTouchEnd);
+    
+            if (!isDragging) {
+                // 클릭으로 간주 (드래그가 아닌 경우)
+                const target = endEvent.target as HTMLElement;
+                const clickableParent = target.closest('.image-square-container');
+                if (clickableParent) {
+                    const dataId = clickableParent.getAttribute('data-id');
+                    if (dataId) {
+                        router.push(`/${type}/${dataId}`);
+                    }
+                }
+            }
+        };
+    
+        document.addEventListener('touchmove', handleTouchMove);
+        document.addEventListener('touchend', handleTouchEnd);
+    };
+
     useEffect(() => {
         updateViewOffset();
 
@@ -142,8 +184,6 @@ export default function PopularCarouselContainer(
         }
     }, [carouselState, hideCarouselArrowState, dataLength, viewOffset]);
 
-
-
     if (dataLength === 0) return (
         <div
             className="d-flex row-center"
@@ -155,9 +195,9 @@ export default function PopularCarouselContainer(
 
     return (
         <div
-            className="mb-3"
-            style={{ overflow: 'hidden', position: 'relative' }}
+            className="mb-3 position-relative overflow-hidden"
             onMouseDown={handleMouseEvents}
+            onTouchStart={handleTouchEvents} // 터치 이벤트 추가
         >
             <div
                 style={{

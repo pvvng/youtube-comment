@@ -72,6 +72,22 @@ body {
     color : #175fb8;
 }
 
+.exit-btn {
+    background-color: #bf0101;
+    border: 1px solid #b00101;
+    color: white;
+    padding: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.5s;
+}
+
+.exit-btn:hover{
+    background-color: #b00101;
+}
+
 .btn-main{
     background-color: #175fb8;
     border: 1px solid #14529d;

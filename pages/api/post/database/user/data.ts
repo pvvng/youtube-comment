@@ -38,8 +38,8 @@ export default async function handler(
         return res.status(400).json({ message: "User Data required." });
     }
 
-    if (!userdata.email) {
-        return res.status(400).json({ message: "User Email required." });
+    if (!userdata.email || userdata.email === undefined) {
+        return res.status(403).json({ message: "user email required" });
     }
 
     let db: Db;
@@ -48,10 +48,6 @@ export default async function handler(
         db = (await connectDB).db('youtube');
     } catch (error) {
         return res.status(500).json({ message: 'Database connection failed' });
-    }
-
-    if (!userdata.email || userdata.email === undefined) {
-        return res.status(403).json({ message: "user email required" });
     }
 
     const userEmail = userdata.email;

@@ -17,9 +17,9 @@ export const kimsData : DeveloperDataType = {
 }
 
 export const josData : DeveloperDataType = {
-    profile : "/developer-image/kims-profile.png",
+    profile : "/developer-image/jos-profile.png",
     name : "조정민",
-    email : "c4851007@gmaile.com",
+    email : "c4851007@gmail.com",
     comment : "여기까지 들어오셨네요.",
     role : ["frontend"],
     github : "https://github.com/JOJoungMin",

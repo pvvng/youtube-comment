@@ -3,6 +3,10 @@ body {
     box-sizing: border-box;
 }
 
+.box-shadowing {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 /* recaptch badge css */
 .grecaptcha-badge {
     z-index: 10000; /* 다른 요소보다 위로 올림 */
@@ -96,9 +100,10 @@ body {
 }
 
 .card-container{
-    border: 1px solid #999999;
+    border: 1px solid rgb(222, 226, 230);;
     padding : 20px;
     border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     @media screen and (max-width : 360px) {
         padding : 10px;
     }

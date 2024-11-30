@@ -8,11 +8,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from "react";
 import moment from 'moment-timezone';
-import Image from 'next/image';
+import CarouselImageContainer from './CarouselImageContainer';
 
 interface PropsType {
-    carouselData : PopularType[];
-    type : string;
+    carouselData: PopularType[];
+    type: string;
 }
 
 const LEFT_LAST = ['d-none', ''];
@@ -21,8 +21,8 @@ const DEFAULT_STATE_ARR = ['', ''];
 const HIDDEN_STATE_ARR = ['d-none', 'd-none'];
 
 export default function PopularCarouselContainer(
-    {carouselData, type} : PropsType
-){
+    { carouselData, type }: PropsType
+) {
     const [carouselState, setCarouselState] = useState(0);
     const [hideCarouselArrowState, setHideCarouselArrowState] = useState(LEFT_LAST);
     const [viewOffset, setViewOffset] = useState(0);
@@ -38,13 +38,13 @@ export default function PopularCarouselContainer(
     function moveLeft() {
         if (carouselState < 0) {
             setCarouselState((prev) => prev + moveLength);
-        } 
+        }
     };
 
     function moveRight() {
         if (carouselState > -Math.round(maxTranslateX)) {
             setCarouselState((prev) => prev - moveLength);
-        } 
+        }
     };
 
     // 화면 크기에 따른 maxTranslateX 업데이트 함수
@@ -53,15 +53,59 @@ export default function PopularCarouselContainer(
 
         if (screenWidth >= 1024) { // lg 이상
             setViewOffset(5);
-        }else if (screenWidth >= 992) { // lg 이상
+        } else if (screenWidth >= 992) { // lg 이상
             setViewOffset(4);
-        }else if (screenWidth >= 466) { // sm 이상
+        } else if (screenWidth >= 466) { // sm 이상
             setViewOffset(3);
-        }else { // xs (576 이하)
+        } else { // xs (576 이하)
             setViewOffset(2);
         }
 
         setCarouselState(0);
+    };
+
+    const handleMouseEvents = (e: React.MouseEvent<HTMLDivElement>) => {
+        let isDragging = false;
+        const startX = e.clientX;
+
+        const handleMouseMove = (moveEvent: MouseEvent) => {
+            const endX = moveEvent.clientX;
+            const distance = startX - endX;
+
+            if (Math.abs(distance) > 5) {
+                isDragging = true; // 드래그가 발생했음을 기록
+            }
+
+            if (distance > 100) {
+                moveRight();
+                document.removeEventListener('mousemove', handleMouseMove);
+            } else if (distance < -100) {
+                moveLeft();
+                document.removeEventListener('mousemove', handleMouseMove);
+            }
+        };
+
+        const handleMouseUp = (upEvent: MouseEvent) => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+
+            const endX = upEvent.clientX;
+
+            if (!isDragging && Math.abs(startX - endX) <= 5) {
+                // 클릭으로 간주 (드래그가 아닌 경우)
+                const target = upEvent.target as HTMLElement;
+                const clickableParent = target.closest('.image-square-container');
+                if (clickableParent) {
+                    const dataId = clickableParent.getAttribute('data-id');
+                    if (dataId) {
+                        router.push(`/${type}/${dataId}`);
+                    }
+                }
+            }
+        };
+
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
     };
 
     useEffect(() => {
@@ -77,84 +121,74 @@ export default function PopularCarouselContainer(
     }, [viewOffset]);
 
     useEffect(() => {
-        if(carouselState >= 0){
-            if(dataLength <= viewOffset){
+        if (carouselState >= 0) {
+            if (dataLength <= viewOffset) {
                 setHideCarouselArrowState(HIDDEN_STATE_ARR);
-            }else{
-                setHideCarouselArrowState(LEFT_LAST);         
+            } else {
+                setHideCarouselArrowState(LEFT_LAST);
             }
-        }else if (carouselState <= -Math.round(maxTranslateX)){
-            if(dataLength <= viewOffset){
+        } else if (carouselState <= -Math.round(maxTranslateX)) {
+            if (dataLength <= viewOffset) {
                 setHideCarouselArrowState(HIDDEN_STATE_ARR);
-            }else{
+            } else {
                 setHideCarouselArrowState(RIGHT_LAST);
             }
-        }else{
-            if(dataLength <= viewOffset){
+        } else {
+            if (dataLength <= viewOffset) {
                 setHideCarouselArrowState(HIDDEN_STATE_ARR);
-            }else{
+            } else {
                 setHideCarouselArrowState(DEFAULT_STATE_ARR);
             }
         }
     }, [carouselState, hideCarouselArrowState, dataLength, viewOffset]);
 
-    if(dataLength === 0) return (
-        <div 
-            className="d-flex row-center" 
-            style={{minHeight : 150}}
+
+
+    if (dataLength === 0) return (
+        <div
+            className="d-flex row-center"
+            style={{ minHeight: 150 }}
         >
             <p className='m-0'>{koreaTime}에 수집된 데이터가 아직 없습니다.</p>
         </div>
     )
 
-    return(
-        <div 
-            className="mb-3" 
-            style={{overflow : 'hidden', position : 'relative'}}
+    return (
+        <div
+            className="mb-3"
+            style={{ overflow: 'hidden', position: 'relative' }}
+            onMouseDown={handleMouseEvents}
         >
-            <div style={{
-                    width : `${dataLength * (100/viewOffset)}%`, 
-                    transform : `translateX(${carouselState}%)`,
-                    transition : 'all 1s'
+            <div
+                style={{
+                    width: `${dataLength * (100 / viewOffset)}%`,
+                    transform: `translateX(${carouselState}%)`,
+                    transition: 'all 1s',
                 }}
             >
-                {carouselData.map((cd, i) => 
-                    <div 
-                        key={cd.dataId + i}
-                        className="float-start text-center"
-                        style={{width : moveLength + '%', padding: '0 8px'}}
-                    >
-                        <div 
-                            className='image-square-container border'
-                            onClick={() => {
-                                router.push(`/${type}/${cd.dataId}`);
-                            }}
-                        >
-                            <Image
-                                fill
-                                sizes='100px'
-                                priority
-                                src={cd.thumnailUrl}
-                                alt={cd.name}
-                                className='thumbnail-container'
-                            />
-                        </div>
-                    </div>
+                {carouselData.map(cardData => 
+                    <CarouselImageContainer key={cardData._id + cardData.dataId} cardData={cardData} moveLength={moveLength} />
                 )}
-                <div style={{clear : 'both'}} />
+                <div style={{ clear: 'both' }} />
             </div>
-            <span 
+            <span
                 className={`left-arrow-head ${hideCarouselArrowState[0]}`}
                 onClick={() => moveLeft()}
             >
-                <FontAwesomeIcon icon={faAngleUp}  style={{transform: 'rotate(-90deg)'}} />            
+                <FontAwesomeIcon
+                    icon={faAngleUp}
+                    style={{ transform: 'rotate(-90deg)' }}
+                />
             </span>
-            <span 
+            <span
                 className={`right-arrow-head ${hideCarouselArrowState[1]}`}
                 onClick={() => moveRight()}
             >
-                <FontAwesomeIcon icon={faAngleUp}  style={{transform: 'rotate(90deg)'}} />            
+                <FontAwesomeIcon
+                    icon={faAngleUp}
+                    style={{ transform: 'rotate(90deg)' }}
+                />
             </span>
         </div>
-    )
+    );
 }

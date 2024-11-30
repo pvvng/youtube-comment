@@ -58,6 +58,7 @@ export default function NavBarHubContainer(
         queryFn: () => fetchGetDBUserData(session),
         enabled: !!session?.user?.email, // email이 존재할 때만 쿼리 실행
         refetchOnWindowFocus: false,
+        retry : false,
         // 캐시타임 1시간(3600000ms)
         gcTime: 3600000,
         staleTime: 3600000,

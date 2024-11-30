@@ -2,6 +2,8 @@ import CardListContainer from "./components/Popularlist/CardListContainer";
 import RecentContainer from "./components/Recent/RecentContainer";
 import MiniMyPageContainer from "./components/MiniMyPage/MiniMyPageContainer";
 import NavbarContainer from "../components/Navbar/NavbarContainer";
+import FooterContainer from "../components/Footer/FooterContainer";
+import InstallPWAAlertContainer from "../components/PWA/InstallPWAAlertContainer";
 
 export default function Home() {
     
@@ -20,6 +22,8 @@ export default function Home() {
                     <RecentContainer />
                 </div>
             </div>
+            <InstallPWAAlertContainer />
+            <FooterContainer />
         </>
     );
 }

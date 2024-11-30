@@ -14,6 +14,7 @@ import useProcessError from '@/@util/hooks/useprocessError';
 import MyPageUserProfile from './MyPageUserProfile';
 import { UserHeartedType } from '@/types/userdata';
 import MyPageCardContainer from './MyPageCardContainer';
+import ExitBtn, { SignOutBtn } from '@/app/components/SignItems/SignBtn';
 
 export interface MyPageCardDataType extends UserHeartedType {
     publisedAt?: string;
@@ -84,6 +85,10 @@ export default function MyPageHubContainer(
                     selectedOption[i] ? <MyPageCardContainer key={i} cardData={so.data} type={so.type} /> : null
                 )
             }
+            <div className='card-container text-center mt-2'>
+                <SignOutBtn />
+                <ExitBtn />
+            </div>
         </div>
     )
 }

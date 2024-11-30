@@ -39,7 +39,6 @@ export default function MyPageUserProfile (
                     <StatsContainer heartList={heartList} />
                 </div>
             </div>
-            {/* 버튼 제거 */}
         </div>
     )
 }

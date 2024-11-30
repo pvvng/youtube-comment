@@ -18,7 +18,7 @@ export default function useProcessError(
     if (isError) {
         let errorMessage = '';
         // error가 AxiosError인지 확인
-        if (error instanceof AxiosError ) {
+        if (error instanceof AxiosError) {
             // AxiosError 타입에 따라 에러 처리
             errorMessage = 
             error.response?.data?.message || '서버에서 오류가 발생했습니다.';
@@ -28,15 +28,17 @@ export default function useProcessError(
         } else {
             errorMessage = "알 수 없는 에러가 발생했습니다.";
         }
+
+        alert(errorMessage);
+
         // 에러 객체에서 메시지 추출
         if(type === "mc"){
-            alert(errorMessage);
             router.back();
-            return null;
+            return;
         }else{
             return errorMessage;
         }
     }
 
-    return null;
+    return;
 }

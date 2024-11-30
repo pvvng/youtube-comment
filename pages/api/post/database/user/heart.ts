@@ -24,7 +24,7 @@ export default async function handler(
         // Rate Limiting 적용
         await rateLimiter.consume(clientIp);
     } catch (rateLimiterRes) {
-        return res.status(429).json({ message: "Too many requests. Please try again later." });
+        return res.status(429).json({ message: "너무 많은 요청이 확인되었습니다. 잠시 후 다시 실행해주세요." });
     }
 
 

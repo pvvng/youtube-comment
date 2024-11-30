@@ -27,6 +27,7 @@
     transition: bottom 0.3s ease; /* 부드러운 슬라이드 효과 */
     text-align: center;
     font-weight: bold;
+    border-radius: 50%;
 }
 
 
@@ -42,6 +43,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
     transition: transform 0.5s ease; /* 살짝 확대 효과 */
 }
 
@@ -76,4 +78,10 @@
 .left-arrow-head:hover,
 .right-arrow-head:hover {
     background-color: #175fb8; /* 반투명한 배경 */
+}
+
+.image-square-container,
+.thumbnail-container {
+    user-select: none;      /* 텍스트 선택 방지 */
+    -webkit-user-drag: none; /* 드래그 방지 */
 }

@@ -10,8 +10,6 @@ import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactQueryProvider from "@/@util/providers/ReactQueryProvider";
 import { ReCaptchaProvider } from "next-recaptcha-v3";
-import { ReactNode } from "react";
-import FooterContainer from "./components/Footer/FooterContainer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -83,8 +81,7 @@ export default function RootLayout({
             <body className={inter.className}>
                 <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>
                     <ReactQueryProvider>
-                            {children}
-                        <FooterContainer />
+                        {children}
                     </ReactQueryProvider>
                 </ReCaptchaProvider>
             </body>

@@ -8,6 +8,7 @@ import TopLikeContainer from "./TopLikeCountContainer";
 import useProcessError from "@/@util/hooks/useprocessError";
 import LoadingContianer from "@/app/components/Loading/LoadingContainer";
 import ErrorContainer from "@/app/components/Error/ErrorContainer";
+import axios from "axios";
 
 interface PropsType {
     videoId : string;
@@ -21,6 +22,17 @@ export default function CommentContainer(
         queryKey : ['commentData', videoId],
         queryFn : () => fetchCommentData(videoId),
         refetchOnWindowFocus : false,
+        // 특정 오류 코드에 대해서만 retry 하지 않음
+        retry: (failureCount, error) => {
+            if (axios.isAxiosError(error)) {
+                const serverMessage = error.response?.data?.message;
+        
+                if (serverMessage === "댓글 수집이 허용되지 않은 영상입니다.") {
+                    return false; // 자동 재시도 방지
+                }
+            }
+            return true;  // 그 외의 오류는 자동 재시도
+        },
         // 캐시타임 1시간(3600000ms)
         gcTime : 3600000,
         staleTime : 3600000,

@@ -4,26 +4,32 @@ import LadingSearchButton from './components/Landing/LandingSearchButton';
 import ContentContainer from './components/Landing/Content/ContentContainer';
 import GoMainBtn from './components/Landing/Content/GoMainBtn';
 import Image from 'next/legacy/image';
+import FooterContainer from './components/Footer/FooterContainer';
+import PopularCardContainer from './components/Landing/Content/PopularCardContainer';
 
 export default function Home() {
     
     return (
-        <div className='text-center overflow-hidden'>
-            <div className='mt-3'>
-                <div className='large-logo-container'>
-                    <Image
-                        src="/logo/logo-full.png"
-                        alt="YoutuView LOGO"
-                        width={360}
-                        height={360}
-                        layout='responsive'
-                        priority
-                    />
+        <>
+            <div className='text-center overflow-hidden'>
+                <div className='mt-3'>
+                    <div className='large-logo-container'>
+                        <Image
+                            src="/logo/logo-full.png"
+                            alt="YoutuView LOGO"
+                            width={360}
+                            height={360}
+                            layout='responsive'
+                            priority
+                        />
+                    </div>
+                    <LadingSearchButton />
                 </div>
-                <LadingSearchButton />
+                <GoMainBtn />
+                <ContentContainer />
+                <PopularCardContainer />
             </div>
-            <GoMainBtn />
-            <ContentContainer />
-        </div>
+            <FooterContainer />
+        </>
     );
 }

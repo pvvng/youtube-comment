@@ -5,7 +5,7 @@ import '@/app/css/sign.css';
 import { signIn, signOut } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { GoogleLogoSvg } from '@/app/SvgContainer';
-import fetchDeleteDBUserData from '@/@util/functions/fetch/fetchDeleteDBUserData';
+import fetchDeleteDBUserData from '@/@util/functions/fetch/DELETE/fetchDeleteDBUserData';
 
 // 구글 로그인 버튼
 export function GoogleSignInBtn() {

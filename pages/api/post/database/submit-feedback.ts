@@ -1,6 +1,6 @@
 import { connectDB } from "@/@util/database";
-import { sanitizeValue } from "@/@util/functions/preventNoSQLAttack";
-import { getClientIp, rateLimiter } from "@/@util/functions/rateLimit";
+import { sanitizeValue } from "@/@util/functions/security/preventNoSQLAttack";
+import { getClientIp, rateLimiter } from "@/@util/functions/security/rateLimit";
 import moment from "moment-timezone";
 import { Db } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";

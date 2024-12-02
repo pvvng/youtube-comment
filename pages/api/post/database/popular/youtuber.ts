@@ -1,5 +1,5 @@
 import { connectDB } from "@/@util/database";
-import { PopularPostDataType } from "@/@util/functions/fetch/fetchUpdateYoutuberPopularity";
+import { PopularPostDataType } from "@/@util/functions/fetch/PATCH/fetchUpdateYoutuberPopularity";
 import { Db } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import moment from "moment-timezone";

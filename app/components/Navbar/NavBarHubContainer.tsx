@@ -12,7 +12,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useDBUserStore } from '@/app/store';
 import InputContainer from "./InputContainer";
 import MobileToggleButton from "./MobileToggleButton";
-import fetchGetDBUserData from '@/@util/functions/fetch/fetchGetDBUserData';
+import fetchPostDBUserData from '@/@util/functions/fetch/POST/fetchPostDBUserData';
 import useProcessError from '@/@util/hooks/useprocessError';
 import Image from 'next/legacy/image';
 
@@ -55,7 +55,7 @@ export default function NavBarHubContainer(
 
     const { data, isLoading, isError, error } = useQuery({
         queryKey: ["dbUserData", session?.user?.email],
-        queryFn: () => fetchGetDBUserData(session),
+        queryFn: () => fetchPostDBUserData(session),
         enabled: !!session?.user?.email, // email이 존재할 때만 쿼리 실행
         refetchOnWindowFocus: false,
         retry : false,

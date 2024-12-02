@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import PopularCarouselContainer from "../../../main/components/Popularlist/PopularCarouselContainer";
-import fetchDBPopularYoutuber from "@/@util/functions/fetch/fetchDBPopularYoutuber";
+import fetchDBPopularYoutuber from "@/@util/functions/fetch/GET/fetchDBPopularYoutuber";
 import useProcessError from "@/@util/hooks/useprocessError";
 import CardHeaderContainer from "../../../main/components/Popularlist/CardHeaderContainer";
 import ErrorContainer from "@/app/components/Error/ErrorContainer";

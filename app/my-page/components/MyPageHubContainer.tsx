@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Session } from "next-auth";
 import { useRouter } from 'next/navigation';
 import MyPageListcountainer from './MyPageListContainer';
-import fetchSubscribedYoutuberData from "@/@util/functions/fetch/fetchSubscribedYoutuberData";
+import fetchSubscribedYoutuberData from "@/@util/functions/fetch/GET/fetchSubscribedYoutuberData";
 import LoadingContianer from "@/app/components/Loading/LoadingContainer";
 import useProcessError from '@/@util/hooks/useprocessError';
 import MyPageUserProfile from './MyPageUserProfile';

@@ -1,6 +1,6 @@
 'use client';
 
-import fetchDBTopYoutuber from "@/@util/functions/fetch/fetchDBTopYoutuber";
+import fetchDBTopYoutuber from "@/@util/functions/fetch/GET/fetchDBTopYoutuber";
 import useProcessError from "@/@util/hooks/useprocessError";
 import PopularCardSkeleton from "./PopularCardSkeleton";
 import PopularCard from "./PopularCard";

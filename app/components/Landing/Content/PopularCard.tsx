@@ -14,8 +14,8 @@ export default function PopularCard(
             <div
                 className="m-auto position-relative"
                 style={{
-                    width: '180px',
-                    height: '180px',
+                    width: '120px',
+                    height: '120px',
                     overflow: 'hidden',
                 }}
             >
@@ -25,12 +25,11 @@ export default function PopularCard(
                     alt={`${topYoutuber.youtuber.name} thumbnail`}
                     fill
                     loading="lazy"
-                    sizes="180px"
+                    sizes="120px"
                     style={{
                         borderRadius: '50%',
                         objectFit: 'cover',
                         objectPosition: 'center',
-                        maxWidth: '180px',
                     }}
                 />
             </div>

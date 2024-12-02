@@ -8,7 +8,7 @@ import { Session } from "next-auth";
  * @param userEmail : session의 email
  * @returns db에 저장된 userdata 저장된 데이터가 없으면 insert하므로 항상 값을 가짐
  */
-export default async function fetchGetDBUserData(
+export default async function fetchPostDBUserData(
     session : Session | null
 ){
     try {

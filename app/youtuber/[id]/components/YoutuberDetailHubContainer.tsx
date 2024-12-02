@@ -1,7 +1,7 @@
 'use client';
 
 import { useQuery } from "@tanstack/react-query";
-import fetchGetDBYoutuberData from "@/@util/functions/fetch/fetchGetDBYoutuberData";
+import fetchGetDBYoutuberData from "@/@util/functions/fetch/GET/fetchGetDBYoutuberData";
 import useProcessError from "@/@util/hooks/useprocessError";
 import LoadingContianer from "@/app/components/Loading/LoadingContainer";
 import YoutuberProfileContainer from "@/app/components/Youtuber/YoutuberProfileContainer";

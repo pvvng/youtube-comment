@@ -1,6 +1,6 @@
 'use client';
 
-import { fetchVideoData } from "@/@util/functions/fetch/fetchVideoData";
+import { fetchVideoData } from "@/@util/functions/fetch/GET/fetchVideoData";
 import { useUpdateRecentVideoLocalStorage } from "@/@util/hooks/useUpdateRecentVideoLocalStorage";
 import { useQuery } from "@tanstack/react-query";
 import VideoContainer from "@/app/components/Video/VideoContainer";

@@ -1,5 +1,5 @@
-import updateDBYAnalyzedDataYoutuberCollection from "@/@util/functions/fetch/updateDBAnalyzedDataYoutuberCollection";
-import updateDBYoutuberCollection from "@/@util/functions/fetch/updateDBYoutuberCollection";
+import updateDBYAnalyzedDataYoutuberCollection from "@/@util/functions/fetch/POST/updateDBAnalyzedDataYoutuberCollection";
+import updateDBYoutuberCollection from "@/@util/functions/fetch/PATCH/updateDBYoutuberCollection";
 import { getClientIp, rateLimiter } from "@/@util/functions/rateLimit";
 import { cleanUpText } from "@/@util/functions/wordAPI/cleanUpText";
 import { FilteredCommentType } from "@/types/comment";

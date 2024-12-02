@@ -1,5 +1,5 @@
 import axios from "axios";
-import { videoCollectionType } from "./updateDBYoutuberCollection";
+import { videoCollectionType } from "../PATCH/updateDBYoutuberCollection";
 
 export async function fetchDBAnalyzedData(
     videoId : string

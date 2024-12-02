@@ -2,7 +2,7 @@ import { connectDB } from "@/@util/database";
 import { Db } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 import moment from "moment-timezone";
-import { PostDataType } from "@/@util/functions/fetch/fetchUpdateVideoPopularity";
+import { PostDataType } from "@/@util/functions/fetch/PATCH/fetchUpdateVideoPopularity";
 
 export default async function handler(
     req: NextApiRequest,

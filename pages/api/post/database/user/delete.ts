@@ -1,5 +1,5 @@
 import { connectDB } from "@/@util/database";
-import { getClientIp, rateLimiter } from "@/@util/functions/rateLimit";
+import { getClientIp, rateLimiter } from "@/@util/functions/security/rateLimit";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { Db } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";

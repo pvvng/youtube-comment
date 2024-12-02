@@ -27,7 +27,7 @@ function LetterContainer(props : PropsType){
         <div className="col-12 col-sm-6 col-lg-4">
             <div className="letter-card mb-4">
                 <div>
-                    <span className="card__title">
+                    <span className="card__title fw-bold">
                         <FontAwesomeIcon icon={props.icon} />
                         {' ' + props.title}
                     </span>

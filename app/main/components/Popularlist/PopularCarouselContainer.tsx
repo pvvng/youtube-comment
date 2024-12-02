@@ -186,7 +186,7 @@ export default function PopularCarouselContainer(
 
     if (dataLength === 0) return (
         <div
-            className="d-flex row-center"
+            className="d-flex row-center p-2 text-center"
             style={{ minHeight: 150 }}
         >
             <p className='m-0'>{koreaTime}에 수집된 데이터가 아직 없습니다.</p>

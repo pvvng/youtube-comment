@@ -2,7 +2,7 @@
 
 import { FilteredCommentType } from "@/types/comment";
 import { useQuery } from "@tanstack/react-query";
-import { fetchDBAnalyzedData } from "@/@util/functions/fetch/fetchDBAnalyzedData";
+import { fetchDBAnalyzedData } from "@/@util/functions/fetch/GET/fetchDBAnalyzedData";
 import FeelGraphContainer from "./FeelGraphContainer";
 import useProcessError from "@/@util/hooks/useprocessError";
 import KeywordHubContainer from "./Word/KeywordHubContainer";

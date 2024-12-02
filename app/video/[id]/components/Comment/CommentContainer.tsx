@@ -1,6 +1,6 @@
 'use client';
 
-import { fetchCommentData } from "@/@util/functions/fetch/fetchCommentData";
+import { fetchCommentData } from "@/@util/functions/fetch/GET/fetchCommentData";
 import { useQuery } from "@tanstack/react-query";
 import DatechartContainer from "../Analyzed/DateChartContainer";
 import WordHubContainer from "../Analyzed/WordHubContainer";

@@ -5,7 +5,7 @@ import '@/app/css/nav.css';
 import { useRef } from "react";
 import { handleFocus } from "@/@util/functions/input/handleFocus";
 import { useRouter } from "next/navigation";
-import { checkVideoId } from "@/@util/functions/checkVideoId";
+import { checkVideoId } from "@/@util/functions/input/checkVideoId";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 

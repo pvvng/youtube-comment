@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import toLocaleString from '@/@util/functions/toLocaleString';
 import dateToString from '@/@util/functions/dateToString';
-import fetchUpdateVideoPopularity from '@/@util/functions/fetch/fetchUpdateVideoPopularity';
+import fetchUpdateVideoPopularity from '@/@util/functions/fetch/PATCH/fetchUpdateVideoPopularity';
 import HeartBtn from '../HeartBtn/HeartBtn';
 import Image from 'next/legacy/image';
 

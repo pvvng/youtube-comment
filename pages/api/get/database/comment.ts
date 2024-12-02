@@ -1,5 +1,5 @@
 import { connectDB } from "@/@util/database";
-import { videoCollectionType } from "@/@util/functions/fetch/updateDBYoutuberCollection";
+import { videoCollectionType } from "@/@util/functions/fetch/PATCH/updateDBYoutuberCollection";
 import { Db } from "mongodb";
 import { NextApiRequest, NextApiResponse } from "next";
 

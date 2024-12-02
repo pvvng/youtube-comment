@@ -21,7 +21,6 @@ export default function MiniMyPageBody(
                     style={{minHeight : '200px', margin : 'auto'}}
                 >
                     <div className="text-center">
-                        <p>로그인 후 이용 가능합니다.</p>
                         <SignInBtn />
                     </div>
                 </div>

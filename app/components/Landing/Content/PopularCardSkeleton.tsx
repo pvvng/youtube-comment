@@ -16,7 +16,7 @@ export default function PopularCardSkeleton() {
                 <div
                     className="skeleton-box skeleton-placeholder"
                     style={{
-                        width: '360px',
+                        maxWidth: '360px',
                         height: '24px',
                         margin: '20px auto',
                         borderRadius: '8px',

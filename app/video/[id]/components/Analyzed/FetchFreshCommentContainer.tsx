@@ -1,6 +1,6 @@
 'use client';
 
-import { fetchAnalyzedCommentData } from "@/@util/functions/fetch/fetchAnalyzedCommentData";
+import { fetchAnalyzedCommentData } from "@/@util/functions/fetch/POST/fetchAnalyzedCommentData";
 import { FilteredCommentType } from "@/types/comment";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState } from "react";

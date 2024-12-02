@@ -5,8 +5,8 @@ import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import toLocaleString from "@/@util/functions/toLocaleString";
 import YoutuberInfoContainer from "./YoutuberInfoContainer";
-import fetchUpdateYoutuberPopularity from "@/@util/functions/fetch/fetchUpdateYoutuberPopularity";
-import fetchPostDBYoutuberData from "@/@util/functions/fetch/fetchPostDBYoutuberData";
+import fetchUpdateYoutuberPopularity from "@/@util/functions/fetch/PATCH/fetchUpdateYoutuberPopularity";
+import fetchPostDBYoutuberData from "@/@util/functions/fetch/POST/fetchPostDBYoutuberData";
 import HeartBtn from "../HeartBtn/HeartBtn";
 import Image from 'next/legacy/image';
 

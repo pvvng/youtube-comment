@@ -41,7 +41,7 @@ export default function  MiniMyPageHeader(
                             alt="user-profile" 
                             width="100%"
                             loading="lazy"
-                            style={{borderRadius : 12}}
+                            className="rounded"
                         />
                     </div>
                     <div className="col-8">

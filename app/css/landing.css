@@ -12,6 +12,10 @@
     justify-content: center;
     align-items: center;
     margin: auto;
+    @media screen and (max-width : 400px) {
+        padding: 10px;
+        min-height: 200px;
+    }
 }
 
 .letter-card:hover {
@@ -228,6 +232,9 @@
     box-shadow: 15px 15px 0 #000;
     position: relative;
     overflow: hidden;
+    @media screen and (max-width : 400px) {
+        padding: 14px;
+    }
 }
 
 .popular-card__title {

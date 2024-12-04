@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const EXPLAIN_CONTENT = [
     {msg : "유튜뷰는 한국어 분석만 지원합니다."},
-    {msg : "유튜뷰의 분석 결과는 항상 정확하지 않습니다. 참고용으로만 활용해주세요."},
+    {msg : "유튜뷰의 분석 결과가 항상 정확한 것은 아닙니다. 참고용으로만 활용해주세요."},
     {msg : "유튜뷰는 개인정보를 저장하지 않습니다."},
 
 ]

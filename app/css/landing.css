@@ -30,7 +30,7 @@
     overflow: hidden;
 
     @media screen and (max-width : 400px) {
-        font-size: 20px;
+        font-size: 24px;
     }
 }
 

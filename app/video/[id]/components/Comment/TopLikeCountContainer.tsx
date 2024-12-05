@@ -3,43 +3,15 @@
 import '@/app/css/video.css';
 
 import { FilteredCommentType } from "@/types/comment";
-import { useEffect, useRef, useState } from "react";
 import { CommentCardContainer } from './CommentCardContainer';
+import useInfiniteScroll from '@/@util/hooks/useInfiniteScroll';
 
 export default function TopLikeContainer(
     {commentData, videoId} : {commentData : FilteredCommentType[], videoId : string}
 ){
 
-    const [visibleData, setVisibleData] = useState<FilteredCommentType[]>([]);
-    const [loadMore, setLoadMore] = useState(false);
-    const observerRef = useRef<HTMLDivElement | null>(null);
-
-    // Intersection Observer (한무 스크롤) 설정
-    useEffect(() => {
-
-        const observer = new IntersectionObserver((entries) => {
-            if (entries[0].isIntersecting) {
-                setLoadMore(true); // 끝에 도달하면 추가 데이터를 불러오기 위해 상태 업데이트
-            }
-        });
-        if (observerRef.current) {
-            observer.observe(observerRef.current);
-        }
-
-        return () => {
-            if (observerRef.current) {
-                observer.unobserve(observerRef.current);
-            }
-        };
-    }, []);
-    
-    useEffect(() => {
-        if (loadMore && visibleData.length < commentData.length) {
-            const nextData = commentData.slice(visibleData.length, visibleData.length + 10);
-            setVisibleData(prev => [...prev, ...nextData]);
-            setLoadMore(false); // 데이터를 불러온 후 다시 loadMore 상태를 false로 설정
-        }
-    },[loadMore])
+    // 무한 스크롤 지정
+    const {visibleData, observerRef} = useInfiniteScroll(commentData);
 
     return (
         <div id='comment' className="p-2 custom-scrollbar card-container mt-2">

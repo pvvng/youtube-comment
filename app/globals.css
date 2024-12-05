@@ -152,7 +152,7 @@ div {
     @media screen and (max-width : 640px) {
         padding : 10px;
     }
-    @media screen and (max-width : 360px) {
+    @media screen and (max-width : 400px) {
         padding : 5px;
     }
 }
@@ -171,7 +171,7 @@ div {
     margin : auto;
     width: 100%;
     max-width: 360px;
-    @media screen and (max-width : 360px) {
+    @media screen and (max-width : 400px) {
         max-width: 240px;
     }
 }

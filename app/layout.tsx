@@ -77,6 +77,7 @@ export default function RootLayout({
                 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
                 <meta name="mobile-web-app-capable" content="yes" />
                 <meta name="google-site-verification" content="JBdVYDDSjbAEZ4ybo1VQ-ZfeHeIovnIxKB4gmNeN9YQ"/>
+                <meta name="google-adsense-account" content="ca-pub-7034464923554278" />
             </head>
             <body className={inter.className}>
                 <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>

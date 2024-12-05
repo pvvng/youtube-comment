@@ -10,6 +10,7 @@ import "./globals.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactQueryProvider from "@/@util/providers/ReactQueryProvider";
 import { ReCaptchaProvider } from "next-recaptcha-v3";
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -78,6 +79,11 @@ export default function RootLayout({
                 <meta name="mobile-web-app-capable" content="yes" />
                 <meta name="google-site-verification" content="JBdVYDDSjbAEZ4ybo1VQ-ZfeHeIovnIxKB4gmNeN9YQ"/>
                 <meta name="google-adsense-account" content="ca-pub-7034464923554278" />
+                <Script 
+                    async
+                    src='https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7034464923554278'
+                    crossOrigin='anonymous'
+                />
             </head>
             <body className={inter.className}>
                 <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}>

@@ -36,10 +36,11 @@ export default function AnalyzingButtonByComponetType(
         return (
             <>
                 <p className="fw-bold">아직 아무도 분석하지 않은 영상이에요!</p>
-                <button 
+                <p>현재는 영상 분석이 불가능합니다.</p>
+                {/* <button 
                     className="btn btn-dark" 
                     onClick={async () => await checkBot()}
-                >영상 분석하기</button>
+                >영상 분석하기</button> */}
             </>
         )
     }else if(typeof type === "string"){

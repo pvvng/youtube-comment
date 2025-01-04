@@ -36,10 +36,11 @@ export default function AnalyzingButtonByComponetType(
         return (
             <>
                 <p className="fw-bold">아직 아무도 분석하지 않은 영상이에요!</p>
-                <button 
+                <p>현재는 영상 분석이 불가능합니다.</p>
+                {/* <button 
                     className="btn btn-dark" 
                     onClick={async () => await checkBot()}
-                >영상 분석하기</button>
+                >영상 분석하기</button> */}
             </>
         )
     }else if(typeof type === "string"){
@@ -53,10 +54,11 @@ export default function AnalyzingButtonByComponetType(
                 </p>
                 {
                     daysDifference >= 7 ?
-                    <button                     
-                        className="btn btn-dark" 
-                        onClick={async () => await checkBot()}
-                    >따끈따끈한 데이터로 변경하기</button>:
+                    // <button                     
+                    //     className="btn btn-dark" 
+                    //     onClick={async () => await checkBot()}
+                    // >따끈따끈한 데이터로 변경하기</button>
+                    <p>현재는 영상 분석이 불가능합니다.</p>:
                     <p className="m-0">일주일 이내에 분석된 데이터에요.</p>
                 }
             </>
